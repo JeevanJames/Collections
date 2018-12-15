@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Collections</name>
+    </assembly>
+    <members>
+        <member name="T:System.Collections.Generic.ByteCollectionExtensions">
+            <summary>
+                Set of utility extension methods for byte collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Checks whether two byte collections are equal based on their content.
+            </summary>
+            <param name="source"> The first byte array to check. </param>
+            <param name="other"> The second byte array to check. </param>
+            <returns> True if the contents of the two byte arrays are equal. </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrEmpty(System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Indicates whether the specified byte array is null or does not contain any elements.
+            </summary>
+            <param name="source"> The byte array to test. </param>
+            <returns> True if the byte array is either null or empty; other False. </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Indicates whether the specified byte array is null, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="source"> The byte array to test. </param>
+            <returns> True if the byte array is null, does not contain any elements or consists exclusively of zero value items. </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.ToString(System.Collections.Generic.IList{System.Byte},System.String)">
+            <summary>
+                Creates a string from a byte array that concatenates each item in the array, separated by
+                the specified delimiter.
+            </summary>
+            <param name="source"> The byte array from which to create the string. </param>
+            <param name="delimiter"> The optional delimiter to separate each item in the array. Default to ',' if not specified. </param>
+            <returns> The combined string </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.GetBytesUptoSequence(System.Byte[],System.Int32,System.Byte[])">
+            <summary>
+            Retrieves the bytes from a byte array upto a specific sequence.
+            </summary>
+            <param name="source">The byte array</param>
+            <param name="start">The index in the array to start checking from</param>
+            <param name="sequence">The sequence to search for</param>
+            <returns>An array of bytes from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Adds the elements of the specified <see cref="T:System.Collections.Generic.IEnumerable`1" /> to the collection
+            </summary>
+            <typeparam name="T">The type of the elements of the collection</typeparam>
+            <param name="collection">The collection to add the items to.</param>
+            <param name="items">
+                The <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements should be added to the end of the collection. The
+                <see cref="T:System.Collections.Generic.IEnumerable`1" /> itself cannot be null, but it can contain elements that are null, if type T is a
+                reference type.
+            </param>
+            <exception cref="T:System.ArgumentNullException">collection is null</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.Fill``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+                Populates each item in a byte collection with a specific value.
+            </summary>
+            <param name="source"> The byte array to be populated. </param>
+            <param name="value"> The value to populate the byte array with. </param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Determines whether none of the elements of a sequence satisfies the specified condition
+            </summary>
+            <typeparam name="T">The type of the elements of source.</typeparam>
+            <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <returns>true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.</returns>
+            <exception cref="T:System.ArgumentNullException">source or predicate is null</exception>
+        </member>
+    </members>
+</doc>

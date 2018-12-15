@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.3;net35;net40;net45</TargetFrameworks>
+    <Version>1.0.0-beta.1</Version>
+    <Authors>Jeevan James</Authors>
+    <Company>Jeevan James</Company>
+    <Description>Collection extensions and custom collections for .NET.</Description>
+    <Copyright>Copyright (c) 2018 Jeevan James</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/JeevanJames/Collections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JeevanJames/Collections.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags />
+    <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Collections.NET</PackageId>
+    <Product>Collections.NET</Product>
+    <PackageIconUrl>https://github.com/JeevanJames/Collections/raw/master/logo.png</PackageIconUrl>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>Collections.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>Collections.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3'">
+    <DefineConstants>NETSTANDARD1_3</DefineConstants>
+  </PropertyGroup>
+</Project>
