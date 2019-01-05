@@ -4,6 +4,9 @@ namespace System.Collections.Generic
 {
     public static class CollectionExtensions
     {
+        public static void AddRange<T>(this ICollection<T> collection, params T[] items) =>
+            AddRange(collection, (IEnumerable<T>)items);
+
         /// <summary>
         ///     Adds the elements of the specified <see cref="IEnumerable{T}" /> to the collection
         /// </summary>

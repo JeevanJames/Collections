@@ -27,7 +27,7 @@ namespace Collection.Tests
         [Theory, MemberData(nameof(NotEmptyCollections))]
         public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
         {
-            collection.IsNullOrEmpty().ShouldBeFalse();
+            collection.IsEmpty().ShouldBeFalse();
         }
 
         public static IEnumerable<object[]> NotEmptyCollections()

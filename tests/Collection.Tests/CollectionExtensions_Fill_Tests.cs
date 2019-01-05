@@ -37,6 +37,14 @@ namespace Collection.Tests
         }
 
         [Fact]
+        public void Throws_if_generator_is_null()
+        {
+            IList<int> collection = new int[6];
+
+            Should.Throw<ArgumentNullException>(() => collection.Fill(null));
+        }
+
+        [Fact]
         public void Fills_collection_with_generated_values()
         {
             IList<int> collection = new int[6];
