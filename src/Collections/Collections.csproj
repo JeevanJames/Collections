@@ -41,4 +41,8 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3'">
     <DefineConstants>NETSTANDARD1_3</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Collections.licenseheader" Link="Collections.licenseheader" />
+  </ItemGroup>
 </Project>
