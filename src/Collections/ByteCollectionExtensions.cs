@@ -100,22 +100,22 @@ namespace System.Collections.Generic
             return result;
         }
 
-        public static int IndexOfSequence(this byte[] source, params byte[] sequence)
+        public static int IndexOfSequence(this IList<byte> source, params byte[] sequence)
         {
-            return IndexOfSequence(source, 0, source.Length, sequence);
+            return IndexOfSequence(source, 0, source.Count, sequence);
         }
 
-        public static int IndexOfSequence(this byte[] source, int start, int count, byte[] sequence)
+        public static int IndexOfSequence(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
             var sequenceIndex = 0;
-            int endIndex = Math.Min(source.Length, start + count);
+            int endIndex = Math.Min(source.Count, start + count);
             for (int byteIdx = start; byteIdx < endIndex; byteIdx++)
             {
                 if (source[byteIdx] == sequence[sequenceIndex])
                 {
                     sequenceIndex++;
-                    if (sequenceIndex >= sequence.Length)
-                        return byteIdx - sequence.Length + 1;
+                    if (sequenceIndex >= sequence.Count)
+                        return byteIdx - sequence.Count + 1;
                 }
                 else
                     sequenceIndex = 0;
@@ -123,12 +123,12 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this byte[] source, params byte[] sequence)
+        public static int[] IndexOfSequences(this IList<byte> source, params byte[] sequence)
         {
-            return IndexOfSequences(source, 0, source.Length, sequence);
+            return IndexOfSequences(source, 0, source.Count, sequence);
         }
 
-        public static int[] IndexOfSequences(this byte[] source, int start, int count, byte[] sequence)
+        public static int[] IndexOfSequences(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
             var locations = new List<int>();
 
@@ -137,7 +137,7 @@ namespace System.Collections.Generic
             {
                 locations.Add(sequenceLocation);
                 count -= sequenceLocation - start + 1;
-                start = sequenceLocation + sequence.Length;
+                start = sequenceLocation + sequence.Count;
                 sequenceLocation = IndexOfSequence(source, start, count, sequence);
             }
 
