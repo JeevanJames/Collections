@@ -35,16 +35,6 @@ namespace System.Collections.Generic
             IsEqualTo(source, (IList<byte>) other);
 
         /// <summary>
-        ///     Indicates whether the specified byte array is null or does not contain any elements.
-        /// </summary>
-        /// <param name="source"> The byte array to test. </param>
-        /// <returns> True if the byte array is either null or empty; other False. </returns>
-        public static bool IsNullOrEmpty(this IList<byte> source)
-        {
-            return source == null || source.Count == 0;
-        }
-
-        /// <summary>
         ///     Indicates whether the specified byte array is null, does not contain any elements or consists
         ///     of only zero value items.
         /// </summary>
@@ -57,12 +47,19 @@ namespace System.Collections.Generic
             return source.All(b => b == 0);
         }
 
+        public static bool IsZeroed(this IList<byte> source)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            return source.All(b => b == 0);
+        }
+
         /// <summary>
         ///     Creates a string from a byte array that concatenates each item in the array, separated by
         ///     the specified delimiter.
         /// </summary>
         /// <param name="source"> The byte array from which to create the string. </param>
-        /// <param name="delimiter"> The optional delimiter to separate each item in the array. Default to ',' if not specified. </param>
+        /// <param name="delimiter"> The optional delimiter to separate each item in the array. </param>
         /// <returns> The combined string </returns>
         public static string ToString(this IList<byte> source, string delimiter)
         {

@@ -17,13 +17,6 @@
             <param name="other"> The second byte array to check. </param>
             <returns> True if the contents of the two byte arrays are equal. </returns>
         </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrEmpty(System.Collections.Generic.IList{System.Byte})">
-            <summary>
-                Indicates whether the specified byte array is null or does not contain any elements.
-            </summary>
-            <param name="source"> The byte array to test. </param>
-            <returns> True if the byte array is either null or empty; other False. </returns>
-        </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.IList{System.Byte})">
             <summary>
                 Indicates whether the specified byte array is null, does not contain any elements or consists
@@ -38,7 +31,7 @@
                 the specified delimiter.
             </summary>
             <param name="source"> The byte array from which to create the string. </param>
-            <param name="delimiter"> The optional delimiter to separate each item in the array. Default to ',' if not specified. </param>
+            <param name="delimiter"> The optional delimiter to separate each item in the array. </param>
             <returns> The combined string </returns>
         </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.GetBytesUptoSequence(System.Byte[],System.Int32,System.Byte[])">
@@ -67,9 +60,26 @@
             <summary>
                 Populates each item in a byte collection with a specific value.
             </summary>
+            <typeparam name="T">The type of the elements of the collection</typeparam>
             <param name="source"> The byte array to be populated. </param>
             <param name="value"> The value to populate the byte array with. </param>
             <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Indicates whether the specified collection is empty.
+            </summary>
+            <typeparam name="T">The type of the elements of the collection</typeparam>
+            <param name="source">The collection to test.</param>
+            <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Indicates whether the specified collection is null or does not contain any elements.
+            </summary>
+            <typeparam name="T">The type of the elements of the collection</typeparam>
+            <param name="source"> The collection to test. </param>
+            <returns> <c>true</c> if the collection is either null or empty; otherwise <c>false</c>. </returns>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
             <summary>
@@ -78,8 +88,8 @@
             <typeparam name="T">The type of the elements of source.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
             <param name="predicate">A function to test each element for a condition.</param>
-            <returns>true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.</returns>
-            <exception cref="T:System.ArgumentNullException">source or predicate is null</exception>
+            <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
         </member>
     </members>
 </doc>
