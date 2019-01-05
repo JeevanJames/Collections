@@ -91,5 +91,38 @@
             <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
         </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
+            <summary>
+                Converts selected elements of the specified collection to an array of another type.
+            </summary>
+            <typeparam name="TInput">The type of elements in the source collection.</typeparam>
+            <typeparam name="TOutput">The type of elements in the target array.</typeparam>
+            <param name="source">The source collection.</param>
+            <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
+            <param name="converter">A delegate that converts elements from the source collection type to the target array element type.</param>
+            <returns>An array of the target element type.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the source collection, <c>predicate</c> delegate or <c>converter</c> delegate are null.</exception>
+        </member>
+        <member name="T:System.Collections.Generic.EnumIterator">
+            <summary>
+                Provides iterators for enum types. Can be used in a LINQ expression.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EnumIterator.For``1">
+            <summary>
+                Generates an iterator for the enum type specified by the TEnum generic parameter.
+            </summary>
+            <typeparam name="TEnum">The enum type to generate the iterator for</typeparam>
+            <returns>An generic iterator that can iterate over the values of TEnum</returns>
+        </member>
+        <member name="M:System.Collections.Generic.EnumIterator.For(System.Type)">
+            <summary>
+                Generates an iterator for the enum type specified by the TEnum generic parameter.
+            </summary>
+            <param name="enumType">The enum type to generate the iterator for</param>
+            <returns>A non-generic iterator that can iterate over the values of the enum</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the specified type is null</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exception>
+        </member>
     </members>
 </doc>
