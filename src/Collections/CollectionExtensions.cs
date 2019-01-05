@@ -83,6 +83,18 @@ namespace System.Collections.Generic
                 source[i] = value;
         }
 
+        public static void Fill<T>(this IList<T> source, Func<int, T> generator)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source.Count == 0)
+                return;
+            if (generator == null)
+                throw new ArgumentNullException(nameof(generator));
+            for (int i = 0; i < source.Count; i++)
+                source[i] = generator(i);
+        }
+
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             if (source == null)
