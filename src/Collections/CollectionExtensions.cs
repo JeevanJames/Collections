@@ -338,7 +338,7 @@ namespace System.Collections.Generic
             if (converter == null)
                 throw new ArgumentNullException(nameof(converter));
 
-            return source.Where(predicate).Select(item => converter(item)).ToArray();
+            return source.Where(predicate).Select(converter).ToArray();
         }
 
         public static List<TOutput> ToList<TInput, TOutput>(this IEnumerable<TInput> source,
@@ -362,8 +362,8 @@ namespace System.Collections.Generic
             return source.Where(predicate).ToList();
         }
 
-        public static List<TOutput> ToList<TInput, TOutput>(this IEnumerable<TInput> source, Func<TInput, bool> predicate,
-            Func<TInput, TOutput> converter)
+        public static List<TOutput> ToList<TInput, TOutput>(this IEnumerable<TInput> source,
+            Func<TInput, bool> predicate, Func<TInput, TOutput> converter)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -372,7 +372,7 @@ namespace System.Collections.Generic
             if (converter == null)
                 throw new ArgumentNullException(nameof(converter));
 
-            return source.Where(predicate).Select(item => converter(item)).ToList();
+            return source.Where(predicate).Select(converter).ToList();
         }
     }
 }
