@@ -32,7 +32,7 @@ namespace System.Collections.Generic
         }
 
         public static bool IsEqualTo(this IList<byte> source, params byte[] other) =>
-            IsEqualTo(source, (IList<byte>) other);
+            IsEqualTo(source, (IList<byte>)other);
 
         /// <summary>
         ///     Indicates whether the specified byte array is null, does not contain any elements or consists
@@ -95,7 +95,7 @@ namespace System.Collections.Generic
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
                 return null;
-            var result = new byte[sequenceIndex - start];
+            byte[] result = new byte[sequenceIndex - start];
             Array.Copy(source, start, result, 0, result.Length);
             return result;
         }
@@ -107,7 +107,7 @@ namespace System.Collections.Generic
 
         public static int IndexOfSequence(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
-            var sequenceIndex = 0;
+            int sequenceIndex = 0;
             int endIndex = Math.Min(source.Count, start + count);
             for (int byteIdx = start; byteIdx < endIndex; byteIdx++)
             {
@@ -167,7 +167,7 @@ namespace System.Collections.Generic
                     results.Add(new byte[0]);
                 else
                 {
-                    var splitBytes = new byte[endIndex - startIndex + 1];
+                    byte[] splitBytes = new byte[endIndex - startIndex + 1];
                     Array.Copy(source, startIndex, splitBytes, 0, splitBytes.Length);
                     results.Add(splitBytes);
                 }
@@ -177,7 +177,7 @@ namespace System.Collections.Generic
                 results.Add(new byte[0]);
             else
             {
-                var splitBytes = new byte[start + count - locations[locations.Length - 1] - sequence.Length];
+                byte[] splitBytes = new byte[start + count - locations[locations.Length - 1] - sequence.Length];
                 Array.Copy(source, locations[locations.Length - 1] + sequence.Length, splitBytes, 0, splitBytes.Length);
                 results.Add(splitBytes);
             }

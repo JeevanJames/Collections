@@ -72,6 +72,7 @@
             <typeparam name="T">The type of the elements of the collection</typeparam>
             <param name="source">The collection to test.</param>
             <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the source collection is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>

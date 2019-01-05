@@ -141,8 +141,13 @@ namespace System.Collections.Generic
         /// <typeparam name="T">The type of the elements of the collection</typeparam>
         /// <param name="source">The collection to test.</param>
         /// <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
-        public static bool IsEmpty<T>(this IEnumerable<T> source) =>
-            source is ICollection<T> collection ? collection.Count == 0 : !source.Any();
+        /// <exception cref="ArgumentNullException">Thrown if the source collection is <c>null</c>.</exception>
+        public static bool IsEmpty<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            return source is ICollection<T> collection ? collection.Count == 0 : !source.Any();
+        }
 
         /// <summary>
         ///     Indicates whether the specified collection is null or does not contain any elements.
@@ -189,24 +194,6 @@ namespace System.Collections.Generic
             return !source.Any(predicate);
         }
 
-        public static bool Remove<T>(this IList<T> list, Func<T, bool> predicate)
-        {
-            if (list == null)
-                throw new ArgumentNullException(nameof(list));
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (predicate(list[i]))
-                {
-                    list.RemoveAt(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public static int RemoveAll<T>(this IList<T> list, Func<T, bool> predicate)
         {
             if (list == null)
@@ -224,6 +211,24 @@ namespace System.Collections.Generic
                 }
             }
             return count;
+        }
+
+        public static bool RemoveFirst<T>(this IList<T> list, Func<T, bool> predicate)
+        {
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (predicate(list[i]))
+                {
+                    list.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool RemoveLast<T>(this IList<T> list, Func<T, bool> predicate)
@@ -248,7 +253,7 @@ namespace System.Collections.Generic
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
-            if (count < 0)
+            if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
             for (var i = 0; i < count; i++)
             {
