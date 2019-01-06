@@ -51,6 +51,12 @@ namespace Collection.Tests
                 case CollectionType.NonEmpty:
                 case CollectionType.NumbersOneToSix:
                     return new List<int> {1, 2, 3, 4, 5, 6};
+                case CollectionType.NullByte:
+                    return null;
+                case CollectionType.EmptyByte:
+                    return new byte[0];
+                case CollectionType.NonEmptyByte:
+                    return new List<byte> {1, 2, 3, 4, 5, 6};
                 default:
                     throw new InvalidOperationException();
             }
@@ -62,6 +68,10 @@ namespace Collection.Tests
         Null,
         Empty,
         NonEmpty,
-        NumbersOneToSix
+        NumbersOneToSix,
+
+        NullByte,
+        EmptyByte,
+        NonEmptyByte,
     }
 }

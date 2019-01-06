@@ -115,18 +115,26 @@ namespace System.Collections.Generic
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
                 return null;
+
             byte[] result = new byte[sequenceIndex - start];
             Array.Copy(source, start, result, 0, result.Length);
             return result;
         }
 
-        public static int IndexOfSequence(this IList<byte> source, params byte[] sequence)
-        {
-            return IndexOfSequence(source, 0, source.Count, sequence);
-        }
+        public static int IndexOfSequence(this IList<byte> source, params byte[] sequence) =>
+            IndexOfSequence(source, 0, source.Count, sequence);
 
         public static int IndexOfSequence(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (start < 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
+            if (count <= 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+
             int sequenceIndex = 0;
             int endIndex = Math.Min(source.Count, start + count);
             for (int byteIdx = start; byteIdx < endIndex; byteIdx++)
