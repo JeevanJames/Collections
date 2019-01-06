@@ -122,7 +122,10 @@ namespace System.Collections.Generic
         }
 
         public static int IndexOfSequence(this IList<byte> source, params byte[] sequence) =>
-            IndexOfSequence(source, 0, source.Count, sequence);
+            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<byte>)sequence);
+
+        public static int IndexOfSequence(this IList<byte> source, int start, int count, params byte[] sequence) =>
+            IndexOfSequence(source, start, count, (IList<byte>)sequence);
 
         public static int IndexOfSequence(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
@@ -151,13 +154,23 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this IList<byte> source, params byte[] sequence)
-        {
-            return IndexOfSequences(source, 0, source.Count, sequence);
-        }
+        public static int[] IndexOfSequences(this IList<byte> source, params byte[] sequence) =>
+            IndexOfSequences(source, 0, source != null ? source.Count : 0, sequence);
+
+        public static int[] IndexOfSequences(this IList<byte> source, int start, int count, params byte[] sequence) =>
+            IndexOfSequences(source, start, count, (IList<byte>)sequence);
 
         public static int[] IndexOfSequences(this IList<byte> source, int start, int count, IList<byte> sequence)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (start < 0)
+                throw new ArgumentOutOfRangeException(nameof(start));
+            if (count <= 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+
             var locations = new List<int>();
 
             int sequenceLocation = IndexOfSequence(source, start, count, sequence);
