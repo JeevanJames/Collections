@@ -57,3 +57,18 @@ The byte array extensions also provide a number of methods to deal with sequence
 |`IndexOfSequence`|Gets the index of the first occurence of the specified byte sequence in a byte array.|
 |`IndexOfSequences`|Gets all indices of the occurences of the specified byte sequence in a byte array.|
 |`SplitBySequence`|Splits a byte array by the specified byte sequence.|
+
+## `EnumIterator` class
+The `EnumIterator` class provides two static methods to create an iterator for the values of an `enum`.
+
+```cs
+// First overload - takes a generic type parameter for the enum type
+foreach (DayOfWeek day in EnumIterator.For<DayOfWeek>())
+{
+    Console.WriteLine(day);
+}
+
+// Second overload - non-generic method that accepts Type parameter.
+List<DayOfWeek> days = EnumIterator.For(typeof(DayOfWeek)).ToList();
+days.ForEach(Console.WriteLine);
+```
