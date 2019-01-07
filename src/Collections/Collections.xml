@@ -6,24 +6,47 @@
     <members>
         <member name="T:System.Collections.Generic.ByteCollectionExtensions">
             <summary>
-                Set of utility extension methods for byte collections.
+                Set of utility extension methods for byte arrays.
             </summary>
         </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Collections.Generic.IList{System.Byte})">
             <summary>
                 Checks whether two byte collections are equal based on their content.
             </summary>
-            <param name="source"> The first byte array to check. </param>
-            <param name="other"> The second byte array to check. </param>
-            <returns> True if the contents of the two byte arrays are equal. </returns>
+            <param name="bytes">The source byte array to check.</param>
+            <param name="other">The second byte array to check.</param>
+            <returns><c>true</c> if the contents of the two byte arrays are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
+            <summary>
+                Checks whether two byte collections are equal based on their content.
+            </summary>
+            <param name="bytes">The source byte array to check.</param>
+            <param name="other">The second byte array to check.</param>
+            <returns><c>true</c> if the contents of the two byte arrays are equal.</returns>
         </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.IList{System.Byte})">
             <summary>
-                Indicates whether the specified byte array is null, does not contain any elements or consists
-                of only zero value items.
+                Indicates whether the specified byte array is null, does not contain any elements or consists of only
+                zero value items.
             </summary>
-            <param name="source"> The byte array to test. </param>
-            <returns> True if the byte array is null, does not contain any elements or consists exclusively of zero value items. </returns>
+            <param name="bytes">The byte array to test.</param>
+            <returns>
+                <c>true</c> if the byte array is null, does not contain any elements or consists exclusively of zero
+                value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsZeroed(System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Indicates whether the specified byte array is does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="bytes">The byte array to test.</param>
+            <returns>
+                <c>true</c> if the byte array is null, does not contain any elements or consists exclusively of zero
+                value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the byte array is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.ToString(System.Collections.Generic.IList{System.Byte},System.String)">
             <summary>
@@ -36,11 +59,11 @@
         </member>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.GetBytesUptoSequence(System.Byte[],System.Int32,System.Byte[])">
             <summary>
-            Retrieves the bytes from a byte array upto a specific sequence.
+                Retrieves the bytes from a byte array upto a specific sequence.
             </summary>
-            <param name="source">The byte array</param>
-            <param name="start">The index in the array to start checking from</param>
-            <param name="sequence">The sequence to search for</param>
+            <param name="source">The byte array.</param>
+            <param name="start">The index in the array to start checking from.</param>
+            <param name="sequence">The sequence to search for.</param>
             <returns>An array of bytes from the starting index to the matching sequence.</returns>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">

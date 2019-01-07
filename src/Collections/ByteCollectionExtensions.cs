@@ -25,53 +25,72 @@ using System.Text;
 namespace System.Collections.Generic
 {
     /// <summary>
-    ///     Set of utility extension methods for byte collections.
+    ///     Set of utility extension methods for byte arrays.
     /// </summary>
     public static class ByteCollectionExtensions
     {
         /// <summary>
         ///     Checks whether two byte collections are equal based on their content.
         /// </summary>
-        /// <param name="source"> The first byte array to check. </param>
-        /// <param name="other"> The second byte array to check. </param>
-        /// <returns> True if the contents of the two byte arrays are equal. </returns>
-        public static bool IsEqualTo(this IList<byte> source, IList<byte> other)
+        /// <param name="bytes">The source byte array to check.</param>
+        /// <param name="other">The second byte array to check.</param>
+        /// <returns><c>true</c> if the contents of the two byte arrays are equal.</returns>
+        public static bool IsEqualTo(this IList<byte> bytes, IList<byte> other)
         {
-            if (ReferenceEquals(source, other))
+            if (ReferenceEquals(bytes, other))
                 return true;
-            if (source == null || other == null)
+            if (bytes == null || other == null)
                 return false;
-            if (source.Count != other.Count)
+            if (bytes.Count != other.Count)
                 return false;
-            for (int byteIdx = 0; byteIdx < source.Count; byteIdx++)
+            for (int i = 0; i < bytes.Count; i++)
             {
-                if (source[byteIdx] != other[byteIdx])
+                if (bytes[i] != other[i])
                     return false;
             }
             return true;
         }
 
-        public static bool IsEqualTo(this IList<byte> source, params byte[] other) =>
-            IsEqualTo(source, (IList<byte>)other);
+        /// <summary>
+        ///     Checks whether two byte collections are equal based on their content.
+        /// </summary>
+        /// <param name="bytes">The source byte array to check.</param>
+        /// <param name="other">The second byte array to check.</param>
+        /// <returns><c>true</c> if the contents of the two byte arrays are equal.</returns>
+        public static bool IsEqualTo(this IList<byte> bytes, params byte[] other) =>
+            IsEqualTo(bytes, (IList<byte>)other);
 
         /// <summary>
-        ///     Indicates whether the specified byte array is null, does not contain any elements or consists
-        ///     of only zero value items.
+        ///     Indicates whether the specified byte array is null, does not contain any elements or consists of only
+        ///     zero value items.
         /// </summary>
-        /// <param name="source"> The byte array to test. </param>
-        /// <returns> True if the byte array is null, does not contain any elements or consists exclusively of zero value items. </returns>
-        public static bool IsNullOrZeroed(this IList<byte> source)
+        /// <param name="bytes">The byte array to test.</param>
+        /// <returns>
+        ///     <c>true</c> if the byte array is null, does not contain any elements or consists exclusively of zero
+        ///     value items.
+        /// </returns>
+        public static bool IsNullOrZeroed(this IList<byte> bytes)
         {
-            if (source == null || source.Count == 0)
+            if (bytes == null || bytes.Count == 0)
                 return true;
-            return source.All(b => b == 0);
+            return bytes.All(b => b == 0);
         }
 
-        public static bool IsZeroed(this IList<byte> source)
+        /// <summary>
+        ///     Indicates whether the specified byte array is does not contain any elements or consists of only zero
+        ///     value items.
+        /// </summary>
+        /// <param name="bytes">The byte array to test.</param>
+        /// <returns>
+        ///     <c>true</c> if the byte array is null, does not contain any elements or consists exclusively of zero
+        ///     value items.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if the byte array is <c>null</c>.</exception>
+        public static bool IsZeroed(this IList<byte> bytes)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-            return source.All(b => b == 0);
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            return bytes.All(b => b == 0);
         }
 
         /// <summary>
@@ -104,11 +123,11 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        /// Retrieves the bytes from a byte array upto a specific sequence.
+        ///     Retrieves the bytes from a byte array upto a specific sequence.
         /// </summary>
-        /// <param name="source">The byte array</param>
-        /// <param name="start">The index in the array to start checking from</param>
-        /// <param name="sequence">The sequence to search for</param>
+        /// <param name="source">The byte array.</param>
+        /// <param name="start">The index in the array to start checking from.</param>
+        /// <param name="sequence">The sequence to search for.</param>
         /// <returns>An array of bytes from the starting index to the matching sequence.</returns>
         public static byte[] GetBytesUptoSequence(this byte[] source, int start, params byte[] sequence)
         {
@@ -185,10 +204,8 @@ namespace System.Collections.Generic
             return locations.ToArray();
         }
 
-        public static byte[][] SplitBySequence(this byte[] source, params byte[] sequence)
-        {
-            return SplitBySequence(source, 0, source.Length, sequence);
-        }
+        public static byte[][] SplitBySequence(this byte[] source, params byte[] sequence) =>
+            SplitBySequence(source, 0, source.Length, sequence);
 
         public static byte[][] SplitBySequence(this byte[] source, int start, int count, byte[] sequence)
         {

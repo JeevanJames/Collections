@@ -89,6 +89,11 @@ namespace System.Collections.Generic
             collection.AddRange(items.Where(predicate).Select(item => converter(item)));
         }
 
+        public static IEnumerable<IList<T>> Chunk<T>(this IEnumerable<T> source, int chunkSize)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Populates each item in a byte collection with a specific value.
         /// </summary>
@@ -297,6 +302,16 @@ namespace System.Collections.Generic
             }
         }
 
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void ShuffleInplace<T>(this IList<T> source)
+        {
+            throw new NotImplementedException();
+        }
+
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> source,
             Func<TInput, TOutput> converter)
         {
@@ -373,6 +388,16 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(converter));
 
             return source.Where(predicate).Select(converter).ToList();
+        }
+
+        public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }
