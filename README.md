@@ -1,2 +1,47 @@
 # Collections.NET
 Collections.NET is a set of collection extensions and custom collections.
+
+All code in this package is under the `System.Collections.Generic` namespace, so you automatically have access to the extension methods simply by using the namespace.
+
+## Collection extensions
+Extension methods for common collection interfaces like `IEnumerable<T>`, `ICollection<T>` and `IList<T>`.
+
+|Method name|Interface|Description|
+|-----------|---------|-----------|
+|`AddRange`|`ICollection<T>`|Adds one or more items to the collection in a single operation. Inspired by the `List<T>.AddRange` method.|
+|`Fill`|`IList<T>`|Sets all elements in a collection to a specific value.|
+|`ForEach`|`IEnumerable<T>`|Iterates over each element in a collection and calls the specified delegate for each item. Inspired by the `List<T>.ForEach` method.|
+|`IndexOf`|`IList<T>`|Finds the index of the first matching element in a collection based on the specified predicate.|
+|`IndexOfAll`|`IList<T>`|Finds all indices of the matching elements in a collection based on the specified predicate.|
+|`IsEmpty`|`IEnumerable<T>`|Indicates whether a collection is empty. A better way of doing `if !collection.Any()`|
+|`IsNullOrEmpty`|`IEnumerable<T>`|Indicates whether a collection is `null` or empty.|
+|`LastIndexOf`|`IList<T>`|Finds the index of the last matching element in a collection based on the specified predicate.|
+|`None`|`IEnumerable<T>`|Determines whether none of the elements in a collection satisfies the specified predicate. Opposite of the LINQ `All` extension method.|
+|`RemoveAll`|`IList<T>`|Removes all elements from a collection that satisfies the specified predicate.|
+|`RemoveFirst`|`IList<T>`|Removes the first element from a collection that satisfies the specified predicate.|
+|`RemoveLast`|`IList<T>`|Removes the last elements from a collection that satisfies the specified predicate.|
+|`Repeat`|`IEnumerable<T>`|Creates a collection that contains the specified collection repeated a specified number of times.|
+|`ToArray`|`IEnumerable<T>`|Creates an array from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
+|`ToList`|`IEnumerable<T>`|Creates a `List<T>` from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
+
+## Byte array extensions
+Extension methods that provide commonly-used operations on `byte` arrays.
+
+> Since .NET arrays implement `IList<T>`, most of the extension methods operate on `IList<byte>` rather than just `byte[]`. Some methods are a work-in-progress and still use `byte[]`. We will be converting these to `IList<byte>` before version 1.0.0 is released.
+
+|Method name|Description|
+|-----------|-----------|
+|`IsEqualTo`|Checks whether two byte collections contain the same data.|
+|`IsNullOrZeroed`|Indicates whether a byte collection is `null`, empty or contains only zeroes.|
+|`IsZeroed`|Indicates whether a byte collection is empty or contains only zeroes.|
+|`ToString`|Joins all values in a byte collection using a specified delimiter.|
+
+### Byte sequence operations
+The byte array extensions also provide a number of methods to deal with sequences of bytes:
+
+|Method name|Description|
+|-----------|-----------|
+|`GetBytesUptoSequence`|Gets all the bytes in a byte array up to the specified byte sequence.|
+|`IndexOfSequence`|Gets the index of the first occurence of the specified byte sequence in a byte array.|
+|`IndexOfSequences`|Gets all indices of the occurences of the specified byte sequence in a byte array.|
+|`SplitBySequence`|Splits a byte array by the specified byte sequence.|
