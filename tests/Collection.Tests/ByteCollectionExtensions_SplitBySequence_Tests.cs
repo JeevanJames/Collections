@@ -123,5 +123,7 @@ namespace Collection.Tests
 
             Should.NotThrow(() => bytes.SplitBySequence(0, 100, sequence));
         }
+
+        //TODO: Add tests for non-standard start and count values.
     }
 }
