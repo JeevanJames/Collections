@@ -235,6 +235,22 @@ namespace System.Collections.Generic
             return !collection.Any(predicate);
         }
 
+        public static IEnumerable<T> Range<T>(this IList<T> collection, int? start = null, int? end = null)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            int startIndex = start.GetValueOrDefault();
+            int endIndex = end.GetValueOrDefault(collection.Count - 1);
+
+            if (startIndex < 0 || startIndex >= collection.Count)
+                throw new ArgumentOutOfRangeException(nameof(start));
+            if (endIndex < startIndex || endIndex >= collection.Count)
+                throw new ArgumentOutOfRangeException(nameof(end), $"End index {endIndex} should be greater or equal to start index {startIndex}.");
+
+            return collection.Skip(startIndex).Take(endIndex - startIndex + 1);
+        }
+
         public static int RemoveAll<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -440,12 +456,22 @@ namespace System.Collections.Generic
 
         public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return collection.Where(element => !predicate(element));
         }
 
         public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> collection, Func<T, int, bool> predicate)
         {
-            throw new NotImplementedException();
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return collection.Where((element, i) => !predicate(element, i));
         }
     }
 }
