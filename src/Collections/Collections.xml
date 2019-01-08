@@ -84,7 +84,7 @@
                 Populates each item in a byte collection with a specific value.
             </summary>
             <typeparam name="T">The type of the elements of the collection</typeparam>
-            <param name="source"> The byte array to be populated. </param>
+            <param name="collection"> The byte array to be populated. </param>
             <param name="value"> The value to populate the byte array with. </param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
@@ -93,7 +93,7 @@
                 Indicates whether the specified collection is empty.
             </summary>
             <typeparam name="T">The type of the elements of the collection</typeparam>
-            <param name="source">The collection to test.</param>
+            <param name="collection">The collection to test.</param>
             <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the source collection is <c>null</c>.</exception>
         </member>
@@ -102,7 +102,7 @@
                 Indicates whether the specified collection is null or does not contain any elements.
             </summary>
             <typeparam name="T">The type of the elements of the collection</typeparam>
-            <param name="source"> The collection to test. </param>
+            <param name="collection"> The collection to test. </param>
             <returns> <c>true</c> if the collection is either null or empty; otherwise <c>false</c>. </returns>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
@@ -110,7 +110,7 @@
                 Determines whether none of the elements of a sequence satisfies the specified condition
             </summary>
             <typeparam name="T">The type of the elements of source.</typeparam>
-            <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
+            <param name="collection">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
             <param name="predicate">A function to test each element for a condition.</param>
             <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
@@ -121,7 +121,7 @@
             </summary>
             <typeparam name="TInput">The type of elements in the source collection.</typeparam>
             <typeparam name="TOutput">The type of elements in the target array.</typeparam>
-            <param name="source">The source collection.</param>
+            <param name="collection">The source collection.</param>
             <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
             <param name="converter">A delegate that converts elements from the source collection type to the target array element type.</param>
             <returns>An array of the target element type.</returns>

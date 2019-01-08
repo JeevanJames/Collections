@@ -19,6 +19,7 @@ limitations under the License.
 #endregion
 
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace System.Collections.Generic
 {
@@ -307,10 +308,57 @@ namespace System.Collections.Generic
             throw new NotImplementedException();
         }
 
-        public static void ShuffleInplace<T>(this IList<T> collection)
+#if NETSTANDARD1_3
+        public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
         {
-            throw new NotImplementedException();
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (iterations < 1)
+                throw new ArgumentOutOfRangeException(nameof(iterations));
+
+            T temp;
+
+            for (int iteration = 0; iteration < iterations; iteration++)
+            {
+                var rng = new Random((int)DateTime.Now.Ticks);
+
+                for (int i = 0; i < collection.Count; i++)
+                {
+                    int index1 = rng.Next(collection.Count);
+                    int index2 = rng.Next(collection.Count);
+                    temp = collection[index1];
+                    collection[index1] = collection[index2];
+                    collection[index2] = temp;
+                }
+            }
         }
+#else
+        public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (iterations < 1)
+                throw new ArgumentOutOfRangeException(nameof(iterations));
+
+            var random = new byte[sizeof(int) * 2];
+            var rng = new RNGCryptoServiceProvider();
+
+            T temp;
+
+            for (int iteration = 0; iteration < iterations; iteration++)
+            {
+                for (int i = 0; i < collection.Count; i++)
+                {
+                    rng.GetBytes(random);
+                    int index1 = Math.Abs(BitConverter.ToInt32(random, 0) % collection.Count);
+                    int index2 = Math.Abs(BitConverter.ToInt32(random, sizeof(int)) % collection.Count);
+                    temp = collection[index1];
+                    collection[index1] = collection[index2];
+                    collection[index2] = temp;
+                }
+            }
+        }
+#endif
 
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> collection,
             Func<TInput, TOutput> converter)
