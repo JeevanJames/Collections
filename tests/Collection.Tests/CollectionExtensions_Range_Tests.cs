@@ -30,20 +30,20 @@ namespace Collection.Tests
     public sealed class CollectionExtensions_Range_Tests
     {
         [Theory, SpecialCollection(CollectionType.Null)]
-        public void Throws_if_collection_is_null(IList<int> collection)
+        public void Throws_if_collection_is_null(ICollection<int> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.Range(0, 1));
         }
 
         [Theory, SpecialCollection(CollectionType.NonEmpty)]
-        public void Throws_if_start_is_out_of_range(IList<int> collection)
+        public void Throws_if_start_is_out_of_range(ICollection<int> collection)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(-1, null));
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(collection.Count, null));
         }
 
         [Theory, SpecialCollection(CollectionType.NonEmpty)]
-        public void Throws_if_end_is_less_than_start_or_out_of_range(IList<int> collection)
+        public void Throws_if_end_is_less_than_start_or_out_of_range(ICollection<int> collection)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(2, 1));
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(2, collection.Count));
@@ -55,7 +55,7 @@ namespace Collection.Tests
         [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, null, new[] {4, 5, 6})]
         [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, null, new[] {1, 2, 3, 4, 5, 6})]
         [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, 3, new[] {4})]
-        public void Returns_iterator_for_specified_range(IList<int> collection, int? start, int? end, IList<int> expectedResult)
+        public void Returns_iterator_for_specified_range(ICollection<int> collection, int? start, int? end, IList<int> expectedResult)
         {
             IEnumerable<int> result = collection.Range(start, end);
 

@@ -235,7 +235,7 @@ namespace System.Collections.Generic
             return !collection.Any(predicate);
         }
 
-        public static IEnumerable<T> Range<T>(this IList<T> collection, int? start = null, int? end = null)
+        public static IEnumerable<T> Range<T>(this ICollection<T> collection, int? start = null, int? end = null)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
