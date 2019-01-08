@@ -90,10 +90,10 @@ namespace System.Collections.Generic
             collection.AddRange(items.Where(predicate).Select(item => converter(item)));
         }
 
-        public static IEnumerable<IList<T>> Chunk<T>(this IEnumerable<T> collection, int chunkSize)
-        {
-            throw new NotImplementedException();
-        }
+        //public static IEnumerable<IList<T>> Chunk<T>(this IEnumerable<T> collection, int chunkSize)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /// <summary>
         ///     Populates each item in a byte collection with a specific value.
@@ -319,10 +319,10 @@ namespace System.Collections.Generic
             }
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection)
-        {
-            throw new NotImplementedException();
-        }
+        //public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 #if NETSTANDARD1_3
         public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
