@@ -29,17 +29,22 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`IsNullOrEmpty`|`IEnumerable<T>`|Indicates whether a collection is `null` or empty.|
 |`LastIndexOf`|`IList<T>`|Finds the index of the last matching element in a collection based on the specified predicate.|
 |`None`|`IEnumerable<T>`|Determines whether none of the elements in a collection satisfies the specified predicate. Opposite of the LINQ `All` extension method.|
+|`Range`|`ICollection<T>`|Returns an iterator for the elements in the collection from the specified start index to the end index.|
 |`RemoveAll`|`IList<T>`|Removes all elements from a collection that satisfies the specified predicate.|
 |`RemoveFirst`|`IList<T>`|Removes the first element from a collection that satisfies the specified predicate.|
 |`RemoveLast`|`IList<T>`|Removes the last elements from a collection that satisfies the specified predicate.|
 |`Repeat`|`IEnumerable<T>`|Creates a collection that contains the specified collection repeated a specified number of times.|
+|`ShuffleInplace`|`IList<T>`|Shuffles the elements of a collection.|
 |`ToArray`|`IEnumerable<T>`|Creates an array from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`ToList`|`IEnumerable<T>`|Creates a `List<T>` from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
+|`WhereNot`|`IEnumerable<T>`|Filters a collection on the values that do not match the specified predicate. Inverse of the LINQ `Where` method.|
 
 ## Byte array extensions
 Extension methods that provide commonly-used operations on `byte` arrays.
 
-> Since .NET arrays implement `IList<T>`, most of the extension methods operate on `IList<byte>` rather than just `byte[]`. Some methods are a work-in-progress and still use `byte[]`. We will be converting these to `IList<byte>` before version 1.0.0 is released.
+> Since .NET arrays implement `IList<T>`, most of the extension methods operate on `IList<byte>` rather than just `byte[]`. The documentation will continue to refer to them as byte arrays.
+
+> Some methods are a work-in-progress and still use `byte[]`. We will be converting these to `IList<byte>` before version 1.0.0 is released.
 
 |Method name|Description|
 |-----------|-----------|
