@@ -56,7 +56,7 @@ namespace Collection.Tests
                 case CollectionType.EmptyByte:
                     return new byte[0];
                 case CollectionType.NonEmptyByte:
-                    return new List<byte> {1, 2, 3, 4, 5, 6};
+                    return new byte[] {1, 2, 3, 4, 5, 6};
                 default:
                     throw new InvalidOperationException();
             }

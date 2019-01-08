@@ -42,9 +42,8 @@ namespace Collection.Tests
         }
 
         [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
-        public void Throws_if_count_is_zero_or_negative(IList<byte> bytes)
+        public void Throws_if_count_is_negative(IList<byte> bytes)
         {
-            Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequences(0, 0, 1));
             Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequences(0, -1, 1));
         }
 

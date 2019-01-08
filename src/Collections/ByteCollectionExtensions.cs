@@ -152,7 +152,7 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(source));
             if (start < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
-            if (count <= 0)
+            if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
@@ -185,7 +185,7 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(source));
             if (start < 0)
                 throw new ArgumentOutOfRangeException(nameof(start));
-            if (count <= 0)
+            if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
@@ -207,8 +207,19 @@ namespace System.Collections.Generic
         public static byte[][] SplitBySequence(this byte[] source, params byte[] sequence) =>
             SplitBySequence(source, 0, source.Length, sequence);
 
-        public static byte[][] SplitBySequence(this byte[] source, int start, int count, byte[] sequence)
+        public static byte[][] SplitBySequence(this byte[] source, int start, int count, params byte[] sequence)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (start < 0)
+                throw new ArgumentOutOfRangeException(nameof(start));
+            if (count < 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (sequence.Length == 0)
+                throw new ArgumentException("Sequence cannot be empty.", nameof(sequence));
+
             if (start + count > source.Length)
                 count = source.Length - start;
 
