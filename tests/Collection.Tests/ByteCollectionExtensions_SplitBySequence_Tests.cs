@@ -114,5 +114,14 @@ namespace Collection.Tests
             result[0].ShouldBeSameAs(bytes);
             result.ShouldBe(new byte[][] {bytes});
         }
+
+        [Fact]
+        public void Does_not_error_if_count_is_too_large()
+        {
+            byte[] bytes = {1, 2, 3, 4, 1, 2, 3, 4};
+            byte[] sequence = {3};
+
+            Should.NotThrow(() => bytes.SplitBySequence(0, 100, sequence));
+        }
     }
 }
