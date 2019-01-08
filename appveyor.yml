@@ -1,10 +1,20 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 configuration: Release
+environment:
+  CODECOV_TOKEN: 5ad613f1-0623-451d-b889-2c6020f132f4
 before_build:
-- cmd: dotnet restore
+- pwsh: >-
+    dotnet restore
+
+    choco install codecov
 build:
   verbosity: minimal
+test_script:
+- pwsh: >-
+    dotnet test --blame ./tests/Collection.Tests/Collection.Tests.csproj /p:CollectCoverage=true /p:Exclude=\"[xunit.*]*\" /p:CoverletOutputFormat=opencover
+
+    codecov -f "./tests/Collection.Tests/coverage.opencover.xml"
 artifacts:
 - path: '**/*.nupkg'
   name: NuGet
