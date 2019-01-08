@@ -276,6 +276,10 @@ namespace System.Collections.Generic
             return collection.Skip(startIndex).Take(endIndex - startIndex + 1);
         }
 
+        public static IEnumerable<T> RangeOfLength<T>(this ICollection<T> collection, int? start = null,
+            int? count = null) =>
+            Range(collection, start, count.HasValue ? (int?) start.GetValueOrDefault() + count.Value - 1 : null);
+
         public static int RemoveAll<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
