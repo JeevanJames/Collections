@@ -20,7 +20,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -29,20 +29,20 @@ namespace Collection.Tests
 {
     public sealed class CollectionExtensions_Range_Tests
     {
-        [Theory, SpecialCollection(CollectionType.Null)]
+        [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(ICollection<int> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.Range(0, 1));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmpty)]
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_start_is_out_of_range(ICollection<int> collection)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(-1, null));
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(collection.Count, null));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmpty)]
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_end_is_less_than_start_or_out_of_range(ICollection<int> collection)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => collection.Range(2, 1));

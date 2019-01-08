@@ -20,7 +20,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -29,19 +29,19 @@ namespace Collection.Tests
 {
     public sealed class CollectionExtensions_LastIndexOf_Tests
     {
-        [Theory, SpecialCollection(CollectionType.Null)]
+        [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(n => n % 2 == 0));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmpty)]
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_predicate_is_null(IList<int> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(null));
         }
 
-        [Theory, SpecialCollection(CollectionType.NumbersOneToSix)]
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Finds_index_of_existing_element(IList<int> collection)
         {
             int index = collection.LastIndexOf(n => n % 2 == 0);
@@ -49,7 +49,7 @@ namespace Collection.Tests
             index.ShouldBe(5);
         }
 
-        [Theory, SpecialCollection(CollectionType.NumbersOneToSix)]
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Returns_negative_number_for_nonexistent_element(IList<int> collection)
         {
             int index = collection.LastIndexOf(n => n == 100);

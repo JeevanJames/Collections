@@ -20,7 +20,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -29,7 +29,7 @@ namespace Collection.Tests
 {
     public sealed class ByteCollectionExtensions_IsZeroed_Tests
     {
-        [Theory, SpecialCollection(CollectionType.NullByte)]
+        [Theory, ByteArray(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<byte> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.IsZeroed());

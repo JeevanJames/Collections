@@ -20,7 +20,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -29,13 +29,13 @@ namespace Collection.Tests
 {
     public sealed class CollectionExtensions_ShuffleInplace_Tests
     {
-        [Theory, SpecialCollection(CollectionType.Null)]
+        [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
             Should.Throw<ArgumentNullException>(() => collection.ShuffleInplace());
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmpty)]
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_iterations_is_less_than_one(IList<int> collection)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(0));

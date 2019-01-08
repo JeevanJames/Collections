@@ -21,6 +21,8 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 
+using Collection.Tests.DataAttributes;
+
 using Shouldly;
 
 using Xunit;
@@ -29,25 +31,25 @@ namespace Collection.Tests
 {
     public sealed class ByteCollectionExtensions_IndexOfSequence_Tests
     {
-        [Theory, SpecialCollection(CollectionType.NullByte)]
+        [Theory, ByteArray(CollectionType.Null)]
         public void Throws_if_bytes_are_null(IList<byte> bytes)
         {
             Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequence(1));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Throws_if_start_is_negative(IList<byte> bytes)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence(-1, 10, 1));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Throws_if_count_is_negative(IList<byte> bytes)
         {
             Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence(0, -1, 1));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Throws_if_sequence_is_null(IList<byte> bytes)
         {
             Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequence(0, 100, null));

@@ -19,7 +19,7 @@ limitations under the License.
 #endregion
 
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -71,7 +71,7 @@ namespace Collection.Tests
             bytes1.IsEqualTo(bytes2).ShouldBeTrue();
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Returns_true_for_params_array(IList<byte> bytes)
         {
             bytes.IsEqualTo(1, 2, 3, 4, 5, 6).ShouldBeTrue();

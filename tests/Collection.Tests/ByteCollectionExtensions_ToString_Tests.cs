@@ -20,7 +20,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using Collection.Tests.DataAttributes;
 using Shouldly;
 
 using Xunit;
@@ -29,43 +29,43 @@ namespace Collection.Tests
 {
     public sealed class ByteCollectionExtensions_ToString_Tests
     {
-        [Theory, SpecialCollection(CollectionType.NullByte)]
+        [Theory, ByteArray(CollectionType.Null)]
         public void Returns_null_if_bytes_are_null(IList<byte> bytes)
         {
             bytes.ToString(",").ShouldBeNull();
         }
 
-        [Theory, SpecialCollection(CollectionType.EmptyByte)]
+        [Theory, ByteArray(CollectionType.Empty)]
         public void Returns_empty_string_if_bytes_is_empty(IList<byte> bytes)
         {
             bytes.ToString(",").ShouldBeEmpty();
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Throws_if_delimiter_is_null(IList<byte> bytes)
         {
             Should.Throw<ArgumentNullException>(() => bytes.ToString(null));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Does_not_throw_if_delimiter_is_empty(IList<byte> bytes)
         {
             Should.NotThrow(() => bytes.ToString(string.Empty));
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Returns_joined_string_without_delimiters(IList<byte> bytes)
         {
             bytes.ToString(string.Empty).ShouldBe("123456");
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Returns_joined_string_with_single_character_delimiter(IList<byte> bytes)
         {
             bytes.ToString(",").ShouldBe("1,2,3,4,5,6");
         }
 
-        [Theory, SpecialCollection(CollectionType.NonEmptyByte)]
+        [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Returns_joined_string_with_MULTI_character_delimiter(IList<byte> bytes)
         {
             bytes.ToString("#;%").ShouldBe("1#;%2#;%3#;%4#;%5#;%6");
