@@ -19,6 +19,7 @@ limitations under the License.
 #endregion
 
 using System;
+using System.Collections.Generic;
 
 namespace Collection.Tests.DataAttributes
 {
@@ -35,10 +36,10 @@ namespace Collection.Tests.DataAttributes
                 case CollectionType.Null:
                     return null;
                 case CollectionType.Empty:
-                    return new byte[0];
+                    return new List<int>(0);
                 case CollectionType.NonEmpty:
                 case CollectionType.NumbersOneToSix:
-                    return new byte[] {1, 2, 3, 4, 5, 6};
+                    return new List<int> {1, 2, 3, 4, 5, 6};
                 default:
                     throw new InvalidOperationException();
             }

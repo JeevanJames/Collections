@@ -36,10 +36,10 @@ namespace Collection.Tests.DataAttributes
                 case CollectionType.Null:
                     return null;
                 case CollectionType.Empty:
-                    return new int[0];
+                    return new byte[0];
                 case CollectionType.NonEmpty:
                 case CollectionType.NumbersOneToSix:
-                    return new List<int> { 1, 2, 3, 4, 5, 6 };
+                    return new byte[] { 1, 2, 3, 4, 5, 6 };
                 default:
                     throw new InvalidOperationException();
             }
