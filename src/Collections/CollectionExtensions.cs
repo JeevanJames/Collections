@@ -90,10 +90,35 @@ namespace System.Collections.Generic
             collection.AddRange(items.Where(predicate).Select(item => converter(item)));
         }
 
-        //public static IEnumerable<IList<T>> Chunk<T>(this IEnumerable<T> collection, int chunkSize)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> collection, int chunkSize)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (chunkSize < 1)
+                throw new ArgumentOutOfRangeException(nameof(chunkSize));
+
+            T[] chunk = null;
+            int count = 0;
+
+            foreach (T element in collection)
+            {
+                if (count == 0)
+                    chunk = new T[chunkSize];
+                chunk[count++] = element;
+                if (count >= chunkSize)
+                {
+                    yield return chunk;
+                    count = 0;
+                }
+            }
+
+            if (chunk != null && count > 0)
+            {
+                T[] trailingChunk = new T[count];
+                Array.Copy(chunk, 0, trailingChunk, 0, count);
+                yield return trailingChunk;
+            }
+        }
 
         /// <summary>
         ///     Populates each item in a byte collection with a specific value.
