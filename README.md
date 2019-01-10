@@ -45,8 +45,6 @@ Extension methods that provide commonly-used operations on `byte` arrays.
 
 > Since .NET arrays implement `IList<T>`, most of the extension methods operate on `IList<byte>` rather than just `byte[]`. The documentation will continue to refer to them as byte arrays.
 
-> Some methods are a work-in-progress and still use `byte[]`. We will be converting these to `IList<byte>` before version 1.0.0 is released.
-
 |Method name|Description|
 |-----------|-----------|
 |`IsEqualTo`|Checks whether two byte collections contain the same data.|
