@@ -25,6 +25,8 @@ namespace System.Collections.Generic
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue = default)
         {
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
     }
