@@ -20,7 +20,8 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 
 |Method name|Interface|Description|
 |-----------|---------|-----------|
-|`AddRange`|`ICollection<T>`|Adds one or more items to the collection in a single operation. Inspired by the `List<T>.AddRange` method.|
+|`AddRange`|`ICollection<T>`|Adds one or more items to a collection in a single operation. Inspired by the `List<T>.AddRange` method.|
+|`Chunk`|`IEnumerable<T>`|Splits a collection into chunks of a specified size.|
 |`Fill`|`IList<T>`|Sets all elements in a collection to a specific value.|
 |`ForEach`|`IEnumerable<T>`|Iterates over each element in a collection and calls the specified delegate for each item. Inspired by the `List<T>.ForEach` method.|
 |`IndexOf`|`IList<T>`|Finds the index of the first matching element in a collection based on the specified predicate.|
