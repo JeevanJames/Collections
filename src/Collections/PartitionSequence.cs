@@ -21,16 +21,31 @@ limitations under the License.
 #if !NETSTANDARD2_0
 namespace System.Collections.Generic
 {
+    /// <summary>
+    ///     Represents the results of a predicate check on all items of a collection.
+    /// </summary>
+    /// <typeparam name="T">The type of element in the collection.</typeparam>
     public sealed class PartitionSequence<T>
     {
+        /// <summary>
+        ///     Initializes an instance of the <see cref="PartitionSequence{T}"/> class.
+        /// </summary>
+        /// <param name="matches">The matching elements.</param>
+        /// <param name="mismatches">The elements that do not match.</param>
         internal PartitionSequence(IEnumerable<T> matches, IEnumerable<T> mismatches)
         {
             Matches = matches;
             Mismatches = mismatches;
         }
 
+        /// <summary>
+        ///     Collection of all items in the collection that satisfy the predicate.
+        /// </summary>
         public IEnumerable<T> Matches { get; }
 
+        /// <summary>
+        ///     Collection of all items in the collection that do not satisfy the predicate.
+        /// </summary>
         public IEnumerable<T> Mismatches { get; }
     }
 }

@@ -227,5 +227,28 @@
             <exception cref="T:System.ArgumentNullException">Thrown when the specified type is null</exception>
             <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exception>
         </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <summary>
+                Represents the results of a predicate check on all items of a collection.
+            </summary>
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
+            </summary>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
+                Collection of all items in the collection that satisfy the predicate.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+            <summary>
+                Collection of all items in the collection that do not satisfy the predicate.
+            </summary>
+        </member>
     </members>
 </doc>
