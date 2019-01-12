@@ -35,10 +35,20 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`RemoveFirst`|`IList<T>`|Removes the first element from a collection that satisfies the specified predicate.|
 |`RemoveLast`|`IList<T>`|Removes the last elements from a collection that satisfies the specified predicate.|
 |`Repeat`|`IEnumerable<T>`|Creates a collection that contains the specified collection repeated a specified number of times.|
+|`Shuffle`|`IEnumerable<T>`|Returns a shuffled collection from a given collection.|
 |`ShuffleInplace`|`IList<T>`|Shuffles the elements of a collection.|
 |`ToArray`|`IEnumerable<T>`|Creates an array from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`ToList`|`IEnumerable<T>`|Creates a `List<T>` from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`WhereNot`|`IEnumerable<T>`|Filters a collection on the values that do not match the specified predicate. Inverse of the LINQ `Where` method.|
+
+## Dictionary extensions
+Extension methods on the `IDictionary<T, U>` interface.
+
+|Method name|Description|
+|-----------|-----------|
+|`AddOrUpdate`|Adds a new entry for a specified key if it doesn't already exist, otherwise updates the existing entry.|
+|`GetValueOrDefault`|Gets a value for a specified key or a default value if the key does not exist.|
+|`GetValueOrAdd`|Gets a value for a specified key or adds an entry if the key does not exist.|
 
 ## Byte array extensions
 Extension methods that provide commonly-used operations on `byte` arrays.
