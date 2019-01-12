@@ -29,30 +29,27 @@ using Xunit;
 
 namespace Collection.Tests.DictionaryExtensions
 {
-    public sealed class GetOrAdd_Tests
+    public sealed class GetValueOrDefault_Tests
     {
         [Theory, Dictionary(CollectionType.Null)]
         public void Throws_if_dictionary_is_null(IDictionary<string, int> dictionary)
         {
-            Should.Throw<ArgumentNullException>(() => dictionary.GetValueOrAdd("One", 2));
+            Should.Throw<ArgumentNullException>(() => dictionary.GetValueOrDefault("Two"));
         }
 
         [Theory, Dictionary(CollectionType.NumbersOneToSix)]
-        public void Gets_value_for_existing_key(IDictionary<string, int> dictionary)
+        public void Returns_value_for_existing_key(IDictionary<string, int> dictionary)
         {
-            int value = dictionary.GetValueOrAdd("Two", 3);
+            int value = dictionary.GetValueOrDefault("Two");
 
             value.ShouldBe(2);
-            dictionary.Count.ShouldBe(6);
         }
 
         [Theory, Dictionary(CollectionType.NumbersOneToSix)]
-        public void Adds_value_for_nonexisting_key(IDictionary<string, int> dictionary)
+        public void Returns_default_value_for_nonexistent_key(IDictionary<string, int> dictionary)
         {
-            int value = dictionary.GetValueOrAdd("Seven", 10);
-
-            value.ShouldBe(10);
-            dictionary.Count.ShouldBe(7);
+            dictionary.GetValueOrDefault("Hundred").ShouldBe(0);
+            dictionary.GetValueOrDefault(string.Empty, 200).ShouldBe(200);
         }
     }
 }

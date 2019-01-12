@@ -27,29 +27,32 @@ using Shouldly;
 
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.DictionaryExtensions
 {
-    public sealed class DictionaryExtensions_GetValueOrDefault_Tests
+    public sealed class GetValueOrAdd_Tests
     {
         [Theory, Dictionary(CollectionType.Null)]
         public void Throws_if_dictionary_is_null(IDictionary<string, int> dictionary)
         {
-            Should.Throw<ArgumentNullException>(() => dictionary.GetValueOrDefault("Two"));
+            Should.Throw<ArgumentNullException>(() => dictionary.GetValueOrAdd("One", 2));
         }
 
         [Theory, Dictionary(CollectionType.NumbersOneToSix)]
-        public void Returns_value_for_existing_key(IDictionary<string, int> dictionary)
+        public void Gets_value_for_existing_key(IDictionary<string, int> dictionary)
         {
-            int value = dictionary.GetValueOrDefault("Two");
+            int value = dictionary.GetValueOrAdd("Two", 3);
 
             value.ShouldBe(2);
+            dictionary.Count.ShouldBe(6);
         }
 
         [Theory, Dictionary(CollectionType.NumbersOneToSix)]
-        public void Returns_default_value_for_nonexistent_key(IDictionary<string, int> dictionary)
+        public void Adds_value_for_nonexisting_key(IDictionary<string, int> dictionary)
         {
-            dictionary.GetValueOrDefault("Hundred").ShouldBe(0);
-            dictionary.GetValueOrDefault(string.Empty, 200).ShouldBe(200);
+            int value = dictionary.GetValueOrAdd("Seven", 10);
+
+            value.ShouldBe(10);
+            dictionary.Count.ShouldBe(7);
         }
     }
 }
