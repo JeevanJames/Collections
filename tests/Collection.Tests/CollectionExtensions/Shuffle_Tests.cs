@@ -29,29 +29,28 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class ShuffleInplace_Tests
+    public sealed class Shuffle_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.ShuffleInplace());
+            Should.Throw<ArgumentNullException>(() => collection.Shuffle());
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_iterations_is_less_than_one(IList<int> collection)
         {
-            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(0));
-            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(-1));
+            Should.Throw<ArgumentOutOfRangeException>(() => collection.Shuffle(0));
+            Should.Throw<ArgumentOutOfRangeException>(() => collection.Shuffle(-1));
         }
 
-        [Fact]
-        public void Shuffles_collection_in_place()
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
+        public void Returns_shuffled_collection(IList<int> collection)
         {
-            int[] collection = {1, 2, 3, 4, 5, 6, 7, 8};
-            
-            collection.ShuffleInplace();
+            IEnumerable<int> shuffled = collection.Shuffle();
 
-            collection.ShouldNotBe(new [] {1, 2, 3, 4, 5, 6, 7, 8});
+            shuffled.ShouldNotBeSameAs(collection);
+            shuffled.ShouldNotBe(new [] {1, 2, 3, 4, 5, 6});
         }
     }
 }
