@@ -19,12 +19,10 @@ limitations under the License.
 #endregion
 
 using System.Collections.Generic;
-
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.ByteCollectionExtensions
 {
     public sealed class ByteCollectionExtensions_GetBytesUptoSequence_Tests
     {

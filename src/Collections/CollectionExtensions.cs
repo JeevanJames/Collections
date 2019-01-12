@@ -348,10 +348,17 @@ namespace System.Collections.Generic
             }
         }
 
-        //public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection, int iterations = 1)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (iterations < 1)
+                throw new ArgumentOutOfRangeException(nameof(iterations));
+
+            T[] array = collection.ToArray();
+            ShuffleInplace(array, iterations);
+            return array;
+        }
 
 #if NETSTANDARD1_3
         public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)

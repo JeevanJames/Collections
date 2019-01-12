@@ -20,41 +20,43 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Collection.Tests.DataAttributes;
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_IndexOf_Tests
+    public sealed class CollectionExtensions_IndexOfAll_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.IndexOf(n => n % 2 == 0));
+            // ToList is needed because the returned collection is lazy
+            Should.Throw<ArgumentNullException>(() => collection.IndexOfAll(n => n % 2 == 0).ToList());
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
         public void Throws_if_predicate_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.IndexOf(null));
+            // ToList is needed because the returned collection is lazy
+            Should.Throw<ArgumentNullException>(() => collection.IndexOfAll(null).ToList());
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
-        public void Finds_index_of_existing_element(IList<int> collection)
+        public void Finds_indices_of_all_matching_elements(IList<int> collection)
         {
-            int index = collection.IndexOf(n => n % 2 == 0);
+            IEnumerable<int> indices = collection.IndexOfAll(n => n % 2 == 0);
 
-            index.ShouldBe(1);
+            indices.ShouldBe(new[] {1, 3, 5});
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
-        public void Returns_negative_number_for_nonexistent_element(IList<int> collection)
+        public void Returns_empty_enumeration_if_matching_elements_not_found(IList<int> collection)
         {
-            int index = collection.IndexOf(n => n == 100);
+            IEnumerable<int> indices = collection.IndexOfAll(n => n > 100);
 
-            index.ShouldBeLessThan(0);
+            indices.ShouldBeEmpty();
         }
     }
 }

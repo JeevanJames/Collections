@@ -19,29 +19,24 @@ limitations under the License.
 #endregion
 
 using System.Collections.Generic;
-
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_IsNullOrZeroed_Tests
+    public sealed class CollectionExtensions_RangeOfLength_Tests
     {
         [Theory]
-        [InlineData(null)]
-        [InlineData(new byte[0])]
-        [InlineData(new byte[] {0, 0, 0, 0})]
-        public void Returns_true_if_collection_is_null_or_empty_or_zeroed(IList<byte> bytes)
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 2, 3, new[] {3, 4, 5})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, 4, new[] {1, 2, 3, 4})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, null, new[] {4, 5, 6})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, null, new[] {1, 2, 3, 4, 5, 6})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, 1, new[] {4})]
+        public void Returns_iterator_for_specified_range(ICollection<int> collection, int? start, int? end, IList<int> expectedResult)
         {
-            bytes.IsNullOrZeroed().ShouldBeTrue();
-        }
+            IEnumerable<int> result = collection.RangeOfLength(start, end);
 
-        [Fact]
-        public void Returns_false_if_any_element_is_non_zero()
-        {
-            byte[] bytes = {0, 1, 0, 0};
-            bytes.IsNullOrZeroed().ShouldBeFalse();
+            result.ShouldBe(expectedResult);
         }
     }
 }

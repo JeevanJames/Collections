@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using Shouldly;
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
     public sealed class CollectionExtensions_Fill_Tests
     {

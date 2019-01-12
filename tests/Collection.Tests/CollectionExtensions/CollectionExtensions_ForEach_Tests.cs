@@ -20,12 +20,10 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
     public sealed class CollectionExtensions_ForEach_Tests
     {

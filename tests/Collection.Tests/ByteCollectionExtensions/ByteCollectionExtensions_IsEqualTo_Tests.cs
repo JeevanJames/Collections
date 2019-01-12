@@ -21,10 +21,9 @@ limitations under the License.
 using System.Collections.Generic;
 using Collection.Tests.DataAttributes;
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.ByteCollectionExtensions
 {
     public sealed class ByteCollectionExtensions_IsEqualTo_Tests
     {

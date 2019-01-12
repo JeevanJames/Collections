@@ -22,12 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Collection.Tests.DataAttributes;
-
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
     public sealed class CollectionExtensions_Chunk_Tests
     {

@@ -18,37 +18,33 @@ limitations under the License.
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
-using Collection.Tests.DataAttributes;
+using System.Linq;
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_IsZeroed_Tests
+    public sealed class CollectionExtensions_IsNullOrEmpty_Tests
     {
-        [Theory, ByteArray(CollectionType.Null)]
-        public void Throws_if_collection_is_null(IList<byte> collection)
-        {
-            Should.Throw<ArgumentNullException>(() => collection.IsZeroed());
-        }
-
         [Theory]
-        [InlineData(new byte[0])]
-        [InlineData(new byte[] {0, 0, 0, 0})]
-        public void Returns_true_if_collection_is_zeroed(IList<byte> collection)
+        [InlineData((IEnumerable<int>)null)]
+        [InlineData(new int[0])]
+        public void Returns_true_if_collection_is_null_or_empty(IEnumerable<int> collection)
         {
-            collection.IsZeroed().ShouldBeTrue();
+            collection.IsNullOrEmpty().ShouldBeTrue();
         }
 
-        [Fact]
-        public void Returns_false_if_collection_contains_nonzeroes()
+        [Theory, MemberData(nameof(NotEmptyCollections))]
+        public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
         {
-            IList<byte> collection = new List<byte> {0, 1, 0, 0};
+            collection.IsNullOrEmpty().ShouldBeFalse();
+        }
 
-            collection.IsZeroed().ShouldBeFalse();
+        public static IEnumerable<object[]> NotEmptyCollections()
+        {
+            yield return new object[] {Enumerable.Range(1, 5)};
+            yield return new object[] {new[] {1, 2, 3, 4, 5}};
         }
     }
 }

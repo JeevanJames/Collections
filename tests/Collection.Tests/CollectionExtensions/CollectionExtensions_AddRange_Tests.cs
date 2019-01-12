@@ -22,10 +22,9 @@ using System;
 using System.Collections.Generic;
 using Collection.Tests.DataAttributes;
 using Shouldly;
-
 using Xunit;
 
-namespace Collection.Tests
+namespace Collection.Tests.CollectionExtensions
 {
     public sealed class CollectionExtensions_AddRange_Tests
     {
