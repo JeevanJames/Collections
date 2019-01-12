@@ -20,8 +20,11 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+
 using Collection.Tests.DataAttributes;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
@@ -49,11 +52,11 @@ namespace Collection.Tests.CollectionExtensions
         }
 
         [Theory]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 2, 4, new[] {3, 4, 5})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, 3, new[] {1, 2, 3, 4})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 2, 4, new[] {3, 4})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, 3, new[] {1, 2, 3})]
         [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, null, new[] {4, 5, 6})]
         [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, null, new[] {1, 2, 3, 4, 5, 6})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, 3, new[] {4})]
+        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, 3, new int[0])]
         public void Returns_iterator_for_specified_range(ICollection<int> collection, int? start, int? end, IList<int> expectedResult)
         {
             IEnumerable<int> result = collection.Range(start, end);

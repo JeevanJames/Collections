@@ -109,11 +109,26 @@
             <summary>
                 Determines whether none of the elements of a sequence satisfies the specified condition
             </summary>
-            <typeparam name="T">The type of the elements of source.</typeparam>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
             <param name="collection">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
             <param name="predicate">A function to test each element for a condition.</param>
             <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.Range``1(System.Collections.Generic.ICollection{``0},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                Returns the range of elements from the specified start and end index of a collection.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="start">
+                The inclusive start index of the range. If <c>null</c>, then this will default to zero.
+            </param>
+            <param name="end">
+                The exclusive end index of the range. If <c>null</c>, then this will default to the number of elements
+                in the collection.
+            </param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> with the elements from the specified range.</returns>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
             <summary>

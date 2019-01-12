@@ -246,7 +246,7 @@ namespace System.Collections.Generic
         /// <summary>
         ///     Determines whether none of the elements of a sequence satisfies the specified condition
         /// </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
         /// <param name="collection">An <see cref="IEnumerable{T}" /> whose elements to apply the predicate to.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
@@ -290,25 +290,41 @@ namespace System.Collections.Generic
 #endif
         }
 
+        /// <summary>
+        ///     Returns the range of elements from the specified start and end index of a collection.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="start">
+        ///     The inclusive start index of the range. If <c>null</c>, then this will default to zero.
+        /// </param>
+        /// <param name="end">
+        ///     The exclusive end index of the range. If <c>null</c>, then this will default to the number of elements
+        ///     in the collection.
+        /// </param>
+        /// <returns>An <see cref="IEnumerable{T}"/> with the elements from the specified range.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the collection is <c>null</c>.</exception>
         public static IEnumerable<T> Range<T>(this ICollection<T> collection, int? start = null, int? end = null)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
 
             int startIndex = start.GetValueOrDefault();
-            int endIndex = end.GetValueOrDefault(collection.Count - 1);
+            int endIndex = end.GetValueOrDefault(collection.Count);
 
             if (startIndex < 0 || startIndex >= collection.Count)
                 throw new ArgumentOutOfRangeException(nameof(start));
-            if (endIndex < startIndex || endIndex >= collection.Count)
+            if (endIndex < startIndex)
                 throw new ArgumentOutOfRangeException(nameof(end), $"End index {endIndex} should be greater or equal to start index {startIndex}.");
+            if (endIndex > collection.Count)
+                endIndex = collection.Count;
 
-            return collection.Skip(startIndex).Take(endIndex - startIndex + 1);
+            return collection.Skip(startIndex).Take(endIndex - startIndex);
         }
 
         public static IEnumerable<T> RangeOfLength<T>(this ICollection<T> collection, int? start = null,
             int? count = null) =>
-            Range(collection, start, count.HasValue ? (int?) start.GetValueOrDefault() + count.Value - 1 : null);
+            Range(collection, start, count.HasValue ? (int?) start.GetValueOrDefault() + count.Value : null);
 
         public static int RemoveAll<T>(this IList<T> collection, Func<T, bool> predicate)
         {
