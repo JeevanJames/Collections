@@ -72,7 +72,7 @@ namespace System.Collections.Generic
             if (items == null)
                 return;
 
-            collection.AddRange(items.Select(item => converter(item)));
+            collection.AddRange(items.Select(converter));
         }
 
         public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource> items,
@@ -87,7 +87,7 @@ namespace System.Collections.Generic
             if (items == null)
                 return;
 
-            collection.AddRange(items.Where(predicate).Select(item => converter(item)));
+            collection.AddRange(items.Where(predicate).Select(converter));
         }
 
         public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> collection, int chunkSize)
@@ -98,24 +98,24 @@ namespace System.Collections.Generic
                 throw new ArgumentOutOfRangeException(nameof(chunkSize));
 
             T[] chunk = null;
-            int count = 0;
+            int currentIndex = 0;
 
             foreach (T element in collection)
             {
-                if (count == 0)
+                if (currentIndex == 0)
                     chunk = new T[chunkSize];
-                chunk[count++] = element;
-                if (count >= chunkSize)
+                chunk[currentIndex++] = element;
+                if (currentIndex >= chunkSize)
                 {
                     yield return chunk;
-                    count = 0;
+                    currentIndex = 0;
                 }
             }
 
-            if (chunk != null && count > 0)
+            if (chunk != null && currentIndex > 0)
             {
-                T[] trailingChunk = new T[count];
-                Array.Copy(chunk, 0, trailingChunk, 0, count);
+                T[] trailingChunk = new T[currentIndex];
+                Array.Copy(chunk, 0, trailingChunk, 0, currentIndex);
                 yield return trailingChunk;
             }
         }
@@ -414,10 +414,10 @@ namespace System.Collections.Generic
             if (iterations < 1)
                 throw new ArgumentOutOfRangeException(nameof(iterations));
 
-            T temp;
-
             for (int iteration = 0; iteration < iterations; iteration++)
             {
+                T temp;
+
                 var rng = new Random((int)DateTime.Now.Ticks);
 
                 for (int i = 0; i < collection.Count; i++)
@@ -441,10 +441,9 @@ namespace System.Collections.Generic
             var random = new byte[sizeof(int) * 2];
             var rng = new RNGCryptoServiceProvider();
 
-            T temp;
-
             for (int iteration = 0; iteration < iterations; iteration++)
             {
+                T temp;
                 for (int i = 0; i < collection.Count; i++)
                 {
                     rng.GetBytes(random);

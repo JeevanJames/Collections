@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/JeevanJames/Collections</PackageProjectUrl>
     <RepositoryUrl>https://github.com/JeevanJames/Collections.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags />
+    <PackageTags>extension-methods extensions collections dictionary array enumerable ienumerable ilist icollection byte-array</PackageTags>
     <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Collections.NET</PackageId>
