@@ -22,6 +22,16 @@ namespace System.Collections.Generic
 {
     public static class DictionaryExtensions
     {
+        /// <summary>
+        ///     Updates the value of a key in the dictionary, if it exists. If the key does not exist,
+        ///     it is added to the dictionary with the specified value.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="value">The value to update or add.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static void AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
             if (dictionary == null)
@@ -33,6 +43,16 @@ namespace System.Collections.Generic
                 dictionary.Add(key, value);
         }
 
+        /// <summary>
+        ///     Gets the value for the specified key in a dictionary. If the key does not exist, the <paramref name="defaultValue"/> value is returned.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="defaultValue">The value to return if the key does not exist.</param>
+        /// <returns>The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue = default)
         {
@@ -41,6 +61,17 @@ namespace System.Collections.Generic
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
 
+        /// <summary>
+        ///     Gets the value associated with the specified key. If the key does not exist, the <paramref name="value"/>
+        ///     value is added to the dictionary with the specified key and returned.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="value">The value to add if the key does does exist.</param>
+        /// <returns>The value assciated with the specified key.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue value)
         {
@@ -53,6 +84,17 @@ namespace System.Collections.Generic
             return value;
         }
 
+        /// <summary>
+        ///     Gets the value associated with the specified key. If the key does not exist, a new value is generated using
+        ///     the the <paramref name="valueGetter"/> delegate and is added to the dictionary.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="valueGetter">The delegate used to generate a new value.</param>
+        /// <returns>The value assciated with the specified key.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary or delegate is <c>null</c>.</exception>
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             Func<TKey, TValue> valueGetter)
         {
@@ -68,6 +110,17 @@ namespace System.Collections.Generic
             return value;
         }
 
+        /// <summary>
+        ///     Gets the value associated with the specified key. If the key does not exist, a new value is generated using
+        ///     the the <paramref name="valueGetter"/> delegate and is added to the dictionary.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="valueGetter">The delegate used to generate a new value.</param>
+        /// <returns>The value assciated with the specified key.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary or delegate is <c>null</c>.</exception>
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             Func<TKey, IDictionary<TKey, TValue>, TValue> valueGetter)
         {
