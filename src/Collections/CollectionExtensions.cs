@@ -457,6 +457,16 @@ namespace System.Collections.Generic
         }
 #endif
 
+        //public static IEnumerable<IEnumerable<T>> SlidingChunk<T>(this IEnumerable<T> collection, int chunkSize)
+        //{
+        //    if (collection == null)
+        //        throw new ArgumentNullException(nameof(collection));
+        //    if (chunkSize < 1)
+        //        throw new ArgumentOutOfRangeException(nameof(chunkSize));
+
+        //    throw new NotImplementedException();
+        //}
+
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> collection,
             Func<TInput, TOutput> converter)
         {
