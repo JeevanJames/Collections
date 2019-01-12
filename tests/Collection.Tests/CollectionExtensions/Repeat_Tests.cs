@@ -20,46 +20,45 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Shouldly;
 using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_RemoveLast_Tests
+    public sealed class Repeat_Tests
     {
         [Fact]
         public void Throws_if_collection_is_null()
         {
-            IList<int> collection = null;
+            IEnumerable<int> collection = null;
 
-            Should.Throw<ArgumentNullException>(() => collection.RemoveLast(n => n % 2 == 0));
-        }
-
-        [Fact]
-        public void Throws_if_predicate_is_null()
-        {
-            IList<int> collection = new[] {1, 2};
-            Should.Throw<ArgumentNullException>(() => collection.RemoveLast(null));
+            // Need to call ToList because the returned IEnumerable is lazy.
+            Should.Throw<ArgumentNullException>(() => collection.Repeat(3).ToList());
         }
 
         [Theory]
-        [InlineData(new int[0])]
-        [InlineData(new [] {1, 3, 5, 7, 9})]
-        public void Returns_false_if_matching_element_not_found(IList<int> collection)
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Throws_if_count_is_negative_or_zero(int count)
         {
-            collection.RemoveLast(n => n % 2 == 0).ShouldBeFalse();
+            IEnumerable<int> collection = new[] {1, 2, 3};
+
+            // Need to call ToList because the returned IEnumerable is lazy.
+            Should.Throw<ArgumentOutOfRangeException>(() => collection.Repeat(count).ToList());
         }
 
-        [Fact]
-        public void Removes_last_matching_element()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void Creates_collection_with_repeated_items(int count)
         {
-            IList<int> collection = new List<int> {1, 2, 3, 4, 5, 6};
+            IEnumerable<int> collection = new[] {5, 6, 7};
 
-            bool removed = collection.RemoveLast(n => n % 2 == 0);
+            IEnumerable<int> repeated = collection.Repeat(count);
 
-            removed.ShouldBeTrue();
-            collection.Count.ShouldBe(5);
-            collection.ShouldContain(n => n == 6, 0);
+            repeated.Count().ShouldBe(collection.Count() * count);
         }
     }
 }

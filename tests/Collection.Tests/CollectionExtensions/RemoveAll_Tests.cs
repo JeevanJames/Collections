@@ -20,38 +20,47 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Shouldly;
 using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_IsEmpty_Tests
+    public sealed class RemoveAll_Tests
     {
         [Fact]
         public void Throws_if_collection_is_null()
         {
-            IEnumerable<int> collection = null;
-            Should.Throw<ArgumentNullException>(() => collection.IsEmpty());
+            IList<int> collection = null;
+
+            Should.Throw<ArgumentNullException>(() => collection.RemoveAll(n => n % 2 == 0));
         }
 
         [Fact]
-        public void Returns_true_if_collection_is_empty()
+        public void Throws_if_predicate_is_null()
         {
-            IEnumerable<int> collection = new int[0];
-            collection.IsEmpty().ShouldBeTrue();
+            IList<int> collection = new List<int> {1, 2, 3, 4, 5, 6};
+
+            Should.Throw<ArgumentNullException>(() => collection.RemoveAll(null));
         }
 
-        [Theory, MemberData(nameof(NotEmptyCollections))]
-        public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
+        [Theory]
+        [InlineData(new int[0])]
+        [InlineData(new[] {1, 3, 5, 7, 9})]
+        public void Returns_zero_if_no_matching_elements_found(IList<int> collection)
         {
-            collection.IsEmpty().ShouldBeFalse();
+            collection.RemoveAll(n => n % 2 == 0).ShouldBe(0);
         }
 
-        public static IEnumerable<object[]> NotEmptyCollections()
+        [Fact]
+        public void Removes_all_matching_elements()
         {
-            yield return new object[] {Enumerable.Range(1, 5)};
-            yield return new object[] {new[] {1, 2, 3, 4, 5}};
+            IList<int> collection = new List<int> {1, 2, 3, 4, 5, 6};
+
+            int removedCount = collection.RemoveAll(n => n % 2 == 0);
+
+            removedCount.ShouldBe(3);
+            collection.Count.ShouldBe(3);
+            collection.ShouldAllBe(n => n % 2 != 0);
         }
     }
 }

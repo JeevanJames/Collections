@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_ForEach_Tests
+    public sealed class ForEach_Tests
     {
         [Fact]
         public void Does_not_do_anything_is_null()

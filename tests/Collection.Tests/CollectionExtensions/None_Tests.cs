@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_None_Tests
+    public sealed class None_Tests
     {
         private static readonly int[] OddNumbers = { 1, 3, 5, 7, 9, 11 };
         private static readonly int[] MixedNumbers = { 1, 2, 3, 5, 7, 8, 9, 11 };

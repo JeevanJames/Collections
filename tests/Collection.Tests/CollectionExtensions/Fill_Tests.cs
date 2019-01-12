@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_Fill_Tests
+    public sealed class Fill_Tests
     {
         [Fact]
         public void Throws_if_collection_is_null()

@@ -26,7 +26,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_SplitBySequence_Tests
+    public sealed class SplitBySequence_Tests
     {
         [Theory, ByteArray(CollectionType.Null)]
         public void Throws_if_bytes_is_null(byte[] bytes)

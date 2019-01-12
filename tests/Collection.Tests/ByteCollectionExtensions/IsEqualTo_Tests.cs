@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_IsEqualTo_Tests
+    public sealed class IsEqualTo_Tests
     {
         [Theory]
         [InlineData(new byte[0])]

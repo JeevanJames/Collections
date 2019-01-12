@@ -26,7 +26,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_IsZeroed_Tests
+    public sealed class IsZeroed_Tests
     {
         [Theory, ByteArray(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<byte> collection)

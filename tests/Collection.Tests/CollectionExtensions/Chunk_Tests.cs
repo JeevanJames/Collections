@@ -27,7 +27,7 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_Chunk_Tests
+    public sealed class Chunk_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_empty(IEnumerable<int> collection)

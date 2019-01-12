@@ -26,7 +26,7 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_IndexOf_Tests
+    public sealed class IndexOf_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)

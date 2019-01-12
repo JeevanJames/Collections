@@ -24,7 +24,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_IsNullOrZeroed_Tests
+    public sealed class IsNullOrZeroed_Tests
     {
         [Theory]
         [InlineData(null)]

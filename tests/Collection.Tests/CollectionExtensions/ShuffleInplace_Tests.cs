@@ -26,34 +26,29 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_LastIndexOf_Tests
+    public sealed class ShuffleInplace_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(n => n % 2 == 0));
+            Should.Throw<ArgumentNullException>(() => collection.ShuffleInplace());
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
-        public void Throws_if_predicate_is_null(IList<int> collection)
+        public void Throws_if_iterations_is_less_than_one(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(null));
+            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(0));
+            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(-1));
         }
 
-        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
-        public void Finds_index_of_existing_element(IList<int> collection)
+        [Fact]
+        public void Shuffles_collection_in_place()
         {
-            int index = collection.LastIndexOf(n => n % 2 == 0);
+            int[] collection = {1, 2, 3, 4, 5, 6, 7, 8};
+            
+            collection.ShuffleInplace();
 
-            index.ShouldBe(5);
-        }
-
-        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
-        public void Returns_negative_number_for_nonexistent_element(IList<int> collection)
-        {
-            int index = collection.LastIndexOf(n => n == 100);
-
-            index.ShouldBeLessThan(0);
+            collection.ShouldNotBe(new [] {1, 2, 3, 4, 5, 6, 7, 8});
         }
     }
 }

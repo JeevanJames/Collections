@@ -26,7 +26,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class ByteCollectionExtensions_ToString_Tests
+    public sealed class ToString_Tests
     {
         [Theory, ByteArray(CollectionType.Null)]
         public void Returns_null_if_bytes_are_null(IList<byte> bytes)

@@ -26,29 +26,34 @@ using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_ShuffleInplace_Tests
+    public sealed class LastIndexOf_Tests
     {
         [Theory, DataAttributes.Collection(CollectionType.Null)]
         public void Throws_if_collection_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentNullException>(() => collection.ShuffleInplace());
+            Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(n => n % 2 == 0));
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
-        public void Throws_if_iterations_is_less_than_one(IList<int> collection)
+        public void Throws_if_predicate_is_null(IList<int> collection)
         {
-            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(0));
-            Should.Throw<ArgumentOutOfRangeException>(() => collection.ShuffleInplace(-1));
+            Should.Throw<ArgumentNullException>(() => collection.LastIndexOf(null));
         }
 
-        [Fact]
-        public void Shuffles_collection_in_place()
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
+        public void Finds_index_of_existing_element(IList<int> collection)
         {
-            int[] collection = {1, 2, 3, 4, 5, 6, 7, 8};
-            
-            collection.ShuffleInplace();
+            int index = collection.LastIndexOf(n => n % 2 == 0);
 
-            collection.ShouldNotBe(new [] {1, 2, 3, 4, 5, 6, 7, 8});
+            index.ShouldBe(5);
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
+        public void Returns_negative_number_for_nonexistent_element(IList<int> collection)
+        {
+            int index = collection.LastIndexOf(n => n == 100);
+
+            index.ShouldBeLessThan(0);
         }
     }
 }

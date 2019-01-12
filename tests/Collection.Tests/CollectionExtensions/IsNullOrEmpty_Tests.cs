@@ -19,24 +19,32 @@ limitations under the License.
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using Shouldly;
 using Xunit;
 
 namespace Collection.Tests.CollectionExtensions
 {
-    public sealed class CollectionExtensions_RangeOfLength_Tests
+    public sealed class IsNullOrEmpty_Tests
     {
         [Theory]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 2, 3, new[] {3, 4, 5})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, 4, new[] {1, 2, 3, 4})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, null, new[] {4, 5, 6})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, null, null, new[] {1, 2, 3, 4, 5, 6})]
-        [InlineData(new[] {1, 2, 3, 4, 5, 6}, 3, 1, new[] {4})]
-        public void Returns_iterator_for_specified_range(ICollection<int> collection, int? start, int? end, IList<int> expectedResult)
+        [InlineData((IEnumerable<int>)null)]
+        [InlineData(new int[0])]
+        public void Returns_true_if_collection_is_null_or_empty(IEnumerable<int> collection)
         {
-            IEnumerable<int> result = collection.RangeOfLength(start, end);
+            collection.IsNullOrEmpty().ShouldBeTrue();
+        }
 
-            result.ShouldBe(expectedResult);
+        [Theory, MemberData(nameof(NotEmptyCollections))]
+        public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
+        {
+            collection.IsNullOrEmpty().ShouldBeFalse();
+        }
+
+        public static IEnumerable<object[]> NotEmptyCollections()
+        {
+            yield return new object[] {Enumerable.Range(1, 5)};
+            yield return new object[] {new[] {1, 2, 3, 4, 5}};
         }
     }
 }
