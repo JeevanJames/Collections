@@ -260,6 +260,36 @@ namespace System.Collections.Generic
             return !collection.Any(predicate);
         }
 
+#if NETSTANDARD2_0
+        public static (IEnumerable<T> matches, IEnumerable<T> mismatches) Partition<T>(this IEnumerable<T> collection,
+            Func<T, bool> predicate)
+#else
+        public static PartitionSequence<T> Partition<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
+#endif
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            var matches = new List<T>();
+            var mismatches = new List<T>();
+
+            foreach (T element in collection)
+            {
+                if (predicate(element))
+                    matches.Add(element);
+                else
+                    mismatches.Add(element);
+            }
+
+#if NETSTANDARD2_0
+            return (matches, mismatches);
+#else
+            return new PartitionSequence<T>(matches, mismatches);
+#endif
+        }
+
         public static IEnumerable<T> Range<T>(this ICollection<T> collection, int? start = null, int? end = null)
         {
             if (collection == null)
