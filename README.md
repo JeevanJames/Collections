@@ -30,6 +30,8 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`IsNullOrEmpty`|`IEnumerable<T>`|Indicates whether a collection is `null` or empty.|
 |`LastIndexOf`|`IList<T>`|Finds the index of the last matching element in a collection based on the specified predicate.|
 |`None`|`IEnumerable<T>`|Determines whether none of the elements in a collection satisfies the specified predicate. Opposite of the LINQ `All` extension method.|
+|`Partition`|`IEnumerable<T>`|Checks each element in a collection against a predicate and returns the elements that match and the elements that do not.|
+|`Random`|`IList<T>`|Creates a collection of the specified size with random values picked from a specified collection.|
 |`Range`|`ICollection<T>`|Returns an iterator for the elements in the collection from the specified start index to the end index.|
 |`RemoveAll`|`IList<T>`|Removes all elements from a collection that satisfies the specified predicate.|
 |`RemoveFirst`|`IList<T>`|Removes the first element from a collection that satisfies the specified predicate.|
