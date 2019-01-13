@@ -107,13 +107,33 @@
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
             <summary>
-                Determines whether none of the elements of a sequence satisfies the specified condition
+                Determines whether none of the elements of the <paramref name="collection"/> satisfies the specified
+                <paramref name="predicate"/>.
             </summary>
             <typeparam name="T">The type of the elements of collection.</typeparam>
-            <param name="collection">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements to apply the predicate to.</param>
-            <param name="predicate">A function to test each element for a condition.</param>
-            <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
+            <param name="collection">The collection.</param>
+            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+            <returns>
+                <c>true</c> if none of the elements in the <paramref name="collection"/> satisfy the
+                <paramref name="predicate"/>; otherwise <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.Partition``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Checks each element of the <paramref name="collection"/> against the specified <paramref name="predicate"/>
+                and returns the elements that match and those that do not match.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+            <returns>
+                A tuple containing two collections - one with the elements that match the <paramref name="predicate"/>
+                and another with elements that do not match.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.Range``1(System.Collections.Generic.ICollection{``0},System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
@@ -130,6 +150,74 @@
             </param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> with the elements from the specified range.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.RemoveAll``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Removes all elements from the <paramref name="collection"/> that satisfy the specified
+                <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="predicate">The predicate delegate to check against.</param>
+            <returns>The number of elements removed.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.RemoveFirst``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Removes the first element from the <paramref name="collection"/> that satisfies the specified
+                <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="predicate">The predicate delegate to check against.</param>
+            <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.RemoveLast``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Removes the last element from the <paramref name="collection"/> that satisfies the specified
+                <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="predicate">The predicate delegate to check against.</param>
+            <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.Repeat``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+                Repeats the <paramref name="collection"/> <paramref name="count"/> number of times.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="count">The number of times to repeat the collection.</param>
+            <returns>The <paramref name="collection"/> repeated <paramref name="count"/> number of times.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown of the <paramref name="count"/> is less than one.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.Shuffle``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+                Returns a shuffled version of the <paramref name="collection"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="iterations">The number of times to repeat the shuffle operation.</param>
+            <returns>A shuffled version of the <paramref name="collection"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.ShuffleInplace``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+                Shuffles the elements of the <paramref name="collection"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="iterations">The number of times to repeat the shuffle operation.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
         </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
             <summary>

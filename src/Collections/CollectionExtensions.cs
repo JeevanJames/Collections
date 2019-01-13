@@ -244,26 +244,58 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Determines whether none of the elements of a sequence satisfies the specified condition
+        ///     Determines whether none of the elements of the <paramref name="collection"/> satisfies the specified
+        ///     <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">An <see cref="IEnumerable{T}" /> whose elements to apply the predicate to.</param>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns><c>true</c> if any elements in the source sequence pass the test in the specified predicate; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <c>source</c> or <c>predicate</c> is <c>null</c>.</exception>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>
+        ///     <c>true</c> if none of the elements in the <paramref name="collection"/> satisfy the
+        ///     <paramref name="predicate"/>; otherwise <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static bool None<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
+
             return !collection.Any(predicate);
         }
 
 #if NETSTANDARD2_0
+        /// <summary>
+        ///     Checks each element of the <paramref name="collection"/> against the specified <paramref name="predicate"/>
+        ///     and returns the elements that match and those that do not match.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>
+        ///     A tuple containing two collections - one with the elements that match the <paramref name="predicate"/>
+        ///     and another with elements that do not match.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static (IEnumerable<T> matches, IEnumerable<T> mismatches) Partition<T>(this IEnumerable<T> collection,
             Func<T, bool> predicate)
 #else
+        /// <summary>
+        ///     Checks each element of the <paramref name="collection"/> against the specified <paramref name="predicate"/>
+        ///     and returns the elements that match and those that do not match.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>
+        ///     A <see cref="PartitionSequence{T}"/> instance containing two collection properties - one with the elements
+        ///     that match the <paramref name="predicate"/> and another with elements that do not match.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static PartitionSequence<T> Partition<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
 #endif
         {
@@ -326,6 +358,16 @@ namespace System.Collections.Generic
             int? count = null) =>
             Range(collection, start, count.HasValue ? (int?) start.GetValueOrDefault() + count.Value : null);
 
+        /// <summary>
+        ///     Removes all elements from the <paramref name="collection"/> that satisfy the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The predicate delegate to check against.</param>
+        /// <returns>The number of elements removed.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static int RemoveAll<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -345,6 +387,16 @@ namespace System.Collections.Generic
             return count;
         }
 
+        /// <summary>
+        ///     Removes the first element from the <paramref name="collection"/> that satisfies the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The predicate delegate to check against.</param>
+        /// <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static bool RemoveFirst<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -363,6 +415,16 @@ namespace System.Collections.Generic
             return false;
         }
 
+        /// <summary>
+        ///     Removes the last element from the <paramref name="collection"/> that satisfies the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The predicate delegate to check against.</param>
+        /// <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static bool RemoveLast<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -381,12 +443,22 @@ namespace System.Collections.Generic
             return false;
         }
 
+        /// <summary>
+        ///     Repeats the <paramref name="collection"/> <paramref name="count"/> number of times.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="count">The number of times to repeat the collection.</param>
+        /// <returns>The <paramref name="collection"/> repeated <paramref name="count"/> number of times.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown of the <paramref name="count"/> is less than one.</exception>
         public static IEnumerable<T> Repeat<T>(this IEnumerable<T> collection, int count)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
             if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
+
             for (var i = 0; i < count; i++)
             {
                 foreach (T item in collection)
@@ -394,6 +466,15 @@ namespace System.Collections.Generic
             }
         }
 
+        /// <summary>
+        ///     Returns a shuffled version of the <paramref name="collection"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="iterations">The number of times to repeat the shuffle operation.</param>
+        /// <returns>A shuffled version of the <paramref name="collection"/>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> collection, int iterations = 1)
         {
             if (collection == null)
@@ -406,6 +487,14 @@ namespace System.Collections.Generic
             return array;
         }
 
+        /// <summary>
+        ///     Shuffles the elements of the <paramref name="collection"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="iterations">The number of times to repeat the shuffle operation.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
 #if NETSTANDARD1_3
         public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
         {
