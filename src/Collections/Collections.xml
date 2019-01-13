@@ -88,12 +88,30 @@
             <param name="value"> The value to populate the byte array with. </param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+                Performs an <paramref name="action"/> on all elements of a <paramref name="collection"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="action">The action to perform.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+                Performs an <paramref name="action"/> on all elements of a <paramref name="collection"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of collection.</typeparam>
+            <param name="collection">The collection.</param>
+            <param name="action">The action to perform.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
+        </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
                 Indicates whether the specified collection is empty.
             </summary>
             <typeparam name="T">The type of the elements of the collection</typeparam>
-            <param name="collection">The collection to test.</param>
+            <param name="collection">The collection.</param>
             <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the source collection is <c>null</c>.</exception>
         </member>
@@ -129,8 +147,8 @@
             <param name="collection">The collection.</param>
             <param name="predicate">The <paramref name="predicate"/> to check against.</param>
             <returns>
-                A tuple containing two collections - one with the elements that match the <paramref name="predicate"/>
-                and another with elements that do not match.
+                A <see cref="T:System.Collections.Generic.PartitionSequence`1"/> instance containing two collection properties - one with the elements
+                that match the <paramref name="predicate"/> and another with elements that do not match.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
@@ -314,6 +332,29 @@
             <returns>A non-generic iterator that can iterate over the values of the enum</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the specified type is null</exception>
             <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exception>
+        </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <summary>
+                Represents the results of a predicate check on all items of a collection.
+            </summary>
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
+            </summary>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
+                Collection of all items in the collection that satisfy the predicate.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+            <summary>
+                Collection of all items in the collection that do not satisfy the predicate.
+            </summary>
         </member>
     </members>
 </doc>
