@@ -149,6 +149,13 @@ namespace System.Collections.Generic
                 collection[i] = generator(i);
         }
 
+        /// <summary>
+        ///     Performs an <paramref name="action"/> on all elements of a <paramref name="collection"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="action">The action to perform.</param>
+        /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
             if (collection == null)
@@ -160,6 +167,13 @@ namespace System.Collections.Generic
                 action(item);
         }
 
+        /// <summary>
+        ///     Performs an <paramref name="action"/> on all elements of a <paramref name="collection"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="action">The action to perform.</param>
+        /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T, int> action)
         {
             if (collection == null)
@@ -205,7 +219,7 @@ namespace System.Collections.Generic
         ///     Indicates whether the specified collection is empty.
         /// </summary>
         /// <typeparam name="T">The type of the elements of the collection</typeparam>
-        /// <param name="collection">The collection to test.</param>
+        /// <param name="collection">The collection.</param>
         /// <returns><c>true</c> if the collection is empty; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if the source collection is <c>null</c>.</exception>
         public static bool IsEmpty<T>(this IEnumerable<T> collection)
