@@ -186,6 +186,16 @@ namespace System.Collections.Generic
                 action(item, index++);
         }
 
+        /// <summary>
+        ///     Returns the index of the first element in a <paramref name="collection"/> that matches the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>The index of the element, if found; otherwise -1.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
         public static int IndexOf<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -201,6 +211,18 @@ namespace System.Collections.Generic
             return -1;
         }
 
+        /// <summary>
+        ///     Returns all indices of elements in a <paramref name="collection"/> that match the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>
+        ///     A sequence of indices of the matches elements in the collection, if any are found; otherwise -1.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
         public static IEnumerable<int> IndexOfAll<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
@@ -242,6 +264,16 @@ namespace System.Collections.Generic
             return collection is ICollection<T> coll ? coll.Count == 0 : !collection.Any();
         }
 
+        /// <summary>
+        ///     Returns the index of the last element in a <paramref name="collection"/> that matches the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>The index of the element, if found; otherwise -1.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
         public static int LastIndexOf<T>(this IList<T> collection, Func<T, bool> predicate)
         {
             if (collection == null)
