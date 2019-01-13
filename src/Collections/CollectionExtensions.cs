@@ -19,7 +19,6 @@ limitations under the License.
 #endregion
 
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace System.Collections.Generic
 {
@@ -368,6 +367,24 @@ namespace System.Collections.Generic
 #endif
         }
 
+        public static IEnumerable<T> Random<T>(this IList<T> collection, int count)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (collection.Count == 0)
+                yield break;
+            if (count < 1)
+                throw new ArgumentOutOfRangeException(nameof(count));
+
+            var rng = new Rng(collection.Count);
+
+            for (int i = 0; i < count; i++)
+            {
+                int index = rng.Next();
+                yield return collection[index];
+            }
+        }
+
         /// <summary>
         ///     Returns the range of elements from the specified start and end index of a collection.
         /// </summary>
@@ -541,7 +558,6 @@ namespace System.Collections.Generic
         /// <param name="iterations">The number of times to repeat the shuffle operation.</param>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
-#if NETSTANDARD1_3
         public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
         {
             if (collection == null)
@@ -549,48 +565,21 @@ namespace System.Collections.Generic
             if (iterations < 1)
                 throw new ArgumentOutOfRangeException(nameof(iterations));
 
-            for (int iteration = 0; iteration < iterations; iteration++)
-            {
-                T temp;
-
-                var rng = new Random((int)DateTime.Now.Ticks);
-
-                for (int i = 0; i < collection.Count; i++)
-                {
-                    int index1 = rng.Next(collection.Count);
-                    int index2 = rng.Next(collection.Count);
-                    temp = collection[index1];
-                    collection[index1] = collection[index2];
-                    collection[index2] = temp;
-                }
-            }
-        }
-#else
-        public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
-        {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-            if (iterations < 1)
-                throw new ArgumentOutOfRangeException(nameof(iterations));
-
-            var random = new byte[sizeof(int) * 2];
-            var rng = new RNGCryptoServiceProvider();
+            var rng = new Rng(collection.Count);
 
             for (int iteration = 0; iteration < iterations; iteration++)
             {
                 T temp;
                 for (int i = 0; i < collection.Count; i++)
                 {
-                    rng.GetBytes(random);
-                    int index1 = Math.Abs(BitConverter.ToInt32(random, 0) % collection.Count);
-                    int index2 = Math.Abs(BitConverter.ToInt32(random, sizeof(int)) % collection.Count);
+                    int index1 = rng.Next();
+                    int index2 = rng.Next();
                     temp = collection[index1];
                     collection[index1] = collection[index2];
                     collection[index2] = temp;
                 }
             }
         }
-#endif
 
         //public static IEnumerable<IEnumerable<T>> SlidingChunk<T>(this IEnumerable<T> collection, int chunkSize)
         //{
