@@ -79,7 +79,7 @@ namespace System.Collections.Generic
         }
 
         public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource> items,
-            Func<TSource, bool> predicate, Func<TSource, TDest> converter)
+            Func<TSource, bool> predicate, Func<TSource, TDest> converter, Func<TDest, bool> afterConvertPredicate = null)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -90,7 +90,10 @@ namespace System.Collections.Generic
             if (items == null)
                 return;
 
-            collection.AddRange(items.Where(predicate).Select(converter));
+            IEnumerable<TDest> convertedItems = items.Where(predicate).Select(converter);
+            if (afterConvertPredicate != null)
+                convertedItems = convertedItems.Where(afterConvertPredicate);
+            collection.AddRange(convertedItems);
         }
 
         /// <summary>
