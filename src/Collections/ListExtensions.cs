@@ -27,151 +27,151 @@ namespace System.Collections.Generic
     public static class ListExtensions
     {
         /// <summary>
-        ///     Populates each item in a byte collection with a specific value.
+        ///     Populates each item in a byte list with a specific value.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of the collection</typeparam>
-        /// <param name="collection"> The byte array to be populated. </param>
+        /// <typeparam name="T">The type of the elements of the list</typeparam>
+        /// <param name="list"> The byte array to be populated. </param>
         /// <param name="value"> The value to populate the byte array with. </param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void Fill<T>(this IList<T> collection, T value)
+        public static void Fill<T>(this IList<T> list, T value)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-            if (collection.Count == 0)
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+            if (list.Count == 0)
                 return;
-            for (int i = 0; i < collection.Count; i++)
-                collection[i] = value;
+            for (int i = 0; i < list.Count; i++)
+                list[i] = value;
         }
 
-        public static void Fill<T>(this IList<T> collection, Func<int, T> generator)
+        public static void Fill<T>(this IList<T> list, Func<int, T> generator)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-            if (collection.Count == 0)
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+            if (list.Count == 0)
                 return;
             if (generator == null)
                 throw new ArgumentNullException(nameof(generator));
-            for (int i = 0; i < collection.Count; i++)
-                collection[i] = generator(i);
+            for (int i = 0; i < list.Count; i++)
+                list[i] = generator(i);
         }
 
         /// <summary>
-        ///     Returns the index of the first element in a <paramref name="collection"/> that matches the specified
+        ///     Returns the index of the first element in a <paramref name="list"/> that matches the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>The index of the element, if found; otherwise -1.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static int IndexOf<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static int IndexOf<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            for (int i = 0; i < collection.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                     return i;
             }
             return -1;
         }
 
         /// <summary>
-        ///     Returns all indices of elements in a <paramref name="collection"/> that match the specified
+        ///     Returns all indices of elements in a <paramref name="list"/> that match the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>
-        ///     A sequence of indices of the matches elements in the collection, if any are found; otherwise -1.
+        ///     A sequence of indices of the matches elements in the list, if any are found; otherwise -1.
         /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static IEnumerable<int> IndexOfAll<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static IEnumerable<int> IndexOfAll<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            for (int i = 0; i < collection.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                     yield return i;
             }
         }
 
         /// <summary>
-        ///     Returns the index of the last element in a <paramref name="collection"/> that matches the specified
+        ///     Returns the index of the last element in a <paramref name="list"/> that matches the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>The index of the element, if found; otherwise -1.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static int LastIndexOf<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static int LastIndexOf<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            for (int i = collection.Count - 1; i >= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                     return i;
             }
             return -1;
         }
 
-        public static IEnumerable<T> Random<T>(this IList<T> collection, int count)
+        public static IEnumerable<T> Random<T>(this IList<T> list, int count)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-            if (collection.Count == 0)
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+            if (list.Count == 0)
                 yield break;
             if (count < 1)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            var rng = new Rng(collection.Count);
+            var rng = new Rng(list.Count);
 
             for (int i = 0; i < count; i++)
             {
                 int index = rng.Next();
-                yield return collection[index];
+                yield return list[index];
             }
         }
 
         /// <summary>
-        ///     Removes all elements from the <paramref name="collection"/> that satisfy the specified
+        ///     Removes all elements from the <paramref name="list"/> that satisfy the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The predicate delegate to check against.</param>
         /// <returns>The number of elements removed.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static int RemoveAll<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static int RemoveAll<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
             int count = 0;
-            for (int i = collection.Count - 1; i >= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                 {
-                    collection.RemoveAt(i);
+                    list.RemoveAt(i);
                     count++;
                 }
             }
@@ -179,27 +179,27 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Removes the first element from the <paramref name="collection"/> that satisfies the specified
+        ///     Removes the first element from the <paramref name="list"/> that satisfies the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The predicate delegate to check against.</param>
         /// <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static bool RemoveFirst<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static bool RemoveFirst<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            for (int i = 0; i < collection.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                 {
-                    collection.RemoveAt(i);
+                    list.RemoveAt(i);
                     return true;
                 }
             }
@@ -207,27 +207,27 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Removes the last element from the <paramref name="collection"/> that satisfies the specified
+        ///     Removes the last element from the <paramref name="list"/> that satisfies the specified
         ///     <paramref name="predicate"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="predicate">The predicate delegate to check against.</param>
         /// <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
-        public static bool RemoveLast<T>(this IList<T> collection, Func<T, bool> predicate)
+        public static bool RemoveLast<T>(this IList<T> list, Func<T, bool> predicate)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            for (int i = collection.Count - 1; i >= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
-                if (predicate(collection[i]))
+                if (predicate(list[i]))
                 {
-                    collection.RemoveAt(i);
+                    list.RemoveAt(i);
                     return true;
                 }
             }
@@ -235,32 +235,32 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Shuffles the elements of the <paramref name="collection"/>.
+        ///     Shuffles the elements of the <paramref name="list"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
         /// <param name="iterations">The number of times to repeat the shuffle operation.</param>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
-        public static void ShuffleInplace<T>(this IList<T> collection, int iterations = 1)
+        public static void ShuffleInplace<T>(this IList<T> list, int iterations = 1)
         {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
             if (iterations < 1)
                 throw new ArgumentOutOfRangeException(nameof(iterations));
 
-            var rng = new Rng(collection.Count);
+            var rng = new Rng(list.Count);
 
             for (int iteration = 0; iteration < iterations; iteration++)
             {
                 T temp;
-                for (int i = 0; i < collection.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     int index1 = rng.Next();
                     int index2 = rng.Next();
-                    temp = collection[index1];
-                    collection[index1] = collection[index2];
-                    collection[index2] = temp;
+                    temp = list[index1];
+                    list[index1] = list[index2];
+                    list[index2] = temp;
                 }
             }
         }
