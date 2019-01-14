@@ -22,36 +22,46 @@ using System.Security.Cryptography;
 
 namespace System.Collections.Generic
 {
+    /// <summary>
+    ///     Consolidated random number generator that uses <see cref="Random"/> for netstandard 1.3 and
+    ///     <c>RNGCryptoServiceProvider</c> for all other targets.
+    /// </summary>
     internal sealed class Rng
     {
 #if NETSTANDARD1_3
         private readonly Random _generator = new Random((int)DateTime.Now.Ticks);
-        private readonly int _count;
-
-        internal Rng(int count)
-        {
-            _count = count;
-        }
-
-        internal int Next()
-        {
-            return _generator.Next(_count);
-        }
 #else
         private readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
         private readonly byte[] _buffer = new byte[sizeof(int)];
-        private readonly int _count;
+#endif
 
-        internal Rng(int count)
+        /// <summary>
+        ///     Exclusive max value of the generated random number.
+        /// </summary>
+        private readonly int _max;
+
+        /// <summary>
+        ///     Initializes an instance of the <see cref="Rng"/> class with the exclusive <paramref name="max"/> value
+        ///     to generate.
+        /// </summary>
+        /// <param name="max">Exclusive max value of the generated random number.</param>
+        internal Rng(int max)
         {
-            _count = count;
+            _max = max;
         }
 
+        /// <summary>
+        ///     Generates a random number from 0 to <see cref="_max"/>
+        /// </summary>
+        /// <returns>The random number.</returns>
         internal int Next()
         {
+#if NETSTANDARD1_3
+            return _generator.Next(_max);
+#else
             _generator.GetBytes(_buffer);
-            return Math.Abs(BitConverter.ToInt32(_buffer, 0) % _count);
-        }
+            return Math.Abs(BitConverter.ToInt32(_buffer, 0) % _max);
 #endif
+        }
     }
 }
