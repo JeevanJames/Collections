@@ -155,15 +155,16 @@ namespace System.Collections.Generic
         /// <param name="collection">The collection.</param>
         /// <param name="action">The action to perform.</param>
         /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
-        public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
             if (collection == null)
-                return;
+                return collection;
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
             foreach (T item in collection)
                 action(item);
+            return collection;
         }
 
         /// <summary>
@@ -173,16 +174,17 @@ namespace System.Collections.Generic
         /// <param name="collection">The collection.</param>
         /// <param name="action">The action to perform.</param>
         /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
-        public static void ForEach<T>(this IEnumerable<T> collection, Action<T, int> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T, int> action)
         {
             if (collection == null)
-                return;
+                return collection;
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
             var index = 0;
             foreach (T item in collection)
                 action(item, index++);
+            return collection;
         }
 
         /// <summary>
@@ -311,7 +313,6 @@ namespace System.Collections.Generic
             return !collection.Any(predicate);
         }
 
-#if NETSTANDARD2_0
         /// <summary>
         ///     Checks each element of the <paramref name="collection"/> against the specified <paramref name="predicate"/>
         ///     and returns the elements that match and those that do not match.
@@ -320,27 +321,15 @@ namespace System.Collections.Generic
         /// <param name="collection">The collection.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>
-        ///     A tuple containing two collections - one with the elements that match the <paramref name="predicate"/>
-        ///     and another with elements that do not match.
+        ///     Two collections sequences - one with the elements that match the <paramref name="predicate"/> and another
+        ///     with elements that do not match.
         /// </returns>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+#if NETSTANDARD2_0
         public static (IEnumerable<T> matches, IEnumerable<T> mismatches) Partition<T>(this IEnumerable<T> collection,
             Func<T, bool> predicate)
 #else
-        /// <summary>
-        ///     Checks each element of the <paramref name="collection"/> against the specified <paramref name="predicate"/>
-        ///     and returns the elements that match and those that do not match.
-        /// </summary>
-        /// <typeparam name="T">The type of the elements of collection.</typeparam>
-        /// <param name="collection">The collection.</param>
-        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
-        /// <returns>
-        ///     A <see cref="PartitionSequence{T}"/> instance containing two collection properties - one with the elements
-        ///     that match the <paramref name="predicate"/> and another with elements that do not match.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
         public static PartitionSequence<T> Partition<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
 #endif
         {

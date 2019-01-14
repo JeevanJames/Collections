@@ -185,8 +185,8 @@
             <param name="collection">The collection.</param>
             <param name="predicate">The <paramref name="predicate"/> to check against.</param>
             <returns>
-                A tuple containing two collections - one with the elements that match the <paramref name="predicate"/>
-                and another with elements that do not match.
+                Two collections sequences - one with the elements that match the <paramref name="predicate"/> and another
+                with elements that do not match.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="collection"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
