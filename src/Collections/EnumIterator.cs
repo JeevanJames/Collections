@@ -21,7 +21,11 @@ limitations under the License.
 using System.Linq;
 using System.Reflection;
 
+#if EXPLICIT
+using Collections.Net.Enum
+#else
 namespace System.Collections.Generic
+#endif
 {
     /// <summary>
     ///     Provides iterators for enum types. Can be used in a LINQ expression.

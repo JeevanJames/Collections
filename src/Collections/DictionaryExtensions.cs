@@ -18,7 +18,11 @@ limitations under the License.
 */
 #endregion
 
+#if EXPLICIT
+using Collections.Net.Dictionary
+#else
 namespace System.Collections.Generic
+#endif
 {
     public static class DictionaryExtensions
     {

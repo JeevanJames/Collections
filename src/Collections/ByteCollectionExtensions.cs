@@ -22,7 +22,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
+#if EXPLICIT
+using Collections.Net.Numeric
+#else
 namespace System.Collections.Generic
+#endif
 {
     /// <summary>
     ///     Set of utility extension methods for byte arrays.

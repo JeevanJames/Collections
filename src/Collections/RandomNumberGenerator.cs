@@ -20,7 +20,11 @@ limitations under the License.
 
 using System.Security.Cryptography;
 
+#if EXPLICIT
+using Collections.Net
+#else
 namespace System.Collections.Generic
+#endif
 {
     /// <summary>
     ///     Consolidated random number generator that uses <see cref="Random"/> for netstandard 1.3 and

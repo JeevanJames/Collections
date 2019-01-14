@@ -19,7 +19,11 @@ limitations under the License.
 #endregion
 
 #if !NETSTANDARD2_0
+#if EXPLICIT
+using Collections.Net
+#else
 namespace System.Collections.Generic
+#endif
 {
     /// <summary>
     ///     Represents the results of a predicate check on all items of a collection.
