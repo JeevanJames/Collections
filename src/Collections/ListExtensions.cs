@@ -106,6 +106,31 @@ namespace System.Collections.Generic
             }
         }
 
+        public static void InsertRange<T>(this IList<T> list, int index, params T[] items) =>
+            InsertRange(list, index, (IEnumerable<T>) items);
+
+        public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items)
+        {
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+
+            if (index >= list.Count)
+            {
+                CollectionExtensions.AddRange(list, items);
+                return;
+            }
+
+            if (index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            if (items == null)
+                return;
+
+            int originalCount = list.Count;
+            foreach (T item in items)
+                list.Insert(index + (list.Count - originalCount), item);
+        }
+
         /// <summary>
         ///     Returns the index of the last element in a <paramref name="list"/> that matches the specified
         ///     <paramref name="predicate"/>.
