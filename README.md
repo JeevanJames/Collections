@@ -26,6 +26,7 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`ForEach`|`IEnumerable<T>`|Iterates over each element in a collection and calls the specified delegate for each item. Inspired by the `List<T>.ForEach` method.|
 |`IndexOf`|`IList<T>`|Finds the index of the first matching element in a collection based on the specified predicate.|
 |`IndexOfAll`|`IList<T>`|Finds all indices of the matching elements in a collection based on the specified predicate.|
+|`InsertRange`|`IList<T>`|Inserts one or more items into a collection at the given location in a single operation.|
 |`IsEmpty`|`IEnumerable<T>`|Indicates whether a collection is empty. A better way of doing `if !collection.Any()`|
 |`IsNullOrEmpty`|`IEnumerable<T>`|Indicates whether a collection is `null` or empty.|
 |`LastIndexOf`|`IList<T>`|Finds the index of the last matching element in a collection based on the specified predicate.|
