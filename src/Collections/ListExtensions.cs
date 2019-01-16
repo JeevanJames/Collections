@@ -21,6 +21,8 @@ limitations under the License.
 #if EXPLICIT
 using Collections.Net.List
 #else
+using System.Linq;
+
 namespace System.Collections.Generic
 #endif
 {
@@ -129,6 +131,38 @@ namespace System.Collections.Generic
             int originalCount = list.Count;
             foreach (T item in items)
                 list.Insert(index + (list.Count - originalCount), item);
+        }
+
+        public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items, Func<T, bool> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            InsertRange(list, index, items.Where(predicate));
+        }
+
+        public static void InsertRange<TDest, TSource>(this IList<TDest> list, int index, IEnumerable<TSource> items,
+            Func<TSource, TDest> converter)
+        {
+            if (converter == null)
+                throw new ArgumentNullException(nameof(converter));
+            InsertRange(list, index, items.Select(converter));
+        }
+
+        public static void InsertRange<TDest, TSource>(this IList<TDest> list, int index, IEnumerable<TSource> items,
+            Func<TSource, bool> predicate, Func<TSource, TDest> converter,
+            Func<TDest, bool> afterConvertPredicate = null)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (converter == null)
+                throw new ArgumentNullException(nameof(converter));
+            if (afterConvertPredicate == null)
+                throw new ArgumentNullException(nameof(afterConvertPredicate));
+
+            IEnumerable<TDest> convertedItems = items.Where(predicate).Select(converter);
+            if (afterConvertPredicate != null)
+                convertedItems = convertedItems.Where(afterConvertPredicate);
+            InsertRange(list, index, convertedItems);
         }
 
         /// <summary>
