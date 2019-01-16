@@ -22,8 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Collection.Tests.DataAttributes;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
+
 using Shouldly;
 
 using Xunit;
@@ -37,6 +38,12 @@ namespace Collection.Tests.CollectionExtensions
         {
             Should.Throw<ArgumentNullException>(() => list.InsertRange(1, 7, 8, 9));
             Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {7, 8, 9}));
+            Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {7, 8, 9}, n => n % 2 == 0));
+            Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {"7", "8", "9"}, int.Parse));
+            Should.Throw<ArgumentNullException>(() =>
+                list.InsertRange(1, new[] {"7", "8", "9"}, s => s == "8", int.Parse));
+            Should.Throw<ArgumentNullException>(() =>
+                list.InsertRange(1, new[] {"7", "8", "9"}, s => s == "8" || s == "9", int.Parse, n => n % 2 == 0));
         }
 
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
@@ -87,6 +94,22 @@ namespace Collection.Tests.CollectionExtensions
             var list = new NoDuplicateCollection {1, 2, 3};
             list.InsertRange(0, 2, 3, 4, 5);
             list.ShouldBe(new[] {4, 5, 1, 2, 3});
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
+        public void Throws_if_predicate_is_null(IList<int> list)
+        {
+            Should.Throw<ArgumentNullException>(() => list.InsertRange(2, new[] {7, 8, 9}, predicate: null));
+            Should.Throw<ArgumentNullException>(() =>
+                list.InsertRange(2, new[] {"7", "8", "9"}, predicate: null, converter: int.Parse));
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
+        public void Throws_if_converter_is_null(IList<int> list)
+        {
+            Should.Throw<ArgumentNullException>(() => list.InsertRange(2, new[] { 7, 8, 9 }, converter: null));
+            Should.Throw<ArgumentNullException>(() =>
+                list.InsertRange(2, new[] { "7", "8", "9" }, predicate: n => n == "8", converter: null));
         }
     }
 
