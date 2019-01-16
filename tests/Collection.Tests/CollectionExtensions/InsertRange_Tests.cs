@@ -20,9 +20,10 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using System.Linq;
 using Collection.Tests.DataAttributes;
-
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Shouldly;
 
 using Xunit;
@@ -46,6 +47,55 @@ namespace Collection.Tests.CollectionExtensions
 
             list.InsertRange(list.Count, new [] {10, 11, 12});
             list.ShouldBe(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+
+            // Empty list
+            var emptyList = new List<int>();
+            emptyList.InsertRange(0, 1, 2, 3);
+            emptyList.ShouldBe(new[] {1, 2, 3});
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
+        public void Throws_if_index_if_negative(IList<int> list)
+        {
+            Should.Throw<ArgumentOutOfRangeException>(() => list.InsertRange(-1, 7, 8, 9));
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
+        public void Does_nothing_if_items_is_null(IList<int> list)
+        {
+            list.InsertRange(1, null);
+
+            list.ShouldBe(new[] {1, 2, 3, 4, 5, 6});
+        }
+
+        [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
+        public void Inserts_items_at_correct_index(IList<int> list)
+        {
+            list.InsertRange(5, 7, 8, 9);
+            list.ShouldBe(new[] {1, 2, 3, 4, 5, 7, 8, 9, 6});
+
+            list.InsertRange(0, 10, 11, 12);
+            list.ShouldBe(new[] { 10, 11, 12, 1, 2, 3, 4, 5, 7, 8, 9, 6 });
+
+            list.InsertRange(3, 13, 14, 15);
+            list.ShouldBe(new[] { 10, 11, 12, 13, 14, 15, 1, 2, 3, 4, 5, 7, 8, 9, 6 });
+        }
+
+        [Fact]
+        public void Inserts_items_at_correct_index_for_custom_collection()
+        {
+            var list = new NoDuplicateCollection {1, 2, 3};
+            list.InsertRange(0, 2, 3, 4, 5);
+            list.ShouldBe(new[] {4, 5, 1, 2, 3});
+        }
+    }
+
+    public sealed class NoDuplicateCollection : Collection<int>
+    {
+        protected override void InsertItem(int index, int item)
+        {
+            if (!this.Any(e => e == item))
+                base.InsertItem(index, item);
         }
     }
 }
