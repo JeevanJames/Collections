@@ -1,6 +1,6 @@
 ﻿#region --- License & Copyright Notice ---
 /*
-Custom collections and sequence extensions for .NET
+Custom collections and collection extensions for .NET
 Copyright (c) 2018-2019 Jeevan James
 All rights reserved.
 
