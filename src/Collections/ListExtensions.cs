@@ -29,12 +29,12 @@ namespace System.Collections.Generic
     public static class ListExtensions
     {
         /// <summary>
-        ///     Populates each item in a byte list with a specific value.
+        ///     Populates each item in a <paramref name="list"/> with a specific <paramref name="value"/>.
         /// </summary>
         /// <typeparam name="T">The type of the elements of the list</typeparam>
-        /// <param name="list"> The byte array to be populated. </param>
-        /// <param name="value"> The value to populate the byte array with. </param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <param name="list">The collection to be populated.</param>
+        /// <param name="value">The value with which to populate the collection.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
         public static void Fill<T>(this IList<T> list, T value)
         {
             if (list == null)
@@ -45,6 +45,14 @@ namespace System.Collections.Generic
                 list[i] = value;
         }
 
+        /// <summary>
+        ///     Populates each item in a <paramref name="list"/> with the values from a <paramref name="generator"/>
+        ///     delegate.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of the list</typeparam>
+        /// <param name="list">The collection to be populated.</param>
+        /// <param name="generator">The delegate to generate the values for each item.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
         public static void Fill<T>(this IList<T> list, Func<int, T> generator)
         {
             if (list == null)
