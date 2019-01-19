@@ -40,6 +40,7 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`Repeat`|`IEnumerable<T>`|Creates a collection that contains the specified collection repeated a specified number of times.|
 |`Shuffle`|`IEnumerable<T>`|Returns a shuffled collection from a given collection.|
 |`ShuffleInplace`|`IList<T>`|Shuffles the elements of a collection.|
+|`SlidingChunk`|`IList<T>`|Returns overlapping chunks of elements of the specified size from a collection.|
 |`ToArray`|`IEnumerable<T>`|Creates an array from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`ToList`|`IEnumerable<T>`|Creates a `List<T>` from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`WhereNot`|`IEnumerable<T>`|Filters a collection on the values that do not match the specified predicate. Inverse of the LINQ `Where` method.|
