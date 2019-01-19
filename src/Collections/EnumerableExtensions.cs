@@ -234,16 +234,6 @@ namespace System.Collections.Generic
             return array;
         }
 
-        //public static IEnumerable<IEnumerable<T>> SlidingChunk<T>(this IEnumerable<T> sequence, int chunkSize)
-        //{
-        //    if (sequence == null)
-        //        throw new ArgumentNullException(nameof(sequence));
-        //    if (chunkSize < 1)
-        //        throw new ArgumentOutOfRangeException(nameof(chunkSize));
-
-        //    throw new NotImplementedException();
-        //}
-
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> sequence,
             Func<TInput, TOutput> converter)
         {

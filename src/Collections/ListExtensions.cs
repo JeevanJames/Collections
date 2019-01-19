@@ -331,5 +331,26 @@ namespace System.Collections.Generic
                 }
             }
         }
+
+        public static IEnumerable<IList<T>> SlidingChunk<T>(this IList<T> list, int chunkSize)
+        {
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+            if (chunkSize < 1)
+                throw new ArgumentOutOfRangeException(nameof(chunkSize));
+
+            if (chunkSize > list.Count)
+                chunkSize = list.Count;
+
+            int upperLimit = Math.Max(0, list.Count - chunkSize);
+            for (int i = 0; i <= upperLimit; i++)
+            {
+                var chunk = new T[chunkSize];
+                for (int j = i; j < i + chunkSize; j++)
+                    chunk[j - i] = list[j];
+                yield return chunk;
+            }
+        }
+
     }
 }
