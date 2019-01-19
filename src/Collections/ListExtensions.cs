@@ -332,6 +332,17 @@ namespace System.Collections.Generic
             }
         }
 
+        /// <summary>
+        ///     Returns overlapping chunks of the specified <paramref name="chunkSize"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of list.</typeparam>
+        /// <param name="list">The list.</param>
+        /// <param name="chunkSize">The size of the chunks.</param>
+        /// <returns>Collection of overlapping chunks.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown if <paramref name="chunkSize"/> is less than one.
+        /// </exception>
         public static IEnumerable<IList<T>> SlidingChunk<T>(this IList<T> list, int chunkSize)
         {
             if (list == null)

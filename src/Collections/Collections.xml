@@ -381,6 +381,19 @@
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
         </member>
+        <member name="M:System.Collections.Generic.ListExtensions.SlidingChunk``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+                Returns overlapping chunks of the specified <paramref name="chunkSize"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of list.</typeparam>
+            <param name="list">The list.</param>
+            <param name="chunkSize">The size of the chunks.</param>
+            <returns>Collection of overlapping chunks.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                Thrown if <paramref name="chunkSize"/> is less than one.
+            </exception>
+        </member>
         <member name="T:System.Collections.Generic.PartitionSequence`1">
             <summary>
                 Represents the results of a predicate check on all items of a collection.
