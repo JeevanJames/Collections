@@ -24,7 +24,7 @@ using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
 {
-    public sealed class GetBytesUptoSequence_Tests
+    public sealed class GetNumbersUptoSequence_Tests
     {
         [Theory]
         [InlineData(new byte[] {1, 2, 3, 4, 5, 6}, new byte[] {4, 5, 6}, 0, new byte[] {1, 2, 3})]

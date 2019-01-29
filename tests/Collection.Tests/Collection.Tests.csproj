@@ -28,4 +28,8 @@
     <ProjectReference Include="..\..\src\Collections\Collections.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IntCollectionExtensions\" />
+  </ItemGroup>
+
 </Project>
