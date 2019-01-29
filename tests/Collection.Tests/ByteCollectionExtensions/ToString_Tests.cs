@@ -20,8 +20,11 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+
 using Collection.Tests.DataAttributes;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Collection.Tests.ByteCollectionExtensions
@@ -41,20 +44,16 @@ namespace Collection.Tests.ByteCollectionExtensions
         }
 
         [Theory, ByteArray(CollectionType.NonEmpty)]
-        public void Throws_if_delimiter_is_null(IList<byte> bytes)
+        public void Does_not_throw_if_delimiter_is_null_or_empty(IList<byte> bytes)
         {
-            Should.Throw<ArgumentNullException>(() => bytes.ToString(null));
-        }
-
-        [Theory, ByteArray(CollectionType.NonEmpty)]
-        public void Does_not_throw_if_delimiter_is_empty(IList<byte> bytes)
-        {
+            Should.NotThrow(() => bytes.ToString(null));
             Should.NotThrow(() => bytes.ToString(string.Empty));
         }
 
         [Theory, ByteArray(CollectionType.NonEmpty)]
         public void Returns_joined_string_without_delimiters(IList<byte> bytes)
         {
+            bytes.ToString(null).ShouldBe("123456");
             bytes.ToString(string.Empty).ShouldBe("123456");
         }
 
@@ -65,7 +64,7 @@ namespace Collection.Tests.ByteCollectionExtensions
         }
 
         [Theory, ByteArray(CollectionType.NonEmpty)]
-        public void Returns_joined_string_with_MULTI_character_delimiter(IList<byte> bytes)
+        public void Returns_joined_string_with_Multi_character_delimiter(IList<byte> bytes)
         {
             bytes.ToString("#;%").ShouldBe("1#;%2#;%3#;%4#;%5#;%6");
         }
