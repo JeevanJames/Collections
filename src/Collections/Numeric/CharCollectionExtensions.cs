@@ -104,7 +104,7 @@ namespace System.Collections.Generic
         /// <param name="source">The char collection from which to create the string.</param>
         /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
         /// <returns>The combined string.</returns>
-        public static string ToString(this IList<char> source, string delimiter = null)
+        public static string ToString(this IList<char> source, string delimiter)
         {
             if (source == null)
                 return null;
