@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         {
             if (longs == null || longs.Count == 0)
                 return true;
-            return longs.All(b => b == 0);
+            return longs.All(b => b == default);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace System.Collections.Generic
         {
             if (longs == null)
                 throw new ArgumentNullException(nameof(longs));
-            return longs.All(b => b == 0);
+            return longs.All(b => b == default);
         }
 
         /// <summary>

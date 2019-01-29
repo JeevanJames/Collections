@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         {
             if (ints == null || ints.Count == 0)
                 return true;
-            return ints.All(b => b == 0);
+            return ints.All(b => b == default);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace System.Collections.Generic
         {
             if (ints == null)
                 throw new ArgumentNullException(nameof(ints));
-            return ints.All(b => b == 0);
+            return ints.All(b => b == default);
         }
 
         /// <summary>

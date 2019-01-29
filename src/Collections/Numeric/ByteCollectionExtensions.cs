@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         {
             if (bytes == null || bytes.Count == 0)
                 return true;
-            return bytes.All(b => b == 0);
+            return bytes.All(b => b == default);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace System.Collections.Generic
         {
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
-            return bytes.All(b => b == 0);
+            return bytes.All(b => b == default);
         }
 
         /// <summary>

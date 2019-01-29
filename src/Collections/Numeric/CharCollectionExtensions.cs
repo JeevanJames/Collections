@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         {
             if (chars == null || chars.Count == 0)
                 return true;
-            return chars.All(b => b == 0);
+            return chars.All(b => b == default);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace System.Collections.Generic
         {
             if (chars == null)
                 throw new ArgumentNullException(nameof(chars));
-            return chars.All(b => b == 0);
+            return chars.All(b => b == default);
         }
 
         /// <summary>

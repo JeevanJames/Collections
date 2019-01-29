@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         {
             if (shorts == null || shorts.Count == 0)
                 return true;
-            return shorts.All(b => b == 0);
+            return shorts.All(b => b == default);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace System.Collections.Generic
         {
             if (shorts == null)
                 throw new ArgumentNullException(nameof(shorts));
-            return shorts.All(b => b == 0);
+            return shorts.All(b => b == default);
         }
 
         /// <summary>
