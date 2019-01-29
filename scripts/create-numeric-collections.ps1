@@ -1,0 +1,4 @@
+(gc -path ..\src\Collections\Numeric\ByteCollectionExtensions.cs -Raw) -creplace 'byte','long' -creplace 'Byte','Long' | Set-Content -Path ..\src\Collections\Numeric\LongCollectionExtensions.cs
+(gc -path ..\src\Collections\Numeric\ByteCollectionExtensions.cs -Raw) -creplace 'byte','short' -creplace 'Byte','Short' | Set-Content -Path ..\src\Collections\Numeric\ShortCollectionExtensions.cs
+(gc -path ..\src\Collections\Numeric\ByteCollectionExtensions.cs -Raw) -creplace 'byte','int' -creplace 'Byte','Int' | Set-Content -Path ..\src\Collections\Numeric\IntCollectionExtensions.cs
+(gc -path ..\src\Collections\Numeric\ByteCollectionExtensions.cs -Raw) -creplace 'byte','char' -creplace 'Byte','Char' | Set-Content -Path ..\src\Collections\Numeric\CharCollectionExtensions.cs

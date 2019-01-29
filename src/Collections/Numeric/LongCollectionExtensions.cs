@@ -1,4 +1,4 @@
-﻿#region --- License & Copyright Notice ---
+#region --- License & Copyright Notice ---
 /*
 Custom collections and collection extensions for .NET
 Copyright (c) 2018-2019 Jeevan James
@@ -29,82 +29,82 @@ namespace System.Collections.Generic
 #endif
 {
     /// <summary>
-    ///     Set of utility extension methods for int arrays and collections.
+    ///     Set of utility extension methods for long arrays and collections.
     /// </summary>
-    public static class IntCollectionExtensions
+    public static class LongCollectionExtensions
     {
         /// <summary>
-        ///     Checks whether two int collections are equal based on their content.
+        ///     Checks whether two long collections are equal based on their content.
         /// </summary>
-        /// <param name="ints">The source int collection to check.</param>
-        /// <param name="other">The second int collection to check.</param>
-        /// <returns><c>true</c> if the contents of the two int collections are equal.</returns>
-        public static bool IsEqualTo(this IList<int> ints, IList<int> other)
+        /// <param name="longs">The source long collection to check.</param>
+        /// <param name="other">The second long collection to check.</param>
+        /// <returns><c>true</c> if the contents of the two long collections are equal.</returns>
+        public static bool IsEqualTo(this IList<long> longs, IList<long> other)
         {
-            if (ReferenceEquals(ints, other))
+            if (ReferenceEquals(longs, other))
                 return true;
-            if (ints == null || other == null)
+            if (longs == null || other == null)
                 return false;
-            if (ints.Count != other.Count)
+            if (longs.Count != other.Count)
                 return false;
-            for (int i = 0; i < ints.Count; i++)
+            for (int i = 0; i < longs.Count; i++)
             {
-                if (ints[i] != other[i])
+                if (longs[i] != other[i])
                     return false;
             }
             return true;
         }
 
         /// <summary>
-        ///     Checks whether two int collections are equal based on their content.
+        ///     Checks whether two long collections are equal based on their content.
         /// </summary>
-        /// <param name="ints">The source int collection to check.</param>
-        /// <param name="other">The second int collection to check.</param>
-        /// <returns><c>true</c> if the contents of the two int collection are equal.</returns>
-        public static bool IsEqualTo(this IList<int> ints, params int[] other) =>
-            IsEqualTo(ints, (IList<int>)other);
+        /// <param name="longs">The source long collection to check.</param>
+        /// <param name="other">The second long collection to check.</param>
+        /// <returns><c>true</c> if the contents of the two long collection are equal.</returns>
+        public static bool IsEqualTo(this IList<long> longs, params long[] other) =>
+            IsEqualTo(longs, (IList<long>)other);
 
         /// <summary>
-        ///     Indicates whether the specified int collection is <c>null</c>, does not contain any elements or consists
+        ///     Indicates whether the specified long collection is <c>null</c>, does not contain any elements or consists
         ///     of only zero value items.
         /// </summary>
-        /// <param name="ints">The int collection to test.</param>
+        /// <param name="longs">The long collection to test.</param>
         /// <returns>
-        ///     <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
+        ///     <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
         ///     of zero value items.
         /// </returns>
-        public static bool IsNullOrZeroed(this ICollection<int> ints)
+        public static bool IsNullOrZeroed(this ICollection<long> longs)
         {
-            if (ints == null || ints.Count == 0)
+            if (longs == null || longs.Count == 0)
                 return true;
-            return ints.All(b => b == 0);
+            return longs.All(b => b == 0);
         }
 
         /// <summary>
-        ///     Indicates whether the specified int collection does not contain any elements or consists of only zero
+        ///     Indicates whether the specified long collection does not contain any elements or consists of only zero
         ///     value items.
         /// </summary>
-        /// <param name="ints">The int collection to test.</param>
+        /// <param name="longs">The long collection to test.</param>
         /// <returns>
-        ///     <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
+        ///     <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
         ///     of zero value items.
         /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if the int collection is <c>null</c>.</exception>
-        public static bool IsZeroed(this ICollection<int> ints)
+        /// <exception cref="ArgumentNullException">Thrown if the long collection is <c>null</c>.</exception>
+        public static bool IsZeroed(this ICollection<long> longs)
         {
-            if (ints == null)
-                throw new ArgumentNullException(nameof(ints));
-            return ints.All(b => b == 0);
+            if (longs == null)
+                throw new ArgumentNullException(nameof(longs));
+            return longs.All(b => b == 0);
         }
 
         /// <summary>
-        ///     Creates a <see cref="String"/> from a int collection that concatenates each item in the collection,
+        ///     Creates a <see cref="String"/> from a long collection that concatenates each item in the collection,
         ///     separated by the specified delimiter.
         /// </summary>
-        /// <param name="source">The int collection from which to create the string.</param>
+        /// <param name="source">The long collection from which to create the string.</param>
         /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
         /// <returns>The combined string.</returns>
-        public static string ToString(this IList<int> source, string delimiter = null)
+        public static string ToString(this IList<long> source, string delimiter = null)
         {
             if (source == null)
                 return null;
@@ -115,8 +115,13 @@ namespace System.Collections.Generic
                 delimiter = string.Empty;
             bool useDelimiter = delimiter.Length > 0;
 
-            var result = new StringBuilder(source[0].ToString(CultureInfo.InvariantCulture),
+#if NETSTANDARD1_3
+            var result = new StringBuilder(source[0].ToString(),
                 (source.Count * 3) + ((source.Count - 1) * delimiter.Length));
+#else
+            var result = new StringBuilder(source[0].ToString(CultureInfo.CurrentCulture),
+                (source.Count * 3) + ((source.Count - 1) * delimiter.Length));
+#endif
             for (int i = 1; i < source.Count; i++)
             {
                 if (useDelimiter)
@@ -127,30 +132,30 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Retrieves the ints from a int array upto a specific sequence.
+        ///     Retrieves the longs from a long array upto a specific sequence.
         /// </summary>
-        /// <param name="source">The int array.</param>
+        /// <param name="source">The long array.</param>
         /// <param name="start">The index in the array to start searching.</param>
         /// <param name="sequence">The sequence to search for.</param>
-        /// <returns>An array of ints from the starting index to the matching sequence.</returns>
-        public static int[] GetNumbersUptoSequence(this int[] source, int start, params int[] sequence)
+        /// <returns>An array of longs from the starting index to the matching sequence.</returns>
+        public static long[] GetNumbersUptoSequence(this long[] source, int start, params long[] sequence)
         {
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
                 return null;
 
-            int[] result = new int[sequenceIndex - start];
+            long[] result = new long[sequenceIndex - start];
             Array.Copy(source, start, result, 0, result.Length);
             return result;
         }
 
-        public static int IndexOfSequence(this IList<int> source, params int[] sequence) =>
-            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<int>)sequence);
+        public static int IndexOfSequence(this IList<long> source, params long[] sequence) =>
+            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<long>)sequence);
 
-        public static int IndexOfSequence(this IList<int> source, int start, int count, params int[] sequence) =>
-            IndexOfSequence(source, start, count, (IList<int>)sequence);
+        public static int IndexOfSequence(this IList<long> source, int start, int count, params long[] sequence) =>
+            IndexOfSequence(source, start, count, (IList<long>)sequence);
 
-        public static int IndexOfSequence(this IList<int> source, int start, int count, IList<int> sequence)
+        public static int IndexOfSequence(this IList<long> source, int start, int count, IList<long> sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -163,13 +168,13 @@ namespace System.Collections.Generic
 
             int sequenceIndex = 0;
             int endIndex = Math.Min(source.Count, start + count);
-            for (int intIdx = start; intIdx < endIndex; intIdx++)
+            for (int longIdx = start; longIdx < endIndex; longIdx++)
             {
-                if (source[intIdx] == sequence[sequenceIndex])
+                if (source[longIdx] == sequence[sequenceIndex])
                 {
                     sequenceIndex++;
                     if (sequenceIndex >= sequence.Count)
-                        return intIdx - sequence.Count + 1;
+                        return longIdx - sequence.Count + 1;
                 }
                 else
                     sequenceIndex = 0;
@@ -177,13 +182,13 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this IList<int> source, params int[] sequence) =>
+        public static int[] IndexOfSequences(this IList<long> source, params long[] sequence) =>
             IndexOfSequences(source, 0, source != null ? source.Count : 0, sequence);
 
-        public static int[] IndexOfSequences(this IList<int> source, int start, int count, params int[] sequence) =>
-            IndexOfSequences(source, start, count, (IList<int>)sequence);
+        public static int[] IndexOfSequences(this IList<long> source, int start, int count, params long[] sequence) =>
+            IndexOfSequences(source, start, count, (IList<long>)sequence);
 
-        public static int[] IndexOfSequences(this IList<int> source, int start, int count, IList<int> sequence)
+        public static int[] IndexOfSequences(this IList<long> source, int start, int count, IList<long> sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -208,10 +213,10 @@ namespace System.Collections.Generic
             return locations.ToArray();
         }
 
-        public static int[][] SplitBySequence(this int[] source, params int[] sequence) =>
+        public static long[][] SplitBySequence(this long[] source, params long[] sequence) =>
             SplitBySequence(source, 0, source.Length, sequence);
 
-        public static int[][] SplitBySequence(this int[] source, int start, int count, params int[] sequence)
+        public static long[][] SplitBySequence(this long[] source, int start, int count, params long[] sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -231,26 +236,26 @@ namespace System.Collections.Generic
             if (locations.Length == 0)
                 return new[] { source };
 
-            var results = new List<int[]>(locations.Length + 1);
+            var results = new List<long[]>(locations.Length + 1);
             for (int locationIdx = 0; locationIdx < locations.Length; locationIdx++)
             {
                 int startIndex = locationIdx > 0 ? locations[locationIdx - 1] + sequence.Length : start;
                 int endIndex = locations[locationIdx] - 1;
                 if (endIndex < startIndex)
-                    results.Add(new int[0]);
+                    results.Add(new long[0]);
                 else
                 {
-                    int[] splitItems = new int[endIndex - startIndex + 1];
+                    long[] splitItems = new long[endIndex - startIndex + 1];
                     Array.Copy(source, startIndex, splitItems, 0, splitItems.Length);
                     results.Add(splitItems);
                 }
             }
 
             if (locations[locations.Length - 1] + sequence.Length > start + count - 1)
-                results.Add(new int[0]);
+                results.Add(new long[0]);
             else
             {
-                int[] splitItems = new int[start + count - locations[locations.Length - 1] - sequence.Length];
+                long[] splitItems = new long[start + count - locations[locations.Length - 1] - sequence.Length];
                 Array.Copy(source, locations[locations.Length - 1] + sequence.Length, splitItems, 0, splitItems.Length);
                 results.Add(splitItems);
             }

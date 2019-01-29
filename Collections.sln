@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4FCB0270-F17C-4F56-A564-E3F3A8398A47}"
 	ProjectSection(SolutionItems) = preProject
+		scripts\create-numeric-collections.ps1 = scripts\create-numeric-collections.ps1
 		scripts\publish.bat = scripts\publish.bat
 		scripts\test-with-coverage.bat = scripts\test-with-coverage.bat
 	EndProjectSection

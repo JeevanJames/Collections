@@ -4,68 +4,6 @@
         <name>Collections.NET</name>
     </assembly>
     <members>
-        <member name="T:System.Collections.Generic.ByteCollectionExtensions">
-            <summary>
-                Set of utility extension methods for byte arrays and collections.
-            </summary>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Collections.Generic.IList{System.Byte})">
-            <summary>
-                Checks whether two byte collections are equal based on their content.
-            </summary>
-            <param name="bytes">The source byte collection to check.</param>
-            <param name="other">The second byte collection to check.</param>
-            <returns><c>true</c> if the contents of the two byte collections are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
-            <summary>
-                Checks whether two byte collections are equal based on their content.
-            </summary>
-            <param name="bytes">The source byte collection to check.</param>
-            <param name="other">The second byte collection to check.</param>
-            <returns><c>true</c> if the contents of the two byte collection are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Byte})">
-            <summary>
-                Indicates whether the specified byte collection is <c>null</c>, does not contain any elements or consists
-                of only zero value items.
-            </summary>
-            <param name="bytes">The byte collection to test.</param>
-            <returns>
-                <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Byte})">
-            <summary>
-                Indicates whether the specified byte collection does not contain any elements or consists of only zero
-                value items.
-            </summary>
-            <param name="bytes">The byte collection to test.</param>
-            <returns>
-                <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the byte collection is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.ToString(System.Collections.Generic.IList{System.Byte},System.String)">
-            <summary>
-                Creates a <see cref="T:System.String"/> from a byte collection that concatenates each item in the collection,
-                separated by the specified delimiter.
-            </summary>
-            <param name="source">The byte collection from which to create the string.</param>
-            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
-            <returns>The combined string.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.GetNumbersUptoSequence(System.Byte[],System.Int32,System.Byte[])">
-            <summary>
-                Retrieves the bytes from a byte array upto a specific sequence.
-            </summary>
-            <param name="source">The byte array.</param>
-            <param name="start">The index in the array to start searching.</param>
-            <param name="sequence">The sequence to search for.</param>
-            <returns>An array of bytes from the starting index to the matching sequence.</returns>
-        </member>
         <member name="M:System.Collections.Generic.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
             <summary>
                 Adds the elements of the specified <see cref="T:System.Collections.Generic.IEnumerable`1" /> to the collection
@@ -278,68 +216,6 @@
             <exception cref="T:System.ArgumentNullException">Thrown when the specified type is null</exception>
             <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exception>
         </member>
-        <member name="T:System.Collections.Generic.IntCollectionExtensions">
-            <summary>
-                Set of utility extension methods for int arrays and collections.
-            </summary>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32})">
-            <summary>
-                Checks whether two int collections are equal based on their content.
-            </summary>
-            <param name="ints">The source int collection to check.</param>
-            <param name="other">The second int collection to check.</param>
-            <returns><c>true</c> if the contents of the two int collections are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int32},System.Int32[])">
-            <summary>
-                Checks whether two int collections are equal based on their content.
-            </summary>
-            <param name="ints">The source int collection to check.</param>
-            <param name="other">The second int collection to check.</param>
-            <returns><c>true</c> if the contents of the two int collection are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
-            <summary>
-                Indicates whether the specified int collection is <c>null</c>, does not contain any elements or consists
-                of only zero value items.
-            </summary>
-            <param name="ints">The int collection to test.</param>
-            <returns>
-                <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int32})">
-            <summary>
-                Indicates whether the specified int collection does not contain any elements or consists of only zero
-                value items.
-            </summary>
-            <param name="ints">The int collection to test.</param>
-            <returns>
-                <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the int collection is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int32},System.String)">
-            <summary>
-                Creates a <see cref="T:System.String"/> from a int collection that concatenates each item in the collection,
-                separated by the specified delimiter.
-            </summary>
-            <param name="source">The int collection from which to create the string.</param>
-            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
-            <returns>The combined string.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.GetNumbersUptoSequence(System.Int32[],System.Int32,System.Int32[])">
-            <summary>
-                Retrieves the ints from a int array upto a specific sequence.
-            </summary>
-            <param name="source">The int array.</param>
-            <param name="start">The index in the array to start searching.</param>
-            <param name="sequence">The sequence to search for.</param>
-            <returns>An array of ints from the starting index to the matching sequence.</returns>
-        </member>
         <member name="M:System.Collections.Generic.ListExtensions.Fill``1(System.Collections.Generic.IList{``0},``0)">
             <summary>
                 Populates each item in a <paramref name="list"/> with a specific <paramref name="value"/>.
@@ -455,6 +331,339 @@
             <exception cref="T:System.ArgumentOutOfRangeException">
                 Thrown if <paramref name="chunkSize"/> is less than one.
             </exception>
+        </member>
+        <member name="T:System.Collections.Generic.ByteCollectionExtensions">
+            <summary>
+                Set of utility extension methods for byte arrays and collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Checks whether two byte collections are equal based on their content.
+            </summary>
+            <param name="bytes">The source byte collection to check.</param>
+            <param name="other">The second byte collection to check.</param>
+            <returns><c>true</c> if the contents of the two byte collections are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
+            <summary>
+                Checks whether two byte collections are equal based on their content.
+            </summary>
+            <param name="bytes">The source byte collection to check.</param>
+            <param name="other">The second byte collection to check.</param>
+            <returns><c>true</c> if the contents of the two byte collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+                Indicates whether the specified byte collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="bytes">The byte collection to test.</param>
+            <returns>
+                <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+                Indicates whether the specified byte collection does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="bytes">The byte collection to test.</param>
+            <returns>
+                <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the byte collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.ToString(System.Collections.Generic.IList{System.Byte},System.String)">
+            <summary>
+                Creates a <see cref="T:System.String"/> from a byte collection that concatenates each item in the collection,
+                separated by the specified delimiter.
+            </summary>
+            <param name="source">The byte collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
+            <returns>The combined string.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.GetNumbersUptoSequence(System.Byte[],System.Int32,System.Byte[])">
+            <summary>
+                Retrieves the bytes from a byte array upto a specific sequence.
+            </summary>
+            <param name="source">The byte array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of bytes from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.CharCollectionExtensions">
+            <summary>
+                Set of utility extension methods for char arrays and collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Char},System.Collections.Generic.IList{System.Char})">
+            <summary>
+                Checks whether two char collections are equal based on their content.
+            </summary>
+            <param name="chars">The source char collection to check.</param>
+            <param name="other">The second char collection to check.</param>
+            <returns><c>true</c> if the contents of the two char collections are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Char},System.Char[])">
+            <summary>
+                Checks whether two char collections are equal based on their content.
+            </summary>
+            <param name="chars">The source char collection to check.</param>
+            <param name="other">The second char collection to check.</param>
+            <returns><c>true</c> if the contents of the two char collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+                Indicates whether the specified char collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="chars">The char collection to test.</param>
+            <returns>
+                <c>true</c> if the char collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+                Indicates whether the specified char collection does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="chars">The char collection to test.</param>
+            <returns>
+                <c>true</c> if the char collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the char collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.ToString(System.Collections.Generic.IList{System.Char},System.String)">
+            <summary>
+                Creates a <see cref="T:System.String"/> from a char collection that concatenates each item in the collection,
+                separated by the specified delimiter.
+            </summary>
+            <param name="source">The char collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
+            <returns>The combined string.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.GetNumbersUptoSequence(System.Char[],System.Int32,System.Char[])">
+            <summary>
+                Retrieves the chars from a char array upto a specific sequence.
+            </summary>
+            <param name="source">The char array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of chars from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.IntCollectionExtensions">
+            <summary>
+                Set of utility extension methods for int arrays and collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32})">
+            <summary>
+                Checks whether two int collections are equal based on their content.
+            </summary>
+            <param name="ints">The source int collection to check.</param>
+            <param name="other">The second int collection to check.</param>
+            <returns><c>true</c> if the contents of the two int collections are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int32},System.Int32[])">
+            <summary>
+                Checks whether two int collections are equal based on their content.
+            </summary>
+            <param name="ints">The source int collection to check.</param>
+            <param name="other">The second int collection to check.</param>
+            <returns><c>true</c> if the contents of the two int collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+                Indicates whether the specified int collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="ints">The int collection to test.</param>
+            <returns>
+                <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+                Indicates whether the specified int collection does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="ints">The int collection to test.</param>
+            <returns>
+                <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the int collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int32},System.String)">
+            <summary>
+                Creates a <see cref="T:System.String"/> from a int collection that concatenates each item in the collection,
+                separated by the specified delimiter.
+            </summary>
+            <param name="source">The int collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
+            <returns>The combined string.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.GetNumbersUptoSequence(System.Int32[],System.Int32,System.Int32[])">
+            <summary>
+                Retrieves the ints from a int array upto a specific sequence.
+            </summary>
+            <param name="source">The int array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of ints from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.LongCollectionExtensions">
+            <summary>
+                Set of utility extension methods for long arrays and collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int64},System.Collections.Generic.IList{System.Int64})">
+            <summary>
+                Checks whether two long collections are equal based on their content.
+            </summary>
+            <param name="longs">The source long collection to check.</param>
+            <param name="other">The second long collection to check.</param>
+            <returns><c>true</c> if the contents of the two long collections are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int64},System.Int64[])">
+            <summary>
+                Checks whether two long collections are equal based on their content.
+            </summary>
+            <param name="longs">The source long collection to check.</param>
+            <param name="other">The second long collection to check.</param>
+            <returns><c>true</c> if the contents of the two long collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int64})">
+            <summary>
+                Indicates whether the specified long collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="longs">The long collection to test.</param>
+            <returns>
+                <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int64})">
+            <summary>
+                Indicates whether the specified long collection does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="longs">The long collection to test.</param>
+            <returns>
+                <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the long collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int64},System.String)">
+            <summary>
+                Creates a <see cref="T:System.String"/> from a long collection that concatenates each item in the collection,
+                separated by the specified delimiter.
+            </summary>
+            <param name="source">The long collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
+            <returns>The combined string.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.GetNumbersUptoSequence(System.Int64[],System.Int32,System.Int64[])">
+            <summary>
+                Retrieves the longs from a long array upto a specific sequence.
+            </summary>
+            <param name="source">The long array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of longs from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.ShortCollectionExtensions">
+            <summary>
+                Set of utility extension methods for short arrays and collections.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int16},System.Collections.Generic.IList{System.Int16})">
+            <summary>
+                Checks whether two short collections are equal based on their content.
+            </summary>
+            <param name="shorts">The source short collection to check.</param>
+            <param name="other">The second short collection to check.</param>
+            <returns><c>true</c> if the contents of the two short collections are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int16},System.Int16[])">
+            <summary>
+                Checks whether two short collections are equal based on their content.
+            </summary>
+            <param name="shorts">The source short collection to check.</param>
+            <param name="other">The second short collection to check.</param>
+            <returns><c>true</c> if the contents of the two short collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int16})">
+            <summary>
+                Indicates whether the specified short collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="shorts">The short collection to test.</param>
+            <returns>
+                <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int16})">
+            <summary>
+                Indicates whether the specified short collection does not contain any elements or consists of only zero
+                value items.
+            </summary>
+            <param name="shorts">The short collection to test.</param>
+            <returns>
+                <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the short collection is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int16},System.String)">
+            <summary>
+                Creates a <see cref="T:System.String"/> from a short collection that concatenates each item in the collection,
+                separated by the specified delimiter.
+            </summary>
+            <param name="source">The short collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
+            <returns>The combined string.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.GetNumbersUptoSequence(System.Int16[],System.Int32,System.Int16[])">
+            <summary>
+                Retrieves the shorts from a short array upto a specific sequence.
+            </summary>
+            <param name="source">The short array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of shorts from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <summary>
+                Represents the results of a predicate check on all items of a collection.
+            </summary>
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
+            </summary>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
+                Collection of all items in the collection that satisfy the predicate.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+            <summary>
+                Collection of all items in the collection that do not satisfy the predicate.
+            </summary>
         </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
