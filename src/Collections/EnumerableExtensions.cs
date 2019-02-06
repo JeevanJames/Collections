@@ -331,5 +331,14 @@ namespace System.Collections.Generic
 
             return sequence.Where((element, i) => !predicate(element, i));
         }
+
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item) =>
+            sequence.Union(new[] { item });
+
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item, IEqualityComparer<T> comparer) =>
+            sequence.Union(new[] { item }, comparer);
+
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, params T[] items) =>
+            sequence.Union(items);
     }
 }
