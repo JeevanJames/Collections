@@ -21,6 +21,7 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |Method name|Interface|Description|
 |-----------|---------|-----------|
 |`AddRange`|`ICollection<T>`|Adds one or more items to a collection in a single operation. Inspired by the `List<T>.AddRange` method.|
+|`AllOrNone`|`IEnumerable<T>`|Determines whether all or none of the elements in a sequence match a predicate.|
 |`Chunk`|`IEnumerable<T>`|Splits a collection into chunks of a specified size.|
 |`Fill`|`IList<T>`|Sets all elements in a collection to a specific value.|
 |`ForEach`|`IEnumerable<T>`|Iterates over each element in a collection and calls the specified delegate for each item. Inspired by the `List<T>.ForEach` method.|
@@ -28,6 +29,7 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`IndexOfAll`|`IList<T>`|Finds all indices of the matching elements in a collection based on the specified predicate.|
 |`InsertRange`|`IList<T>`|Inserts one or more items into a collection at the given location in a single operation.|
 |`IsEmpty`|`IEnumerable<T>`|Indicates whether a collection is empty. A better way of doing `if !collection.Any()`|
+|`IsNotNullOrEmpty`|`IEnumerable<T>`|Determines whether a sequence is not `null` and has at least one element.|
 |`IsNullOrEmpty`|`IEnumerable<T>`|Indicates whether a collection is `null` or empty.|
 |`LastIndexOf`|`IList<T>`|Finds the index of the last matching element in a collection based on the specified predicate.|
 |`None`|`IEnumerable<T>`|Determines whether none of the elements in a collection satisfies the specified predicate. Opposite of the LINQ `All` extension method.|
@@ -43,6 +45,7 @@ Extension methods for common collection interfaces like `IEnumerable<T>`, `IColl
 |`SlidingChunk`|`IList<T>`|Returns overlapping chunks of elements of the specified size from a collection.|
 |`ToArray`|`IEnumerable<T>`|Creates an array from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
 |`ToList`|`IEnumerable<T>`|Creates a `List<T>` from a collection. Overloads available to select the elements from the collection to be included in the array based on a predicate, and to convert the elements to a different type.|
+|`Union`|`IEnumerable<T>`|Produces a set union of two sequences.|
 |`WhereNot`|`IEnumerable<T>`|Filters a collection on the values that do not match the specified predicate. Inverse of the LINQ `Where` method.|
 
 ## Dictionary extensions
