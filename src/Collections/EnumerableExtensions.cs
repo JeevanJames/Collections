@@ -28,6 +28,45 @@ namespace System.Collections.Generic
 {
     public static class EnumerableExtensions
     {
+        /// <summary>
+        ///     Determines whether all or none of the elements in a <paramref name="sequence"/> match the specified
+        ///     <paramref name="predicate"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of sequence.</typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+        /// <returns>
+        ///     <c>true</c>, if all or none of the elements in the sequence match the predicate. If some elements match
+        ///     and others do not, then <c>false</c> is returned.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown of the sequence is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown of the predicate is <c>null</c>.</exception>
+        public static bool AllOrNone<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
+        {
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            // Track state of the predicate for each element.
+            bool? result = null;
+
+            foreach (T element in sequence)
+            {
+                bool elementResult = predicate(element);
+                // If first element, set the tracking state variable. All subsequent elements should return the same
+                // value for the predicate.
+                if (!result.HasValue)
+                    result = elementResult;
+                // If the predicate for the current element is different from the tracking value, then the sequence
+                // contains elements that return different values for the predicate and hence return false.
+                else if (elementResult != result.Value)
+                    return false;
+            }
+
+            return true;
+        }
+
         public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> sequence, int chunkSize)
         {
             if (sequence == null)
@@ -109,6 +148,17 @@ namespace System.Collections.Generic
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
             return sequence is ICollection<T> coll ? coll.Count == 0 : !sequence.Any();
+        }
+
+        /// <summary>
+        ///     Indicates whether the specified <paramref name="sequence"/> is not <c>null</c> and has at least one element.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of the sequence</typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <returns><c>true</c>, if the sequence if not <c>null</c> and has elements.</returns>
+        public static bool IsNotNullOrEmpty<T>(this IEnumerable<T> sequence)
+        {
+            return sequence != null && sequence.Any();
         }
 
         /// <summary>
