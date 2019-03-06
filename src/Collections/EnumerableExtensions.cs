@@ -67,6 +67,33 @@ namespace System.Collections.Generic
             return true;
         }
 
+        public static bool AllItemsContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection,
+            Comparison<T> comparison = null)
+        {
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            Func<T, bool> check = comparison == null
+                ? (Func<T, bool>)(item => collection.Any(c => item.Equals(c)))
+                : (item => collection.Any(c => comparison(item, c) == 0));
+            return sequence.All(item => collection.Any(c => comparison(item, c) == 0));
+        }
+
+        public static bool AnyItemContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection, Comparison<T> comparison = null)
+        {
+            if (sequence == null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            Func<T, bool> check = comparison == null
+                ? (Func<T, bool>)(item => collection.Any(c => item.Equals(c)))
+                : (item => collection.Any(c => comparison(item, c) == 0));
+            return sequence.Any(item => collection.Any(c => comparison(item, c) == 0));
+        }
+
         public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> sequence, int chunkSize)
         {
             if (sequence == null)
