@@ -1,5 +1,7 @@
 version: 1.7.0-build.{build}
-image: Visual Studio 2019 Preview
+image:
+- Visual Studio 2019 Preview
+- Visual Studio 2013
 environment:
   MYGET_FEED: https://www.myget.org/F/collections-net/api/v2/package
   MYGET_API_KEY:
