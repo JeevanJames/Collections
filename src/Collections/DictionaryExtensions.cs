@@ -38,7 +38,7 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static void AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
-            if (dictionary == null)
+            if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
 
             if (dictionary.ContainsKey(key))
@@ -72,14 +72,17 @@ namespace System.Collections.Generic
 #endif
 
         /// <summary>
-        ///     Gets the value for the specified key in a dictionary. If the key does not exist, the <paramref name="defaultValue"/> value is returned.
+        ///     Gets the value for the specified key in a dictionary. If the key does not exist, the
+        ///     <paramref name="defaultValue"/> value is returned.
         /// </summary>
         /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key to locate in the dictionary.</param>
         /// <param name="defaultValue">The value to return if the key does not exist.</param>
-        /// <returns>The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.</returns>
+        /// <returns>
+        ///     The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
+        /// </returns>
         /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue = default)
@@ -88,6 +91,29 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(dictionary));
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
+
+#if !NET35 && !NET40
+        /// <summary>
+        ///     Gets the value for the specified key in a dictionary. If the key does not exist, the
+        ///     <paramref name="defaultValue"/> value is returned.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to locate in the dictionary.</param>
+        /// <param name="defaultValue">The value to return if the key does not exist.</param>
+        /// <returns>
+        ///     The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
+        public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key,
+            TValue defaultValue = default)
+        {
+            if (dictionary is null)
+                throw new ArgumentNullException(nameof(dictionary));
+            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
+        }
+#endif
 
         /// <summary>
         ///     Gets the value associated with the specified key. If the key does not exist, the <paramref name="value"/>

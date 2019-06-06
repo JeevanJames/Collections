@@ -47,14 +47,32 @@
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
-                Gets the value for the specified key in a dictionary. If the key does not exist, the <paramref name="defaultValue"/> value is returned.
+                Gets the value for the specified key in a dictionary. If the key does not exist, the
+                <paramref name="defaultValue"/> value is returned.
             </summary>
             <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of values in the dictionary.</typeparam>
             <param name="dictionary">The dictionary.</param>
             <param name="key">The key to locate in the dictionary.</param>
             <param name="defaultValue">The value to return if the key does not exist.</param>
-            <returns>The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.</returns>
+            <returns>
+                The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)">
+            <summary>
+                Gets the value for the specified key in a dictionary. If the key does not exist, the
+                <paramref name="defaultValue"/> value is returned.
+            </summary>
+            <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+            <param name="dictionary">The dictionary.</param>
+            <param name="key">The key to locate in the dictionary.</param>
+            <param name="defaultValue">The value to return if the key does not exist.</param>
+            <returns>
+                The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
+            </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
@@ -664,6 +682,29 @@
             <param name="start">The index in the array to start searching.</param>
             <param name="sequence">The sequence to search for.</param>
             <returns>An array of shorts from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <summary>
+                Represents the results of a predicate check on all items of a collection.
+            </summary>
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
+            </summary>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
+                Collection of all items in the collection that satisfy the predicate.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+            <summary>
+                Collection of all items in the collection that do not satisfy the predicate.
+            </summary>
         </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
