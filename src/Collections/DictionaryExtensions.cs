@@ -47,6 +47,30 @@ namespace System.Collections.Generic
                 dictionary.Add(key, value);
         }
 
+        public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, params KeyValuePair<TKey, TValue>[] kvps)
+        {
+            if (dictionary is null)
+                throw new ArgumentNullException(nameof(dictionary));
+            if (kvps is null)
+                throw new ArgumentNullException(nameof(kvps));
+
+            foreach (KeyValuePair<TKey, TValue> kvp in kvps)
+                dictionary.Add(kvp);
+        }
+
+#if NETSTANDARD2_0
+        public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, params (TKey key, TValue value)[] kvps)
+        {
+            if (dictionary is null)
+                throw new ArgumentNullException(nameof(dictionary));
+            if (kvps is null)
+                throw new ArgumentNullException(nameof(kvps));
+
+            foreach (var (key, value) in kvps)
+                dictionary.Add(key, value);
+        }
+#endif
+
         /// <summary>
         ///     Gets the value for the specified key in a dictionary. If the key does not exist, the <paramref name="defaultValue"/> value is returned.
         /// </summary>
@@ -60,7 +84,7 @@ namespace System.Collections.Generic
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue = default)
         {
-            if (dictionary == null)
+            if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
@@ -79,7 +103,7 @@ namespace System.Collections.Generic
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue value)
         {
-            if (dictionary == null)
+            if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
 
             if (dictionary.TryGetValue(key, out TValue existingValue))
@@ -102,9 +126,9 @@ namespace System.Collections.Generic
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             Func<TKey, TValue> valueGetter)
         {
-            if (dictionary == null)
+            if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
-            if (valueGetter == null)
+            if (valueGetter is null)
                 throw new ArgumentNullException(nameof(valueGetter));
 
             if (dictionary.TryGetValue(key, out TValue existingValue))
@@ -128,9 +152,9 @@ namespace System.Collections.Generic
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             Func<TKey, IDictionary<TKey, TValue>, TValue> valueGetter)
         {
-            if (dictionary == null)
+            if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
-            if (valueGetter == null)
+            if (valueGetter is null)
                 throw new ArgumentNullException(nameof(valueGetter));
 
             if (dictionary.TryGetValue(key, out TValue existingValue))
