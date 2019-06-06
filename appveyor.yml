@@ -1,25 +1,32 @@
-version: 1.0.{build}
-image: Visual Studio 2017
-configuration: Release
+version: 1.7.0-build.{build}
+image: Visual Studio 2019 Preview
 environment:
+  MYGET_FEED: https://www.myget.org/F/collections-net/api/v2/package
+  MYGET_API_KEY:
+    secure: 3tEiaoqZlTJcJkAX+3wWyp3mbCYuJpALEFzTEaum6ACiXbWgsa1kWYGBi3TUFY7c
+  MYGET_SYMBOLS_FEED: https://www.myget.org/F/collections-net/symbols/api/v2/package
+  MYGET_SYMBOLS_API_KEY:
+    secure: 3tEiaoqZlTJcJkAX+3wWyp3mbCYuJpALEFzTEaum6ACiXbWgsa1kWYGBi3TUFY7c
+  NUGET_FEED: https://api.nuget.org/v3/index.json
+  NUGET_API_KEY:
+    secure: 055huZhAN+6nzYY39jc+7cOiRVQuZlxoQ9JFJUH5wMIlAMD6smHb1pQqDuyX03PR
+  NUGET_PACKAGE_VERSION: 1.6.0
   CODECOV_TOKEN: 5ad613f1-0623-451d-b889-2c6020f132f4
-before_build:
-- pwsh: >-
-    dotnet restore
-
-    choco install codecov
-build:
-  verbosity: minimal
+install:
+- pwsh: choco install codecov
+build_script:
+- pwsh: dotnet build -c Release
 test_script:
 - pwsh: >-
     dotnet test --blame ./tests/Collection.Tests/Collection.Tests.csproj /p:CollectCoverage=true /p:Exclude=\"[xunit.*]*\" /p:CoverletOutputFormat=opencover
 
     codecov -f "./tests/Collection.Tests/coverage.opencover.xml"
-artifacts:
-- path: '**/*.nupkg'
-  name: NuGet
-deploy:
-- provider: NuGet
-  api_key:
-    secure: 1EsewYvmcY1mezJgxG8QGZmrikfpIrr6AiyMuwckiPer+VobTN7xjjMvIN9h0sFd
-  artifact: /.*\.nupkg/
+deploy_script
+- pwsh: >-
+    dotnet pack ./src/Collections/Collections.csproj --include-symbols --include-source -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
+
+    dotnet nuget push ./src/Collections/bin/Release/Collections.NET.$env:APPVEYOR_BUILD_VERSION.nupkg -s $env:MYGET_FEED -k $env:MYGET_API_KEY -ss $env:MYGET_SYMBOLS_FEED -sk $env:MYGET_SYMBOLS_API_KEY
+
+    dotnet pack ./src/Collections/Collections.csproj --include-symbols --include-source -c Release /p:Version=$env:NUGET_PACKAGE_VERSION
+
+    dotnet nuget push ./src/Collections/bin/Release/Collections.NET.$env:NUGET_PACKAGE_VERSION.nupkg -s $env:NUGET_FEED -k $env:NUGET_API_KEY
