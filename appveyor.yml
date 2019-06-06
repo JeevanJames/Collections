@@ -21,7 +21,7 @@ test_script:
     dotnet test --blame ./tests/Collection.Tests/Collection.Tests.csproj /p:CollectCoverage=true /p:Exclude=\"[xunit.*]*\" /p:CoverletOutputFormat=opencover
 
     codecov -f "./tests/Collection.Tests/coverage.opencover.xml"
-deploy_script
+deploy_script:
 - pwsh: >-
     dotnet pack ./src/Collections/Collections.csproj --include-symbols --include-source -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
