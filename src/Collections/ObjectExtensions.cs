@@ -21,7 +21,7 @@ limitations under the License.
 using System.Linq;
 
 #if EXPLICIT
-namespace Collections.Net.Enumerable
+namespace Collections.Net.Object
 #else
 namespace System.Collections.Generic
 #endif
@@ -51,15 +51,50 @@ namespace System.Collections.Generic
         public static IEnumerable<T> ParentChainReverse<T>(this T start, Func<T, T> parentSelector, Func<T, bool> stopCondition = null, bool skipStart = false)
             where T : class
         {
-            if (stopCondition is null)
-                return ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
-
-            throw new NotImplementedException();
+            var chain = ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
+            if (stopCondition != null)
+                chain = chain.SkipWhile(item => !stopCondition(item));
+            return chain;
         }
 
         public static T FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
+            where T : class
         {
-            throw new NotImplementedException();
+            if (start is null)
+                throw new ArgumentNullException(nameof(start));
+            if (parentSelector is null)
+                throw new ArgumentNullException(nameof(parentSelector));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            T current = parentSelector(start);
+            while (current != null)
+            {
+                if (predicate(current))
+                    return current;
+                current = parentSelector(current);
+            }
+
+            return null;
+        }
+
+        public static T FindRootParent<T>(this T start, Func<T, T> parentSelector)
+            where T : class
+        {
+            if (start is null)
+                throw new ArgumentNullException(nameof(start));
+            if (parentSelector is null)
+                throw new ArgumentNullException(nameof(parentSelector));
+
+            T current = start;
+            T parent = parentSelector(current);
+            while (parent != null)
+            {
+                current = parent;
+                parent = parentSelector(current);
+            }
+
+            return current;
         }
     }
 }

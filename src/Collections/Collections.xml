@@ -276,6 +276,20 @@
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
         </member>
+        <member name="M:System.Collections.Generic.ListExtensions.IndexOfAll``1ef name="list"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.IndexOf``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Returns the index of the first element in a <paramref name="list"/> that matches the specified
+                <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of list.</typeparam>
+            <param name="list">The list.</param>
+            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+            <returns>The index of the element, if found; otherwise -1.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
         <member name="M:System.Collections.Generic.ListExtensions.IndexOfAll``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
             <summary>
                 Returns all indices of elements in a <paramref name="list"/> that match the specified
@@ -316,22 +330,7 @@
         </member>
         <member name="M:System.Collections.Generic.ListExtensions.RemoveFirst``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
             <summary>
-                Removes the first element from the <paramref name="list"/> that satisfies the specified
-                <paramref name="predicate"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of list.</typeparam>
-            <param name="list">The list.</param>
-            <param name="predicate">The predicate delegate to check against.</param>
-            <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.ListExtensions.RemoveLast``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
-            <summary>
-                Removes the last element from the <paramref name="list"/> that satisfies the specified
-                <paramref name="predicate"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of list.</typeparam>
+                Removes the first element from the <paramref name="listname="T">The type of the elements of list.</typeparam>
             <param name="list">The list.</param>
             <param name="predicate">The predicate delegate to check against.</param>
             <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
@@ -374,6 +373,22 @@
             <param name="other">The second byte collection to check.</param>
             <returns><c>true</c> if the contents of the two byte collections are equal.</returns>
         </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
+            <summary>
+                Checks whether two byte collections are equal based on their content.
+            </summary>
+            <param name="bytes">The source byte collection to check.</param>
+            <param name="other">The second byte collection to check.</param>
+            <returns><c>true</c> if the contents of the two byte collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+                Indicates whether the specified byte collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="bytes">The byte collection to test.</param>
+            <returns>
+                <c>true</c> if the byte collection is <c>null</c>,r>
         <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
             <summary>
                 Checks whether two byte collections are equal based on their content.
@@ -436,22 +451,7 @@
             <param name="other">The second char collection to check.</param>
             <returns><c>true</c> if the contents of the two char collections are equal.</returns>
         </member>
-        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Char},System.Char[])">
-            <summary>
-                Checks whether two char collections are equal based on their content.
-            </summary>
-            <param name="chars">The source char collection to check.</param>
-            <param name="other">The second char collection to check.</param>
-            <returns><c>true</c> if the contents of the two char collection are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Char})">
-            <summary>
-                Indicates whether the specified char collection is <c>null</c>, does not contain any elements or consists
-                of only zero value items.
-            </summary>
-            <param name="chars">The char collection to test.</param>
-            <returns>
-                <c>true</c> if the char collection is <c>null</c>, does not contain any elements or consists exclusively
+        <member name="M:System.Collections.Generly
                 of zero value items.
             </returns>
         </member>
@@ -506,7 +506,7 @@
             <param name="other">The second int collection to check.</param>
             <returns><c>true</c> if the contents of the two int collection are equal.</returns>
         </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
+        <member name="M:System.Collectionons.Generic.ILislectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
             <summary>
                 Indicates whether the specified int collection is <c>null</c>, does not contain any elements or consists
                 of only zero value items.
@@ -579,6 +579,24 @@
                 of zero value items.
             </returns>
         </member>
+        <member name="M:System.Collect
+                Checks whether two long collections are equal based on their content.
+            </summary>
+            <param name="longs">The source long collection to check.</param>
+            <param name="other">The second long collection to check.</param>
+            <returns><c>true</c> if the contents of the two long collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.LongCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int64})">
+            <summary>
+                Indicates whether the specified long collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="longs">The long collection to test.</param>
+            <returns>
+                <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
+                of zero value items.
+            </returns>
+        </member>
         <member name="M:System.Collections.Generic.LongCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int64})">
             <summary>
                 Indicates whether the specified long collection does not contain any elements or consists of only zero
@@ -629,25 +647,7 @@
             <param name="shorts">The source short collection to check.</param>
             <param name="other">The second short collection to check.</param>
             <returns><c>true</c> if the contents of the two short collection are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int16})">
-            <summary>
-                Indicates whether the specified short collection is <c>null</c>, does not contain any elements or consists
-                of only zero value items.
-            </summary>
-            <param name="shorts">The short collection to test.</param>
-            <returns>
-                <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-        </member>
-        <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int16})">
-            <summary>
-                Indicates whether the specified short collection does not contain any elements or consists of only zero
-                value items.
-            </summary>
-            <param name="shorts">The short collection to test.</param>
-            <returns>
+        </membe           <returns>
                 <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
                 of zero value items.
             </returns>
@@ -656,58 +656,52 @@
         <member name="M:System.Collections.Generic.ShortCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int16},System.String)">
             <summary>
                 Creates a <see cref="T:System.String"/> from a short collection that concatenates each item in the collection,
-                separated by the specified delimiter.
-            </summary>
+                separat  <member name="M:System.Collect            </summary>
             <param name="source">The short collection from which to create the string.</param>
             <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
             <returns>The combined string.</returns>
         </member>
-        <member name="M:System.Collections.Generic.ShortCollectionExtensions.GetNumbersUptoSequence(System.Int16[],System.Int32,System.Int16[])">
+              <param name="shorts">The short collecShortCollectionExtensions.GetNumbersUptoSequence(System.Int16[],System.Int32,System.Int16[])">
             <summary>
                 Retrieves the shorts from a short array upto a specific sequence.
             </summary>
             <param name="source">The short array.</param>
-            <param name="start">The index in the array to start searching.</param>
-            <param name="sequence">The sequence to search for.</param>
-            <returns>An array of shorts from the starting index to the matching sequence.</returns>
-        </member>
-        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <param e short collecti index in the array to start searching.</param>
+            <param name="sequence">The sequenceneric.ShortCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int16},System.String)">
             <summary>
-                Represents the results of a predicate check on all items of a collection.
+                Creates a <see cref="T:System.String"/> from a short collection that concatenates each item in the collection,
+                separated by the specified delimiter.
             </summary>
-            <typeparam name="T">The type of element in the collection.</typeparam>
-        </member>
-        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <param name="source">The short collection from which to create the string.</param>
+            <param name="delimiter">The optional delimiter to sections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
             <summary>
                 Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
             </summary>
-            <param name="matches">The matching elements.</param>
-            <param name="mismatches">The elements that do not match.</param>
-        </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
-            <summary>
+        etrieves the shorts from a short array upto a specific sequence.
+            </summary>
+            <param name="source">The short array.</param>
+            <param name="start">The index in the array to start searching.</param>
+            <param namey>
                 Collection of all items in the collection that satisfy the predicate.
             </summary>
+        </mem sequence.</returns>
         </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+        <member name="TonSequence`1.Mismatches">
             <summary>
                 Collection of all items in the collection that do not satisfy the predicate.
             </summary>
         </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
-                Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and
-                <c>RNGCryptoServiceProvider</c> for all other targets.
-            </summary>
-        </member>
-        <member name="F:System.Collections.Generic.Rng._max">
-            <summary>
-                Exclusive max value of the generated random number.
+                Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and         Exclusive max value of the generated random number.
             </summary>
         </member>
         <member name="M:System.Collections.Generic.Rng.#ctor(System.Int32)">
-            <summary>
-                Initializes an instance of the <see cref="T:System.Collections.Generic.Rng"/> class with the exclusive <paramref name="max"/> value
+         <summary>
+                Exclusive max value of the generated random number.
+            </summary>
+        </member>
+        <member name="M:System.Collece
                 to generate.
             </summary>
             <param name="max">Exclusive max value of the generated random number.</param>
@@ -715,6 +709,12 @@
         <member name="M:System.Collections.Generic.Rng.Next">
             <summary>
                 Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
+            </summary>
+            <returns>The random number.</returns>
+        </member>
+    </members>
+</doc>
+   Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
             </summary>
             <returns>The random number.</returns>
         </member>
