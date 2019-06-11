@@ -56,5 +56,10 @@ namespace System.Collections.Generic
 
             throw new NotImplementedException();
         }
+
+        public static T FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

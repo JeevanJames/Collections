@@ -60,21 +60,6 @@
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
-        <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)">
-            <summary>
-                Gets the value for the specified key in a dictionary. If the key does not exist, the
-                <paramref name="defaultValue"/> value is returned.
-            </summary>
-            <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
-            <typeparam name="TValue">The type of values in the dictionary.</typeparam>
-            <param name="dictionary">The dictionary.</param>
-            <param name="key">The key to locate in the dictionary.</param>
-            <param name="defaultValue">The value to return if the key does not exist.</param>
-            <returns>
-                The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
-        </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
                 Gets the value associated with the specified key. If the key does not exist, the <paramref name="value"/>
@@ -181,6 +166,21 @@
             <param name="sequence">The sequence.</param>
             <param name="predicate">The <paramref name="predicate"/> to check against.</param>
             <returns>
+                <c>true</c> if none of the elements in the <paramref name="sehe specified sequence is null or does not contain any elements.
+            </summary>
+            <typeparam name="T">The type of the elements of the sequence</typeparam>
+            <param name="sequence"> The sequence to test. </param>
+            <returns> <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>. </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EnumerableExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Determines whether none of the elements of the <paramref name="sequence"/> satisfies the specified
+                <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of sequence.</typeparam>
+            <param name="sequence">The sequence.</param>
+            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
+            <returns>
                 <c>true</c> if none of the elements in the <paramref name="sequence"/> satisfy the
                 <paramref name="predicate"/>; otherwise <c>false</c>.
             </returns>
@@ -220,19 +220,7 @@
             <typeparam name="T">The type of the elements of sequence.</typeparam>
             <param name="sequence">The sequence.</param>
             <param name="iterations">The number of times to repeat the shuffle operation.</param>
-            <returns>A shuffled version of the <paramref name="sequence"/>.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.EnumerableExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
-            <summary>
-                Converts selected elements of the specified sequence to an array of another type.
-            </summary>
-            <typeparam name="TInput">The type of elements in the source sequence.</typeparam>
-            <typeparam name="TOutput">The type of elements in the target array.</typeparam>
-            <param name="sequence">The source sequence.</param>
-            <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
-            <param name="converter">A delegate that converts elements from the source sequence type to the target array element type.</param>
+            <returns>A shufe="converter">A delegate that converts elements from the source sequence type to the target array element type.</param>
             <returns>An array of the target element type.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the source sequence, <c>predicate</c> delegate or <c>converter</c> delegate are null.</exception>
         </member>
@@ -683,9 +671,56 @@
             <param name="sequence">The sequence to search for.</param>
             <returns>An array of shorts from the starting index to the matching sequence.</returns>
         </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
+            <summary>
+                Represents the results of a predicate check on all items of a collection.
+            </summary>
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
+            </summary>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
+                Collection of all items in the collection that satisfy the predicate.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
+            <summary>
+                Collection of all items in the collection that do not satisfy the predicate.
+            </summary>
+        </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
                 Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and
+                <c>RNGCryptoServiceProvider</c> for all other targets.
+            </summary>
+        </member>
+        <member name="F:System.Collections.Generic.Rng._max">
+            <summary>
+                Exclusive max value of the generated random number.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.Rng.#ctor(System.Int32)">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.Rng"/> class with the exclusive <paramref name="max"/> value
+                to generate.
+            </summary>
+            <param name="max">Exclusive max value of the generated random number.</param>
+        </member>
+        <member name="M:System.Collections.Generic.Rng.Next">
+            <summary>
+                Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
+            </summary>
+            <returns>The random number.</returns>
+        </member>
+    </members>
+</doc>
+T:System.Random"/> for netstandard 1.3 and
                 <c>RNGCryptoServiceProvider</c> for all other targets.
             </summary>
         </member>
