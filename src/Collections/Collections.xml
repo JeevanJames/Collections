@@ -166,21 +166,6 @@
             <param name="sequence">The sequence.</param>
             <param name="predicate">The <paramref name="predicate"/> to check against.</param>
             <returns>
-                <c>true</c> if none of the elements in the <paramref name="sehe specified sequence is null or does not contain any elements.
-            </summary>
-            <typeparam name="T">The type of the elements of the sequence</typeparam>
-            <param name="sequence"> The sequence to test. </param>
-            <returns> <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>. </returns>
-        </member>
-        <member name="M:System.Collections.Generic.EnumerableExtensions.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
-            <summary>
-                Determines whether none of the elements of the <paramref name="sequence"/> satisfies the specified
-                <paramref name="predicate"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of sequence.</typeparam>
-            <param name="sequence">The sequence.</param>
-            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
-            <returns>
                 <c>true</c> if none of the elements in the <paramref name="sequence"/> satisfy the
                 <paramref name="predicate"/>; otherwise <c>false</c>.
             </returns>
@@ -220,7 +205,31 @@
             <typeparam name="T">The type of the elements of sequence.</typeparam>
             <param name="sequence">The sequence.</param>
             <param name="iterations">The number of times to repeat the shuffle operation.</param>
-            <returns>A shufe="converter">A delegate that converts elements from the source sequence type to the target array element type.</param>
+            <returns>A shuffled version of the <paramref name="sequence"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EnumerableExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
+            <summary>
+                Converts selected elements of the specified sequence to an array of another type.
+            </summary>
+            <typeparam name="TInput">The type of elements in the source sequence.</typeparam>
+            <typeparam name="TOutput">The type of elements in the target array.</typeparam>
+            <param name="sequence">The source sequence.</param>
+            <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
+            <param namfled version of the <paramref name="sequence"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EnumerableExtensions.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
+            <summary>
+                Converts selected elements of the specified sequence to an array of another type.
+            </summary>
+            <typeparam name="TInput">The type of elements in the source sequence.</typeparam>
+            <typeparam name="TOutput">The type of elements in the target array.</typeparam>
+            <param name="sequence">The source sequence.</param>
+            <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
+            <param name="converter">A delegate that converts elements from the source sequence type to the target array element type.</param>
             <returns>An array of the target element type.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the source sequence, <c>predicate</c> delegate or <c>converter</c> delegate are null.</exception>
         </member>
@@ -263,20 +272,6 @@
             <param name="list">The collection to be populated.</param>
             <param name="generator">The delegate to generate the values for each item.</param>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.ListExtensions.IndexOf``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
-            <summary>
-                Returns the index of the first element in a <paramref name="list"/> that matches the specified
-                <paramref name="predicate"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of list.</typeparam>
-            <param name="list">The list.</param>
-            <param name="predicate">The <paramref name="predicate"/> to check against.</param>
-            <returns>The index of the element, if found; otherwise -1.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.ListExtensions.IndexOfAll``1ef name="list"/> is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.ListExtensions.IndexOf``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
             <summary>
@@ -388,22 +383,6 @@
             </summary>
             <param name="bytes">The byte collection to test.</param>
             <returns>
-                <c>true</c> if the byte collection is <c>null</c>,r>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Byte},System.Byte[])">
-            <summary>
-                Checks whether two byte collections are equal based on their content.
-            </summary>
-            <param name="bytes">The source byte collection to check.</param>
-            <param name="other">The second byte collection to check.</param>
-            <returns><c>true</c> if the contents of the two byte collection are equal.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.ByteCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Byte})">
-            <summary>
-                Indicates whether the specified byte collection is <c>null</c>, does not contain any elements or consists
-                of only zero value items.
-            </summary>
-            <param name="bytes">The byte collection to test.</param>
-            <returns>
                 <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
                 of zero value items.
             </returns>
@@ -451,7 +430,22 @@
             <param name="other">The second char collection to check.</param>
             <returns><c>true</c> if the contents of the two char collections are equal.</returns>
         </member>
-        <member name="M:System.Collections.Generly
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Char},System.Char[])">
+            <summary>
+                Checks whether two char collections are equal based on their content.
+            </summary>
+            <param name="chars">The source char collection to check.</param>
+            <param name="other">The second char collection to check.</param>
+            <returns><c>true</c> if the contents of the two char collection are equal.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.CharCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+                Indicates whether the specified char collection is <c>null</c>, does not contain any elements or consists
+                of only zero value items.
+            </summary>
+            <param name="chars">The char collection to test.</param>
+            <returns>
+                <c>true</c> if the char collection is <c>null</c>, does not contain any elements or consists exclusively
                 of zero value items.
             </returns>
         </member>
@@ -506,7 +500,7 @@
             <param name="other">The second int collection to check.</param>
             <returns><c>true</c> if the contents of the two int collection are equal.</returns>
         </member>
-        <member name="M:System.Collectionons.Generic.ILislectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
+        <member name="M:System.Collections.Generic.IntCollectionExtensions.IsNullOrZeroed(System.Collections.Generic.ICollection{System.Int32})">
             <summary>
                 Indicates whether the specified int collection is <c>null</c>, does not contain any elements or consists
                 of only zero value items.
@@ -642,12 +636,13 @@
         </member>
         <member name="M:System.Collections.Generic.ShortCollectionExtensions.IsEqualTo(System.Collections.Generic.IList{System.Int16},System.Int16[])">
             <summary>
-                Checks whether two short collections are equal based on their content.
+                Checks whether twtionExtensions.IsZeroed(System.Collections.Generic.ICollection{System.Int16})">
+            <summary>
+                Indicates whether the specified short collection does not contain any elements or consists of only zero
+                value items.
             </summary>
-            <param name="shorts">The source short collection to check.</param>
-            <param name="other">The second short collection to check.</param>
-            <returns><c>true</c> if the contents of the two short collection are equal.</returns>
-        </membe           <returns>
+            <param name="shorts">The short collection to test.</param>
+            <returns>
                 <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
                 of zero value items.
             </returns>
@@ -656,52 +651,58 @@
         <member name="M:System.Collections.Generic.ShortCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int16},System.String)">
             <summary>
                 Creates a <see cref="T:System.String"/> from a short collection that concatenates each item in the collection,
-                separat  <member name="M:System.Collect            </summary>
+                separated by the specified delimiter.
+            </summary>
             <param name="source">The short collection from which to create the string.</param>
             <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
             <returns>The combined string.</returns>
         </member>
-              <param name="shorts">The short collecShortCollectionExtensions.GetNumbersUptoSequence(System.Int16[],System.Int32,System.Int16[])">
+        <member name="M:System.Collections.Generic.ShortCollectionExtensions.GetNumbersUptoSequence(System.Int16[],System.Int32,System.Int16[])">
             <summary>
                 Retrieves the shorts from a short array upto a specific sequence.
             </summary>
             <param name="source">The short array.</param>
-            <param e short collecti index in the array to start searching.</param>
-            <param name="sequence">The sequenceneric.ShortCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int16},System.String)">
+            <param name="start">The index in the array to start searching.</param>
+            <param name="sequence">The sequence to search for.</param>
+            <returns>An array of shorts from the starting index to the matching sequence.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.PartitionSequence`1">
             <summary>
-                Creates a <see cref="T:System.String"/> from a short collection that concatenates each item in the collection,
-                separated by the specified delimiter.
+                Represents the results of a predicate check on all items of a collection.
             </summary>
-            <param name="source">The short collection from which to create the string.</param>
-            <param name="delimiter">The optional delimiter to sections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
+            <typeparam name="T">The type of element in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
             <summary>
                 Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
             </summary>
-        etrieves the shorts from a short array upto a specific sequence.
-            </summary>
-            <param name="source">The short array.</param>
-            <param name="start">The index in the array to start searching.</param>
-            <param namey>
+            <param name="matches">The matching elements.</param>
+            <param name="mismatches">The elements that do not match.</param>
+        </member>
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
+            <summary>
                 Collection of all items in the collection that satisfy the predicate.
             </summary>
-        </mem sequence.</returns>
         </member>
-        <member name="TonSequence`1.Mismatches">
+        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
             <summary>
                 Collection of all items in the collection that do not satisfy the predicate.
             </summary>
         </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
-                Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and         Exclusive max value of the generated random number.
+                Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and
+                <c>RNGCryptoServiceProvider</c> for all other targets.
             </summary>
         </member>
-        <member name="M:System.Collections.Generic.Rng.#ctor(System.Int32)">
-         <summary>
+        <member name="F:System.Collections.Generic.Rng._max">
+            <summary>
                 Exclusive max value of the generated random number.
             </summary>
         </member>
-        <member name="M:System.Collece
+        <member name="M:System.Collections.Generic.Rng.#ctor(System.Int32)">
+            <summary>
+                Initializes an instance of the <see cref="T:System.Collections.Generic.Rng"/> class with the exclusive <paramref name="max"/> value
                 to generate.
             </summary>
             <param name="max">Exclusive max value of the generated random number.</param>
@@ -709,12 +710,6 @@
         <member name="M:System.Collections.Generic.Rng.Next">
             <summary>
                 Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
-            </summary>
-            <returns>The random number.</returns>
-        </member>
-    </members>
-</doc>
-   Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
             </summary>
             <returns>The random number.</returns>
         </member>
