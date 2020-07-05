@@ -45,6 +45,20 @@
             <param name="value">The value to update or add.</param>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.KeyValuePair{``0,``1}[])">
+            <summary>
+                Adds multiple values to the dictionary. If any key exists, the value is updated.
+            </summary>
+            <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+            <param name="dictionary">The dictionary.</param>
+            <param name="kvps">
+                One or more key value pairs containing the values to add or update.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                Thrown if the <paramref name="dictionary"/> or <paramref name="kvps"/> is <c>null</c>.
+            </exception>
+        </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
                 Gets the value for the specified key in a dictionary. If the key does not exist, the
@@ -56,14 +70,32 @@
             <param name="key">The key to locate in the dictionary.</param>
             <param name="defaultValue">The value to return if the key does not exist.</param>
             <returns>
-                The value corresponding to the specified key; otherwise the <paramref name="defaultValue"/> value.
+                The value corresponding to the specified key; otherwise the
+                <paramref name="defaultValue"/> value.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)">
+            <summary>
+                Gets the value for the specified key in a dictionary. If the key does not exist, the
+                <paramref name="defaultValue"/> value is returned.
+            </summary>
+            <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+            <param name="dictionary">The dictionary.</param>
+            <param name="key">The key to locate in the dictionary.</param>
+            <param name="defaultValue">The value to return if the key does not exist.</param>
+            <returns>
+                The value corresponding to the specified key; otherwise the
+                <paramref name="defaultValue"/> value.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
-                Gets the value associated with the specified key. If the key does not exist, the <paramref name="value"/>
-                value is added to the dictionary with the specified key and returned.
+                Gets the value associated with the specified key. If the key does not exist, the
+                <paramref name="value"/> value is added to the dictionary with the specified key and
+                returned.
             </summary>
             <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of values in the dictionary.</typeparam>
@@ -75,8 +107,9 @@
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1})">
             <summary>
-                Gets the value associated with the specified key. If the key does not exist, a new value is generated using
-                the the <paramref name="valueGetter"/> delegate and is added to the dictionary.
+                Gets the value associated with the specified key. If the key does not exist, a new value
+                is generated using the the <paramref name="valueGetter"/> delegate and is added to the
+                dictionary.
             </summary>
             <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of values in the dictionary.</typeparam>
@@ -84,12 +117,15 @@
             <param name="key">The key to locate in the dictionary.</param>
             <param name="valueGetter">The delegate used to generate a new value.</param>
             <returns>The value assciated with the specified key.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary or delegate is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">
+                Thrown if the dictionary or delegate is <c>null</c>.
+            </exception>
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,System.Collections.Generic.IDictionary{``0,``1},``1})">
             <summary>
-                Gets the value associated with the specified key. If the key does not exist, a new value is generated using
-                the the <paramref name="valueGetter"/> delegate and is added to the dictionary.
+                Gets the value associated with the specified key. If the key does not exist, a new value
+                is generated using the the <paramref name="valueGetter"/> delegate and is added to the
+                dictionary.
             </summary>
             <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of values in the dictionary.</typeparam>
@@ -97,7 +133,9 @@
             <param name="key">The key to locate in the dictionary.</param>
             <param name="valueGetter">The delegate used to generate a new value.</param>
             <returns>The value assciated with the specified key.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary or delegate is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">
+                Thrown if the dictionary or delegate is <c>null</c>.
+            </exception>
         </member>
         <member name="M:System.Collections.Generic.EnumerableExtensions.AllOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
             <summary>

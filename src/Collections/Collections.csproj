@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Build properties -->
-    <TargetFrameworks>netstandard2.0;net461;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;net40</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
     <AssemblyName>Collections.NET</AssemblyName>
 
@@ -38,15 +38,7 @@
     <DefineConstants>NET461</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net35'">
-    <DefineConstants>NET35</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
     <DefineConstants>NET40</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45</DefineConstants>
   </PropertyGroup>
 </Project>
