@@ -1,7 +1,7 @@
 ﻿#region --- License & Copyright Notice ---
 /*
 Custom collections and collection extensions for .NET
-Copyright (c) 2018-2019 Jeevan James
+Copyright (c) 2018-2020 Jeevan James
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
