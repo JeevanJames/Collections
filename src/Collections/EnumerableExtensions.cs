@@ -29,18 +29,20 @@ namespace System.Collections.Generic
     public static class EnumerableExtensions
     {
         /// <summary>
-        ///     Determines whether all or none of the elements in a <paramref name="sequence"/> match the specified
-        ///     <paramref name="predicate"/>.
+        ///     Determines whether all or none of the elements in a <paramref name="sequence"/> match
+        ///     the specified <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the elements of sequence.</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>
-        ///     <c>true</c>, if all or none of the elements in the sequence match the predicate. If some elements match
-        ///     and others do not, then <c>false</c> is returned.
+        ///     <c>true</c>, if all or none of the elements in the sequence match the predicate. If some
+        ///     elements match and others do not, then <c>false</c> is returned.
         /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown of the sequence is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException">Thrown of the predicate is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown of the <paramref name="sequence"/> or <paramref name="predicate"/> is
+        ///     <c>null</c>.
+        /// </exception>
         public static bool AllOrNone<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
         {
             if (sequence == null)
@@ -54,12 +56,13 @@ namespace System.Collections.Generic
             foreach (T element in sequence)
             {
                 bool elementResult = predicate(element);
-                // If first element, set the tracking state variable. All subsequent elements should return the same
-                // value for the predicate.
+                // If first element, set the tracking state variable. All subsequent elements should
+                // return the same value for the predicate.
                 if (!result.HasValue)
                     result = elementResult;
-                // If the predicate for the current element is different from the tracking value, then the sequence
-                // contains elements that return different values for the predicate and hence return false.
+                // If the predicate for the current element is different from the tracking value, then
+                // the sequence contains elements that return different values for the predicate and
+                // hence return false.
                 else if (elementResult != result.Value)
                     return false;
             }
@@ -81,7 +84,8 @@ namespace System.Collections.Generic
             return sequence.All(item => collection.Any(c => comparison(item, c) == 0));
         }
 
-        public static bool AnyItemContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection, Comparison<T> comparison = null)
+        public static bool AnyItemContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection,
+            Comparison<T> comparison = null)
         {
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
@@ -130,7 +134,9 @@ namespace System.Collections.Generic
         /// <typeparam name="T">The type of the elements of sequence.</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <param name="action">The action to perform.</param>
-        /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown of the <paramref name="action"/> is <c>null</c>.
+        /// </exception>
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
             if (sequence == null)
@@ -149,7 +155,9 @@ namespace System.Collections.Generic
         /// <typeparam name="T">The type of the elements of sequence.</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <param name="action">The action to perform.</param>
-        /// <exception cref="ArgumentNullException">Thrown of the <paramref name="action"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown of the <paramref name="action"/> is <c>null</c>.
+        /// </exception>
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)
         {
             if (sequence == null)
@@ -169,7 +177,9 @@ namespace System.Collections.Generic
         /// <typeparam name="T">The type of the elements of the sequence</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <returns><c>true</c> if the sequence is empty; otherwise <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the source sequence is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the source sequence is <c>null</c>.
+        /// </exception>
         public static bool IsEmpty<T>(this IEnumerable<T> sequence)
         {
             if (sequence == null)
@@ -178,7 +188,8 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Indicates whether the specified <paramref name="sequence"/> is not <c>null</c> and has at least one element.
+        ///     Indicates whether the specified <paramref name="sequence"/> is not <c>null</c> and has
+        ///     at least one element.
         /// </summary>
         /// <typeparam name="T">The type of the elements of the sequence</typeparam>
         /// <param name="sequence">The sequence.</param>
@@ -193,7 +204,9 @@ namespace System.Collections.Generic
         /// </summary>
         /// <typeparam name="T">The type of the elements of the sequence</typeparam>
         /// <param name="sequence"> The sequence to test. </param>
-        /// <returns> <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>. </returns>
+        /// <returns>
+        ///     <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>.
+        /// </returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> sequence)
         {
             if (sequence == null)
@@ -202,8 +215,8 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Determines whether none of the elements of the <paramref name="sequence"/> satisfies the specified
-        ///     <paramref name="predicate"/>.
+        ///     Determines whether none of the elements of the <paramref name="sequence"/> satisfies the
+        ///     specified <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the elements of sequence.</typeparam>
         /// <param name="sequence">The sequence.</param>
@@ -212,8 +225,10 @@ namespace System.Collections.Generic
         ///     <c>true</c> if none of the elements in the <paramref name="sequence"/> satisfy the
         ///     <paramref name="predicate"/>; otherwise <c>false</c>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the <paramref name="sequence"/> or <paramref name="predicate"/> is
+        ///     <c>null</c>.
+        /// </exception>
         public static bool None<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
         {
             if (sequence == null)
@@ -225,18 +240,21 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Checks each element of the <paramref name="sequence"/> against the specified <paramref name="predicate"/>
-        ///     and returns the elements that match and those that do not match.
+        ///     Checks each element of the <paramref name="sequence"/> against the specified
+        ///     <paramref name="predicate"/> and returns the elements that match and those that do not
+        ///     match.
         /// </summary>
         /// <typeparam name="T">The type of the elements of sequence.</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
         /// <returns>
-        ///     Two collections sequences - one with the elements that match the <paramref name="predicate"/> and another
-        ///     with elements that do not match.
+        ///     Two collections sequences - one with the elements that match the
+        ///     <paramref name="predicate"/> and another with elements that do not match.
         /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the <paramref name="sequence"/> or <paramref name="predicate"/> is
+        ///     <c>null</c>.
+        /// </exception>
 #if NETSTANDARD2_0
         public static (IEnumerable<T> matches, IEnumerable<T> mismatches) Partition<T>(this IEnumerable<T> sequence,
             Func<T, bool> predicate)
@@ -274,8 +292,12 @@ namespace System.Collections.Generic
         /// <param name="sequence">The sequence.</param>
         /// <param name="count">The number of times to repeat the sequence.</param>
         /// <returns>The <paramref name="sequence"/> repeated <paramref name="count"/> number of times.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown of the <paramref name="count"/> is less than one.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the <paramref name="sequence"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown of the <paramref name="count"/> is less than one.
+        /// </exception>
         public static IEnumerable<T> Repeat<T>(this IEnumerable<T> sequence, int count)
         {
             if (sequence == null)
@@ -297,8 +319,12 @@ namespace System.Collections.Generic
         /// <param name="sequence">The sequence.</param>
         /// <param name="iterations">The number of times to repeat the shuffle operation.</param>
         /// <returns>A shuffled version of the <paramref name="sequence"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the <paramref name="sequence"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown if the <paramref name="iterations"/> is less than one.
+        /// </exception>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> sequence, int iterations = 1)
         {
             if (sequence == null)
@@ -338,10 +364,17 @@ namespace System.Collections.Generic
         /// <typeparam name="TInput">The type of elements in the source sequence.</typeparam>
         /// <typeparam name="TOutput">The type of elements in the target array.</typeparam>
         /// <param name="sequence">The source sequence.</param>
-        /// <param name="predicate">A delegate that controls the elements that are included in the target array.</param>
-        /// <param name="converter">A delegate that converts elements from the source sequence type to the target array element type.</param>
+        /// <param name="predicate">
+        ///     A delegate that controls the elements that are included in the target array.
+        /// </param>
+        /// <param name="converter">
+        ///     A delegate that converts elements from the source sequence type to the target array
+        ///     element type.
+        /// </param>
         /// <returns>An array of the target element type.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if the source sequence, <c>predicate</c> delegate or <c>converter</c> delegate are null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if the source sequence, <c>predicate</c> delegate or <c>converter</c> delegate are null.
+        /// </exception>
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> sequence, Func<TInput, bool> predicate,
             Func<TInput, TOutput> converter)
         {
