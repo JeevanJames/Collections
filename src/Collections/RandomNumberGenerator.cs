@@ -32,12 +32,8 @@ namespace System.Collections.Generic
     /// </summary>
     internal sealed class Rng
     {
-#if NETSTANDARD1_3
-        private readonly Random _generator = new Random((int)DateTime.Now.Ticks);
-#else
         private readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
         private readonly byte[] _buffer = new byte[sizeof(int)];
-#endif
 
         /// <summary>
         ///     Exclusive max value of the generated random number.
@@ -60,12 +56,8 @@ namespace System.Collections.Generic
         /// <returns>The random number.</returns>
         internal int Next()
         {
-#if NETSTANDARD1_3
-            return _generator.Next(_max);
-#else
             _generator.GetBytes(_buffer);
             return Math.Abs(BitConverter.ToInt32(_buffer, 0) % _max);
-#endif
         }
     }
 }

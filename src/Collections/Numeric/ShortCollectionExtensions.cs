@@ -115,13 +115,8 @@ namespace System.Collections.Generic
                 delimiter = string.Empty;
             bool useDelimiter = delimiter.Length > 0;
 
-#if NETSTANDARD1_3
-            var result = new StringBuilder(source[0].ToString(),
-                (source.Count * 3) + ((source.Count - 1) * delimiter.Length));
-#else
             var result = new StringBuilder(source[0].ToString(CultureInfo.CurrentCulture),
                 (source.Count * 3) + ((source.Count - 1) * delimiter.Length));
-#endif
             for (int i = 1; i < source.Count; i++)
             {
                 if (useDelimiter)

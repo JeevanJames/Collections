@@ -217,6 +217,7 @@ namespace System.Collections.Generic
 
             if (dictionary.TryGetValue(key, out TValue existingValue))
                 return existingValue;
+
             TValue value = valueGetter(key, dictionary);
             dictionary.Add(key, value);
             return value;

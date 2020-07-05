@@ -54,11 +54,7 @@ namespace System.Collections.Generic
         {
             if (enumType == null)
                 throw new ArgumentNullException(nameof(enumType));
-#if NETSTANDARD1_3
-            if (!enumType.GetTypeInfo().IsEnum)
-#else
             if (!enumType.IsEnum)
-#endif
                 throw new ArgumentException("enumType must be an enum", nameof(enumType));
             return Enum.GetValues(enumType);
         }

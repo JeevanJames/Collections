@@ -230,20 +230,7 @@
                 Repeats the <paramref name="sequence"/> <paramref name="count"/> number of times.
             </summary>
             <typeparam name="T">The type of the elements of sequence.</typeparam>
-            <param name="sequence">The sequence.</param>
-            <param name="count">The number of times to repeat the sequence.</param>
-            <returns>The <paramref name="sequence"/> repeated <paramref name="count"/> number of times.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown of the <paramref name="count"/> is less than one.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.EnumerableExtensions.Shuffle``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
-            <summary>
-                Returns a shuffled version of the <paramref name="sequence"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of sequence.</typeparam>
-            <param name="sequence">The sequence.</param>
-            <param name="iterations">The number of times to repeat the shuffle operation.</param>
-            <returns>A shuffled version of the <paramref name="sequence"/>.</returns>
+            <pef name="sequence"/>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="sequence"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
         </member>
@@ -284,6 +271,20 @@
             <summary>
                 Populates each item in a <paramref name="list"/> with a specific <paramref name="value"/>.
             </summary>
+            <typeparam name="T">The type of the elements of the list</typeparam>
+            <param name="list">The collection to be populated.</param>
+            <param name="value">The value with which to populate the collection.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.Fill``1(System.Collections.Generic.IList{``0},System.Func{System.Int32,``0})">
+            <summary>
+                Populates each item in a <paramref name="list"/> with the values from a <paramref name="generator"/>
+                delegate.
+            </summary>
+            <typeparam name="T">The type of the elements of the list</typeparam>
+            <param name="list">The collection to be populated.</param>
+            <param name="generator">The delegate to generate the values for each item.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null     </summary>
             <typeparam name="T">The type of the elements of the list</typeparam>
             <param name="list">The collection to be populated.</param>
             <param name="value">The value with which to populate the collection.</param>

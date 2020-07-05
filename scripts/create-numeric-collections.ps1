@@ -7,8 +7,8 @@ Get-ChildItem -Path ..\tests\Collection.Tests\ByteCollectionExtensions -File -Fi
     $filename = $_.Name
     $content = Get-Content -Path "..\tests\Collection.Tests\ByteCollectionExtensions\$filename"
 
-	# $content -creplace 'byte','char' -creplace 'Byte','Char' | Set-Content -Path ..\tests\Collection.Tests\CharCollectionExtensions\$_
-	$content -creplace 'byte','int' -creplace 'Byte','Int' | Set-Content -Path ..\tests\Collection.Tests\IntCollectionExtensions\$_
-	$content -creplace 'byte','long' -creplace 'Byte','Long' | Set-Content -Path ..\tests\Collection.Tests\LongCollectionExtensions\$_
-	$content -creplace 'byte','short' -creplace 'Byte','Short' | Set-Content -Path ..\tests\Collection.Tests\ShortCollectionExtensions\$_
+    # $content -creplace 'byte','char' -creplace 'Byte','Char' | Set-Content -Path ..\tests\Collection.Tests\CharCollectionExtensions\$_
+    $content -creplace 'byte','int' -creplace 'Byte','Int' | Set-Content -Path ..\tests\Collection.Tests\IntCollectionExtensions\$_
+    $content -creplace 'byte','long' -creplace 'Byte','Long' | Set-Content -Path ..\tests\Collection.Tests\LongCollectionExtensions\$_
+    $content -creplace 'byte','short' -creplace 'Byte','Short' | Set-Content -Path ..\tests\Collection.Tests\ShortCollectionExtensions\$_
 }
