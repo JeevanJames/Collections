@@ -28,7 +28,25 @@ namespace System.Collections.Generic
 {
     public static class ObjectExtensions
     {
-        public static IEnumerable<T> ParentChain<T>(this T start, Func<T, T> parentSelector, Func<T, bool> stopCondition = null, bool skipStart = false)
+        /// <summary>
+        ///     Given a self-referencing object, this method traverses up the parent chain until the
+        ///     oldest parent is reached or the specified <paramref name="stopCondition"/> is met.
+        /// </summary>
+        /// <typeparam name="T">Type of the self-referencing object.</typeparam>
+        /// <param name="start">The object to start traversing from.</param>
+        /// <param name="parentSelector">
+        ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns it's parent
+        ///     instance.
+        /// </param>
+        /// <param name="stopCondition">Optional predicate to stop the traversal.</param>
+        /// <param name="skipStart">
+        ///     If <c>true</c>, skips the <paramref name="start"/> instance during traversal.
+        /// </param>
+        /// <returns>The sequence of instances traversed.</returns>
+        public static IEnumerable<T> ParentChain<T>(this T start,
+            Func<T, T> parentSelector,
+            Func<T, bool> stopCondition = null,
+            bool skipStart = false)
             where T : class
         {
             if (parentSelector is null)
@@ -48,7 +66,10 @@ namespace System.Collections.Generic
             }
         }
 
-        public static IEnumerable<T> ParentChainReverse<T>(this T start, Func<T, T> parentSelector, Func<T, bool> stopCondition = null, bool skipStart = false)
+        public static IEnumerable<T> ParentChainReverse<T>(this T start,
+            Func<T, T> parentSelector,
+            Func<T, bool> stopCondition = null,
+            bool skipStart = false)
             where T : class
         {
             var chain = ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
