@@ -1,6 +1,6 @@
 version: 1.8.0-build.{build}
 image:
-- Visual Studio 2019 Preview
+- Visual Studio 2019
 environment:
   MYGET_FEED: https://www.myget.org/F/collections-net/api/v2/package
   MYGET_API_KEY:
