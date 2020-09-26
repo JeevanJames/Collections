@@ -4,10 +4,10 @@ image:
 environment:
   MYGET_FEED: https://www.myget.org/F/collections-net/api/v2/package
   MYGET_API_KEY:
-    secure: 3tEiaoqZlTJcJkAX+3wWyp3mbCYuJpALEFzTEaum6ACiXbWgsa1kWYGBi3TUFY7c
+    secure: j4h+o37uqm7LmUncRqQ7KA/M6dBZVo07idthknTFF/k1aVO+MbfT1EecNEJqjPoR
   MYGET_SYMBOLS_FEED: https://www.myget.org/F/collections-net/symbols/api/v2/package
   MYGET_SYMBOLS_API_KEY:
-    secure: 3tEiaoqZlTJcJkAX+3wWyp3mbCYuJpALEFzTEaum6ACiXbWgsa1kWYGBi3TUFY7c
+    secure: j4h+o37uqm7LmUncRqQ7KA/M6dBZVo07idthknTFF/k1aVO+MbfT1EecNEJqjPoR
   NUGET_FEED: https://api.nuget.org/v3/index.json
   NUGET_API_KEY:
     secure: 055huZhAN+6nzYY39jc+7cOiRVQuZlxoQ9JFJUH5wMIlAMD6smHb1pQqDuyX03PR
