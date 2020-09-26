@@ -309,7 +309,23 @@
             <param name="enumType">The enum type to generate the iterator for</param>
             <returns>A non-generic iterator that can iterate over the values of the enum</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the specified type is null</exception>
-            <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exceptpeparam>
+            <exception cref="T:System.ArgumentException">Thrown when the specified type is not an enum</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.Fill``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+                Populates each item in a <paramref name="list"/> with a specific <paramref name="value"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of the list</typeparam>
+            <param name="list">The collection to be populated.</param>
+            <param name="value">The value with which to populate the collection.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.Fill``1(System.Collections.Generic.IList{``0},System.Func{System.Int32,``0})">
+            <summary>
+                Populates each item in a <paramref name="list"/> with the values from a <paramref name="generator"/>
+                delegate.
+            </summary>
+            <typeparam name="T">The type of the elements of the list</typeparam>
             <param name="list">The collection to be populated.</param>
             <param name="generator">The delegate to generate the values for each item.</param>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
@@ -350,20 +366,6 @@
             <param name="predicate">The <paramref name="predicate"/> to check against.</param>
             <returns>The index of the element, if found; otherwise -1.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.ListExtensions.RemoveAll``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
-            <summary>
-                Removes all elements from the <paramref name="list"/> that satisfy the specified
-                <paramref name="predicate"/>.
-            </summary>
-            <typeparam name="T">The type of the elements of list.</typeparam>
-            <param name="list">The list.</param>
-            <param name="predicate">The predicate delegate to check against.</param>
-            <returns>The number of elements removed.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
-        </meparamref name="list"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.ListExtensions.RemoveAll``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">

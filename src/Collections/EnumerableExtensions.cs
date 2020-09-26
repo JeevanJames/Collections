@@ -401,9 +401,9 @@ namespace System.Collections.Generic
 
         public static List<T> ToList<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
         {
-            if (sequence == null)
+            if (sequence is null)
                 throw new ArgumentNullException(nameof(sequence));
-            if (predicate == null)
+            if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
             return sequence.Where(predicate).ToList();
@@ -422,11 +422,65 @@ namespace System.Collections.Generic
             return sequence.Where(predicate).Select(converter).ToList();
         }
 
+        public static IEnumerable<T> WhereAny<T, TOther>(this IEnumerable<T> sequence, IEnumerable<TOther> other,
+            Func<T, TOther, bool> predicate)
+        {
+            if (other is null)
+                throw new ArgumentNullException(nameof(other));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return sequence.Where(element => other.Any(otherElement => predicate(element, otherElement)));
+        }
+
+        public static IEnumerable<T> WhereAny<T>(this IEnumerable<T> sequence, IEnumerable<T> other,
+            Func<T, T, bool> predicate = null)
+        {
+            if (predicate is null)
+            {
+                // TODO: Check if T implements any of the equality interfaces and if so, try comparing
+                // with those.
+                predicate = (item, otherItem) => ReferenceEquals(item, otherItem);
+            }
+
+            return sequence.WhereAny<T, T>(other, predicate);
+        }
+
+        public static IEnumerable<string> WhereAny(this IEnumerable<string> sequence, IEnumerable<string> other,
+            StringComparison comparison = default)
+        {
+            return sequence.WhereAny<string>(other, (item, otherItem) => string.Equals(item, otherItem, comparison));
+        }
+
+        public static IEnumerable<T> WhereNotAny<T, TOther>(this IEnumerable<T> sequence, IEnumerable<TOther> other,
+            Func<T, TOther, bool> predicate)
+        {
+            if (other is null)
+                throw new ArgumentNullException(nameof(other));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return sequence.Where(element => !other.Any(otherElement => predicate(element, otherElement)));
+        }
+
+        public static IEnumerable<T> WhereNotAny<T>(this IEnumerable<T> sequence, IEnumerable<T> other,
+            Func<T, T, bool> predicate = null)
+        {
+            if (predicate is null)
+            {
+                // TODO: Check if T implements any of the equality interfaces and if so, try comparing
+                // with those.
+                predicate = (item, otherItem) => ReferenceEquals(item, otherItem);
+            }
+
+            return sequence.WhereNotAny<T, T>(other, predicate);
+        }
+
         public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
         {
-            if (sequence == null)
+            if (sequence is null)
                 throw new ArgumentNullException(nameof(sequence));
-            if (predicate == null)
+            if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
             return sequence.Where(element => !predicate(element));

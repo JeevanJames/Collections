@@ -1,4 +1,4 @@
-version: 1.7.0-build.{build}
+version: 1.8.0-build.{build}
 image:
 - Visual Studio 2019 Preview
 environment:
@@ -11,7 +11,7 @@ environment:
   NUGET_FEED: https://api.nuget.org/v3/index.json
   NUGET_API_KEY:
     secure: 055huZhAN+6nzYY39jc+7cOiRVQuZlxoQ9JFJUH5wMIlAMD6smHb1pQqDuyX03PR
-  NUGET_PACKAGE_VERSION: 1.6.0
+  NUGET_PACKAGE_VERSION: 1.7.0
   CODECOV_TOKEN: 5ad613f1-0623-451d-b889-2c6020f132f4
 install:
 - pwsh: choco install codecov
