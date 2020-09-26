@@ -20,7 +20,6 @@
     <PackageTags>extension-methods extensions collections dictionary array enumerable ienumerable ilist icollection byte-array</PackageTags>
     <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
     <Product>Collections.NET</Product>
-    <PackageIconUrl>https://github.com/JeevanJames/Collections/raw/master/logo.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup>
