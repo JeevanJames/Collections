@@ -30,7 +30,7 @@ namespace System.Collections.Generic
         {
             if (count <= 0)
                 yield break;
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
                 yield return value;
         }
 
@@ -40,7 +40,7 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(valueFactory));
             if (count <= 0)
                 yield break;
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
                 yield return valueFactory(i);
         }
     }

@@ -29,6 +29,42 @@ namespace System.Collections.Generic
     public static class EnumerableExtensions
     {
         /// <summary>
+        ///     Determines whether all items in a <paramref name="sequence"/> satisfy the specified
+        ///     <paramref name="predicate"/>. If not, the first non-compliant item is returned.
+        /// </summary>
+        /// <typeparam name="T">The type of the items of sequence.</typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="predicate">The predicate to check each item against.</param>
+        /// <param name="nonCompliantItem">The first non-compliant item in the sequence.</param>
+        /// <returns>
+        ///     <c>true</c>, if all or none of the elements in the sequence match the predicate. If some
+        ///     elements match and others do not, then <c>false</c> is returned.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown of the <paramref name="sequence"/> or <paramref name="predicate"/> is
+        ///     <c>null</c>.
+        /// </exception>
+        public static bool All<T>(this IEnumerable<T> sequence, Func<T, bool> predicate, out T nonCompliantItem)
+        {
+            if (sequence is null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (predicate is null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            foreach (T item in sequence)
+            {
+                if (!predicate(item))
+                {
+                    nonCompliantItem = item;
+                    return false;
+                }
+            }
+
+            nonCompliantItem = default;
+            return true;
+        }
+
+        /// <summary>
         ///     Determines whether all or none of the elements in a <paramref name="sequence"/> match
         ///     the specified <paramref name="predicate"/>.
         /// </summary>
@@ -122,7 +158,7 @@ namespace System.Collections.Generic
 
             if (chunk != null && currentIndex > 0)
             {
-                T[] trailingChunk = new T[currentIndex];
+                var trailingChunk = new T[currentIndex];
                 Array.Copy(chunk, 0, trailingChunk, 0, currentIndex);
                 yield return trailingChunk;
             }
@@ -165,7 +201,7 @@ namespace System.Collections.Generic
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
-            var index = 0;
+            int index = 0;
             foreach (T item in sequence)
                 action(item, index++);
             return sequence;
@@ -305,7 +341,7 @@ namespace System.Collections.Generic
             if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 foreach (T item in sequence)
                     yield return item;
