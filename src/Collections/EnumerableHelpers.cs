@@ -18,6 +18,8 @@ limitations under the License.
 */
 #endregion
 
+using System.Security.Cryptography;
+
 #if EXPLICIT
 using System;
 using System.Collections.Generic;
@@ -46,6 +48,34 @@ namespace System.Collections.Generic
                 yield break;
             for (int i = 0; i < count; i++)
                 yield return valueFactory(i);
+        }
+
+        private static readonly RNGCryptoServiceProvider _rng = new RNGCryptoServiceProvider();
+
+        public static IEnumerable<byte> CreateRandomBytes(int count, byte min = byte.MinValue, byte max = byte.MaxValue)
+        {
+            byte[] buffer = new byte[sizeof(byte)];
+            int zeroBasedInclusiveMax = (int)max - (int)min + 1;
+
+            for (int i = 0; i < count; i++)
+            {
+                _rng.GetBytes(buffer);
+                int randomValue = (buffer[0] % zeroBasedInclusiveMax) + min;
+                yield return (byte)randomValue;
+            }
+        }
+
+        public static IEnumerable<int> CreateRandomInts(int count, int min = int.MinValue, int max = int.MaxValue)
+        {
+            byte[] buffer = new byte[sizeof(int)];
+            long zeroBasedInclusiveMax = (long)max - (long)min + 1;
+
+            for (int i = 0; i < count; i++)
+            {
+                _rng.GetBytes(buffer);
+                long randomValue = (Math.Abs(BitConverter.ToInt32(buffer, 0)) % zeroBasedInclusiveMax) + min;
+                yield return (int)randomValue;
+            }
         }
     }
 }

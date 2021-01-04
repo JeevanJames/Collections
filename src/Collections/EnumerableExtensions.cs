@@ -281,6 +281,22 @@ namespace System.Collections.Generic
             return !sequence.Any(predicate);
         }
 
+        public static IEnumerable<T> NotOfType<T, TUnwanted>(this IEnumerable<T>? sequence)
+        {
+            if (sequence is null)
+                return Enumerable.Empty<T>();
+            return NotOfTypeIterator<T, TUnwanted>(sequence);
+        }
+
+        private static IEnumerable<T> NotOfTypeIterator<T, TUnwanted>(IEnumerable<T> sequence)
+        {
+            foreach (T item in sequence)
+            {
+                if (!(item is TUnwanted))
+                    yield return item;
+            }
+        }
+
         /// <summary>
         ///     Checks each element of the <paramref name="sequence"/> against the specified
         ///     <paramref name="predicate"/> and returns the elements that match and those that do not
@@ -377,6 +393,30 @@ namespace System.Collections.Generic
             T[] array = sequence.ToArray();
             ListExtensions.ShuffleInplace(array, iterations);
             return array;
+        }
+
+        public static IEnumerable<T> SkipEvery<T>(this IEnumerable<T> sequence, int skipCount)
+        {
+            if (sequence is null)
+                throw new ArgumentNullException(nameof(sequence));
+            if (skipCount <= 1)
+                throw new ArgumentOutOfRangeException(nameof(skipCount), "Skip count should be 2 or greater.");
+            return SkipEveryIterator(sequence, skipCount);
+        }
+
+        private static IEnumerable<T> SkipEveryIterator<T>(IEnumerable<T> sequence, int skipCount)
+        {
+            int counter = skipCount;
+            foreach (T item in sequence)
+            {
+                if (counter == skipCount)
+                {
+                    yield return item;
+                    counter = 1;
+                }
+                else
+                    counter++;
+            }
         }
 
         public static TOutput[] ToArray<TInput, TOutput>(this IEnumerable<TInput> sequence,

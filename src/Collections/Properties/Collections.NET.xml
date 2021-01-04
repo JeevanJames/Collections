@@ -75,22 +75,6 @@
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
-        <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)">
-            <summary>
-                Gets the value for the specified key in a dictionary. If the key does not exist, the
-                <paramref name="defaultValue"/> value is returned.
-            </summary>
-            <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
-            <typeparam name="TValue">The type of values in the dictionary.</typeparam>
-            <param name="dictionary">The dictionary.</param>
-            <param name="key">The key to locate in the dictionary.</param>
-            <param name="defaultValue">The value to return if the key does not exist.</param>
-            <returns>
-                The value corresponding to the specified key; otherwise the
-                <paramref name="defaultValue"/> value.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
-        </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
                 Gets the value associated with the specified key. If the key does not exist, the
@@ -913,6 +897,32 @@
         <member name="F:System.Collections.Specialized.MruTriggers.NewItemInserted">
             <summary>
                 A new item is inserted into the collection
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemSet">
+            <summary>
+                An existing item in the collection is overwritten with an item that already exists in the collection
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemInserted">
+            <summary>
+                An item that already exists in the collection is inserted again
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ItemAccessed">
+            <summary>
+                An item in the collection is accessed using the indexer
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.Default">
+            <summary>
+                Combination of all triggers.
+                New or existing items are inserted or set, or an item is accessed.
+            </summary>
+        </member>
+    </members>
+</doc>
+rted into the collection
             </summary>
         </member>
         <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemSet">
