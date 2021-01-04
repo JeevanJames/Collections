@@ -30,8 +30,7 @@ namespace System.Collections.Generic
 #endif
 {
     /// <summary>
-    ///     Consolidated random number generator that uses <see cref="Random"/> for netstandard 1.3 and
-    ///     <c>RNGCryptoServiceProvider</c> for all other targets.
+    ///     Random number generator.
     /// </summary>
     internal sealed class Rng
     {
