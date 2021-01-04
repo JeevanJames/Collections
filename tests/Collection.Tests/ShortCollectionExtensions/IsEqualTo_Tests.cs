@@ -23,6 +23,10 @@ using Collection.Tests.DataAttributes;
 using Shouldly;
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Numeric;
+#endif
+
 namespace Collection.Tests.ShortCollectionExtensions
 {
     public sealed class IsEqualTo_Tests

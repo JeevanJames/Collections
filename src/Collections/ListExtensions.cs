@@ -18,11 +18,16 @@ limitations under the License.
 */
 #endregion
 
-#if EXPLICIT
-using Collections.Net.List
-#else
 using System.Linq;
 
+#if EXPLICIT
+using System;
+using System.Collections.Generic;
+
+using Collections.Net.Collection;
+
+namespace Collections.Net.List
+#else
 namespace System.Collections.Generic
 #endif
 {
@@ -126,7 +131,7 @@ namespace System.Collections.Generic
 
             if (index >= list.Count)
             {
-                CollectionExtensions.AddRange(list, items);
+                list.AddRange(items);
                 return;
             }
 

@@ -27,6 +27,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Dictionary;
+#endif
+
 namespace Collection.Tests.DictionaryExtensions
 {
     public sealed class GetValueOrAdd_Tests

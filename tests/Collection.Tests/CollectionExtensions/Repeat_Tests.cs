@@ -24,6 +24,10 @@ using System.Linq;
 using Shouldly;
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Enumerable;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class Repeat_Tests

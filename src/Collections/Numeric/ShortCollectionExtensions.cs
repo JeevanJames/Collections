@@ -23,7 +23,10 @@ using System.Linq;
 using System.Text;
 
 #if EXPLICIT
-using Collections.Net.Numeric
+using System;
+using System.Collections.Generic;
+
+namespace Collections.Net.Numeric
 #else
 namespace System.Collections.Generic
 #endif
@@ -98,7 +101,7 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        ///     Creates a <see cref="String"/> from a short collection that concatenates each item in the collection,
+        ///     Creates a <see cref="string"/> from a short collection that concatenates each item in the collection,
         ///     separated by the specified delimiter.
         /// </summary>
         /// <param name="source">The short collection from which to create the string.</param>
@@ -259,3 +262,4 @@ namespace System.Collections.Generic
         }
     }
 }
+

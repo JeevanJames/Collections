@@ -27,6 +27,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Collection;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class Range_Tests

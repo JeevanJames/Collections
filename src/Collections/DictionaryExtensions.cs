@@ -19,7 +19,10 @@ limitations under the License.
 #endregion
 
 #if EXPLICIT
-using Collections.Net.Dictionary
+using System;
+using System.Collections.Generic;
+
+namespace Collections.Net.Dictionary
 #else
 namespace System.Collections.Generic
 #endif
@@ -85,7 +88,7 @@ namespace System.Collections.Generic
             if (kvps is null)
                 throw new ArgumentNullException(nameof(kvps));
 
-            foreach (var (key, value) in kvps)
+            foreach ((TKey key, TValue value) in kvps)
                 dictionary.AddOrUpdate(key, value);
 
             return dictionary;
@@ -114,7 +117,7 @@ namespace System.Collections.Generic
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
 
-#if !NET40
+#if NETSTANDARD2_0 || NET461
         /// <summary>
         ///     Gets the value for the specified key in a dictionary. If the key does not exist, the
         ///     <paramref name="defaultValue"/> value is returned.
@@ -148,7 +151,7 @@ namespace System.Collections.Generic
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key to locate in the dictionary.</param>
         /// <param name="value">The value to add if the key does does exist.</param>
-        /// <returns>The value assciated with the specified key.</returns>
+        /// <returns>The value associated with the specified key.</returns>
         /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue value)

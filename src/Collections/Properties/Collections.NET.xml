@@ -102,7 +102,7 @@
             <param name="dictionary">The dictionary.</param>
             <param name="key">The key to locate in the dictionary.</param>
             <param name="value">The value to add if the key does does exist.</param>
-            <returns>The value assciated with the specified key.</returns>
+            <returns>The value associated with the specified key.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         </member>
         <member name="M:System.Collections.Generic.DictionaryExtensions.GetValueOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1})">
@@ -772,29 +772,6 @@
             </param>
             <returns>The sequence of instances traversed.</returns>
         </member>
-        <member name="T:System.Collections.Generic.PartitionSequence`1">
-            <summary>
-                Represents the results of a predicate check on all items of a collection.
-            </summary>
-            <typeparam name="T">The type of element in the collection.</typeparam>
-        </member>
-        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
-            </summary>
-            <param name="matches">The matching elements.</param>
-            <param name="mismatches">The elements that do not match.</param>
-        </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
-            <summary>
-                Collection of all items in the collection that satisfy the predicate.
-            </summary>
-        </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
-            <summary>
-                Collection of all items in the collection that do not satisfy the predicate.
-            </summary>
-        </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
                 Consolidated random number generator that uses <see cref="T:System.Random"/> for netstandard 1.3 and
@@ -818,6 +795,124 @@
                 Generates a random number from 0 to <see cref="F:System.Collections.Generic.Rng._max"/>
             </summary>
             <returns>The random number.</returns>
+        </member>
+        <member name="T:System.Collections.Specialized.MruCollection`1">
+            <inheritdoc />
+            <summary>
+                Represents a most-recently-used collection, where the most recently added or accessed item
+                is moved to the top of the collection. If the item already exists in the collection at any
+                position, it is also moved to the top.
+            </summary>
+            <typeparam name="T">The type of elements in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.Peek(System.Int32)">
+            <summary>
+                Gets the item at the specified index without triggering the MRU logic that causes the
+                item to be moved to the top of the collection.
+            </summary>
+            <param name="index">The index of the item to be retrieved</param>
+            <returns>The item at the specified index</returns>
+        </member>
+        <member name="P:System.Collections.Specialized.MruCollection`1.Item(System.Int32)">
+            <summary>
+                Overrides the indexer's getter to return the item at the specified index and then move
+                it to the top of the collection.
+            </summary>
+            <param name="index">The zero-based index of the item to get or set.</param>
+            <returns>The item at the specified index</returns>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.InsertItem(System.Int32,`0)">
+            <inheritdoc />
+            <summary>
+                Forces the new item to be inserted at the first position in the collection.
+                If the item already exists in the collection, it is moved to the first position.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.SetItem(System.Int32,`0)">
+            <inheritdoc />
+            <summary>
+                Forces the new item to be inserted at the first position in the collection.
+                If the item already exists in the collection, it is moved to the first position.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.RemoveExisting(`0)">
+            <summary>
+                Removes any existing item in the collection that matches the specified item parameter.
+            </summary>
+            <param name="item">The item to remove</param>
+            <returns>True if an item was matched and removed; otherwise false</returns>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.TrimExcess">
+            <summary>
+                Removes any extra items from the collection that are beyond the expected capacity.
+            </summary>
+        </member>
+        <member name="T:System.Collections.Specialized.MruCollection`1.EquatableEqualityComparer`1">
+            <inheritdoc />
+            <summary>
+                <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> implementation that
+                wraps an <see cref="T:System.IEquatable`1" />
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="T:System.Collections.Specialized.MruCollectionOptions`1">
+            <summary>
+                Options for initializing a <see cref="T:System.Collections.Specialized.MruCollection`1" /> instance.
+            </summary>
+            <typeparam name="T">Type of items in the collection</typeparam>
+        </member>
+        <member name="P:System.Collections.Specialized.MruCollectionOptions`1.InitialData">
+            <summary>
+                Initial data that is populated into the collection. This data is not affected by MRU logic.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Specialized.MruCollectionOptions`1.EqualityComparer">
+            <summary>
+                <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> instance to use to compare two items for equality.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Specialized.MruCollectionOptions`1.Triggers">
+            <summary>
+                Actions on the collection that cause the MRU logic to be executed.
+                Examples include inserting or setting items, and accessing items through the indexer.
+                This property allows you to configure which actions trigger the MRU logic.
+            </summary>
+        </member>
+        <member name="T:System.Collections.Specialized.MruTriggers">
+            <summary>
+                Triggers that cause the MRU logic to be executed on an MRU collection.
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.NewItemSet">
+            <summary>
+                An existing item in the collection is overwritten with a new item
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.NewItemInserted">
+            <summary>
+                A new item is inserted into the collection
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemSet">
+            <summary>
+                An existing item in the collection is overwritten with an item that already exists in the collection
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemInserted">
+            <summary>
+                An item that already exists in the collection is inserted again
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.ItemAccessed">
+            <summary>
+                An item in the collection is accessed using the indexer
+            </summary>
+        </member>
+        <member name="F:System.Collections.Specialized.MruTriggers.Default">
+            <summary>
+                Combination of all triggers.
+                New or existing items are inserted or set, or an item is accessed.
+            </summary>
         </member>
     </members>
 </doc>

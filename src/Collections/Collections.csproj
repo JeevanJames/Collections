@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!-- Build properties -->
     <TargetFrameworks>netstandard2.0;net461;net40</TargetFrameworks>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <AssemblyName>Collections.NET</AssemblyName>
 
     <!-- NuGet properties -->

@@ -27,6 +27,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Numeric;
+#endif
+
 namespace Collection.Tests.IntCollectionExtensions
 {
     public sealed class ToString_Tests

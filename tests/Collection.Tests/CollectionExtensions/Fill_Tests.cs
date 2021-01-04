@@ -23,6 +23,10 @@ using System.Collections.Generic;
 using Shouldly;
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.List;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class Fill_Tests

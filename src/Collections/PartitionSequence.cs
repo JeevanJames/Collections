@@ -20,7 +20,9 @@ limitations under the License.
 
 #if !NETSTANDARD2_0
 #if EXPLICIT
-using Collections.Net
+using System.Collections.Generic;
+
+namespace Collections.Net
 #else
 namespace System.Collections.Generic
 #endif

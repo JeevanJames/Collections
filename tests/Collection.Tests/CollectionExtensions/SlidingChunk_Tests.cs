@@ -28,6 +28,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.List;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class SlidingChunk_Tests

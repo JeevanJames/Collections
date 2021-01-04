@@ -21,7 +21,10 @@ limitations under the License.
 using System.Security.Cryptography;
 
 #if EXPLICIT
-using Collections.Net
+using System;
+using System.Collections.Generic;
+
+namespace Collections.Net
 #else
 namespace System.Collections.Generic
 #endif

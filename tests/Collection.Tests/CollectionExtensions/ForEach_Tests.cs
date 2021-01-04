@@ -23,6 +23,10 @@ using System.Collections.Generic;
 using Shouldly;
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Enumerable;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class ForEach_Tests

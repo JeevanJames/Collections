@@ -26,6 +26,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Enum;
+#endif
+
 namespace Collection.Tests
 {
     public sealed class EnumIterator_Tests

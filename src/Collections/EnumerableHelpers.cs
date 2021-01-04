@@ -19,6 +19,9 @@ limitations under the License.
 #endregion
 
 #if EXPLICIT
+using System;
+using System.Collections.Generic;
+
 namespace Collections.Net.Enumerable
 #else
 namespace System.Collections.Generic

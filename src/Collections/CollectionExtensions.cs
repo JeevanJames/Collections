@@ -21,7 +21,10 @@ limitations under the License.
 using System.Linq;
 
 #if EXPLICIT
-using Collections.Net.Collection
+using System;
+using System.Collections.Generic;
+
+namespace Collections.Net.Collection
 #else
 namespace System.Collections.Generic
 #endif

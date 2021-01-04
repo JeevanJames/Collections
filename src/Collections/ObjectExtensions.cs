@@ -21,6 +21,9 @@ limitations under the License.
 using System.Linq;
 
 #if EXPLICIT
+using System;
+using System.Collections.Generic;
+
 namespace Collections.Net.Object
 #else
 namespace System.Collections.Generic
@@ -72,7 +75,7 @@ namespace System.Collections.Generic
             bool skipStart = false)
             where T : class
         {
-            var chain = ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
+            IEnumerable<T> chain = ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
             if (stopCondition != null)
                 chain = chain.SkipWhile(item => !stopCondition(item));
             return chain;

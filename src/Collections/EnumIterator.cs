@@ -22,7 +22,11 @@ using System.Linq;
 using System.Reflection;
 
 #if EXPLICIT
-using Collections.Net.Enum
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Collections.Net.Enum
 #else
 namespace System.Collections.Generic
 #endif
@@ -38,9 +42,9 @@ namespace System.Collections.Generic
         /// <typeparam name="TEnum">The enum type to generate the iterator for</typeparam>
         /// <returns>An generic iterator that can iterate over the values of TEnum</returns>
         public static IEnumerable<TEnum> For<TEnum>()
-            where TEnum : Enum
+            where TEnum : System.Enum
         {
-            return Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
+            return System.Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(enumType));
             if (!enumType.IsEnum)
                 throw new ArgumentException("enumType must be an enum", nameof(enumType));
-            return Enum.GetValues(enumType);
+            return System.Enum.GetValues(enumType);
         }
     }
 }

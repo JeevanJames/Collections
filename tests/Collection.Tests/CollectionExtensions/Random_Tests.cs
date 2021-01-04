@@ -28,6 +28,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.List;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class Random_Tests
@@ -56,7 +60,7 @@ namespace Collection.Tests.CollectionExtensions
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Generates_random_sequence(IList<int> collection)
         {
-            List<int> random = collection.Random(10).ToList();
+            var random = collection.Random(10).ToList();
 
             random.Count.ShouldBe(10);
             random.ShouldAllBe(n => collection.Any(element => element == n));

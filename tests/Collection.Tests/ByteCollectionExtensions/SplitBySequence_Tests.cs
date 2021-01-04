@@ -24,6 +24,10 @@ using Collection.Tests.DataAttributes;
 using Shouldly;
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Numeric;
+#endif
+
 namespace Collection.Tests.ByteCollectionExtensions
 {
     public sealed class SplitBySequence_Tests

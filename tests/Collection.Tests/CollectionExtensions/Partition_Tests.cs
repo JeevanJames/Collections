@@ -28,6 +28,10 @@ using Shouldly;
 
 using Xunit;
 
+#if EXPLICIT
+using Collections.Net.Enumerable;
+#endif
+
 namespace Collection.Tests.CollectionExtensions
 {
     public sealed class Partition_Tests
@@ -47,7 +51,7 @@ namespace Collection.Tests.CollectionExtensions
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Returns_matches_and_mismatches(IList<int> collection)
         {
-            var (matches, mismatches) = collection.Partition(n => n % 2 == 0);
+            (IEnumerable<int> matches, IEnumerable<int> mismatches) = collection.Partition(n => n % 2 == 0);
 
             matches.ShouldBe(new[] {2, 4, 6});
             mismatches.ShouldBe(new[] {1, 3, 5});
@@ -56,7 +60,7 @@ namespace Collection.Tests.CollectionExtensions
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Returns_matches_where_all_match(IList<int> collection)
         {
-            var (matches, mismatches) = collection.Partition(n => n >= 1 && n <= 6);
+            (IEnumerable<int> matches, IEnumerable<int> mismatches) = collection.Partition(n => n >= 1 && n <= 6);
 
             matches.ShouldBe(new[] {1, 2, 3, 4, 5, 6});
             mismatches.Any().ShouldBeFalse();
@@ -65,7 +69,7 @@ namespace Collection.Tests.CollectionExtensions
         [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
         public void Returns_matches_where_none_match(IList<int> collection)
         {
-            var (matches, mismatches) = collection.Partition(n => n == 10);
+            (IEnumerable<int> matches, IEnumerable<int> mismatches) = collection.Partition(n => n == 10);
 
             matches.Any().ShouldBeFalse();
             mismatches.ShouldBe(new[] { 1, 2, 3, 4, 5, 6 });
