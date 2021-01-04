@@ -42,7 +42,7 @@ namespace System.Collections.Generic
         /// <param name="longs">The source long collection to check.</param>
         /// <param name="other">The second long collection to check.</param>
         /// <returns><c>true</c> if the contents of the two long collections are equal.</returns>
-        public static bool IsEqualTo(this IList<long> longs, IList<long> other)
+        public static bool IsEqualTo(this IList<long>? longs, IList<long>? other)
         {
             if (ReferenceEquals(longs, other))
                 return true;
@@ -64,8 +64,10 @@ namespace System.Collections.Generic
         /// <param name="longs">The source long collection to check.</param>
         /// <param name="other">The second long collection to check.</param>
         /// <returns><c>true</c> if the contents of the two long collection are equal.</returns>
-        public static bool IsEqualTo(this IList<long> longs, params long[] other) =>
-            IsEqualTo(longs, (IList<long>)other);
+        public static bool IsEqualTo(this IList<long> longs, params long[] other)
+        {
+            return IsEqualTo(longs, (IList<long>)other);
+        }
 
         /// <summary>
         ///     Indicates whether the specified long collection is <c>null</c>, does not contain any elements or consists
@@ -76,7 +78,7 @@ namespace System.Collections.Generic
         ///     <c>true</c> if the long collection is <c>null</c>, does not contain any elements or consists exclusively
         ///     of zero value items.
         /// </returns>
-        public static bool IsNullOrZeroed(this ICollection<long> longs)
+        public static bool IsNullOrZeroed(this ICollection<long>? longs)
         {
             if (longs == null || longs.Count == 0)
                 return true;
@@ -107,7 +109,7 @@ namespace System.Collections.Generic
         /// <param name="source">The long collection from which to create the string.</param>
         /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
         /// <returns>The combined string.</returns>
-        public static string ToString(this IList<long> source, string delimiter)
+        public static string? ToString(this IList<long>? source, string? delimiter)
         {
             if (source == null)
                 return null;
@@ -136,7 +138,7 @@ namespace System.Collections.Generic
         /// <param name="start">The index in the array to start searching.</param>
         /// <param name="sequence">The sequence to search for.</param>
         /// <returns>An array of longs from the starting index to the matching sequence.</returns>
-        public static long[] GetNumbersUptoSequence(this long[] source, int start, params long[] sequence)
+        public static long[]? GetNumbersUptoSequence(this long[] source, int start, params long[] sequence)
         {
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
@@ -147,13 +149,13 @@ namespace System.Collections.Generic
             return result;
         }
 
-        public static int IndexOfSequence(this IList<long> source, params long[] sequence) =>
-            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<long>)sequence);
+        public static int IndexOfSequence(this IList<long>? source, params long[] sequence) =>
+            IndexOfSequence(source, 0, source?.Count ?? 0, (IList<long>)sequence);
 
-        public static int IndexOfSequence(this IList<long> source, int start, int count, params long[] sequence) =>
+        public static int IndexOfSequence(this IList<long>? source, int start, int count, params long[] sequence) =>
             IndexOfSequence(source, start, count, (IList<long>)sequence);
 
-        public static int IndexOfSequence(this IList<long> source, int start, int count, IList<long> sequence)
+        public static int IndexOfSequence(this IList<long>? source, int start, int count, IList<long>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -180,13 +182,17 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this IList<long> source, params long[] sequence) =>
-            IndexOfSequences(source, 0, source != null ? source.Count : 0, sequence);
+        public static int[] IndexOfSequences(this IList<long>? source, params long[] sequence)
+        {
+            return IndexOfSequences(source, 0, source?.Count ?? 0, sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<long> source, int start, int count, params long[] sequence) =>
-            IndexOfSequences(source, start, count, (IList<long>)sequence);
+        public static int[] IndexOfSequences(this IList<long>? source, int start, int count, params long[] sequence)
+        {
+            return IndexOfSequences(source, start, count, (IList<long>)sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<long> source, int start, int count, IList<long> sequence)
+        public static int[] IndexOfSequences(this IList<long>? source, int start, int count, IList<long>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

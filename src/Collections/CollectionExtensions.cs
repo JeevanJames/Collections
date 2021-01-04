@@ -26,6 +26,7 @@ using System.Collections.Generic;
 
 namespace Collections.Net.Collection
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
@@ -45,7 +46,7 @@ namespace System.Collections.Generic
         ///     reference type.
         /// </param>
         /// <exception cref="ArgumentNullException">collection is null</exception>
-        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
+        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T>? items)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -56,7 +57,7 @@ namespace System.Collections.Generic
                 collection.Add(item);
         }
 
-        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items, Func<T, bool> predicate)
+        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T>? items, Func<T, bool> predicate)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -68,7 +69,7 @@ namespace System.Collections.Generic
             collection.AddRange(items.Where(predicate));
         }
 
-        public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource> items,
+        public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource>? items,
             Func<TSource, TDest> converter)
         {
             if (collection == null)
@@ -81,8 +82,8 @@ namespace System.Collections.Generic
             collection.AddRange(items.Select(converter));
         }
 
-        public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource> items,
-            Func<TSource, bool> predicate, Func<TSource, TDest> converter, Func<TDest, bool> afterConvertPredicate = null)
+        public static void AddRange<TDest, TSource>(this ICollection<TDest> collection, IEnumerable<TSource>? items,
+            Func<TSource, bool> predicate, Func<TSource, TDest> converter, Func<TDest, bool>? afterConvertPredicate = null)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -132,7 +133,9 @@ namespace System.Collections.Generic
         }
 
         public static IEnumerable<T> RangeOfLength<T>(this ICollection<T> collection, int? start = null,
-            int? count = null) =>
-            Range(collection, start, count.HasValue ? (int?) start.GetValueOrDefault() + count.Value : null);
+            int? count = null)
+        {
+            return Range(collection, start, count.HasValue ? (int?)start.GetValueOrDefault() + count.Value : null);
+        }
     }
 }

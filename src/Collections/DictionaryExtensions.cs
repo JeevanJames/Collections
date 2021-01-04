@@ -24,6 +24,7 @@ using System.Collections.Generic;
 
 namespace Collections.Net.Dictionary
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
@@ -114,7 +115,7 @@ namespace System.Collections.Generic
         {
             if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
-            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
+            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
         }
 
 #if NETSTANDARD2_0 || NET461
@@ -137,7 +138,7 @@ namespace System.Collections.Generic
         {
             if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
-            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
+            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
         }
 #endif
 
@@ -176,7 +177,7 @@ namespace System.Collections.Generic
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key to locate in the dictionary.</param>
         /// <param name="valueGetter">The delegate used to generate a new value.</param>
-        /// <returns>The value assciated with the specified key.</returns>
+        /// <returns>The value associated with the specified key.</returns>
         /// <exception cref="ArgumentNullException">
         ///     Thrown if the dictionary or delegate is <c>null</c>.
         /// </exception>
@@ -206,7 +207,7 @@ namespace System.Collections.Generic
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key to locate in the dictionary.</param>
         /// <param name="valueGetter">The delegate used to generate a new value.</param>
-        /// <returns>The value assciated with the specified key.</returns>
+        /// <returns>The value associated with the specified key.</returns>
         /// <exception cref="ArgumentNullException">
         ///     Thrown if the dictionary or delegate is <c>null</c>.
         /// </exception>

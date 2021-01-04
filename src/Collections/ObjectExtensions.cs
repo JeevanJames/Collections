@@ -26,6 +26,7 @@ using System.Collections.Generic;
 
 namespace Collections.Net.Object
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
@@ -46,9 +47,9 @@ namespace System.Collections.Generic
         ///     If <c>true</c>, skips the <paramref name="start"/> instance during traversal.
         /// </param>
         /// <returns>The sequence of instances traversed.</returns>
-        public static IEnumerable<T> ParentChain<T>(this T start,
+        public static IEnumerable<T> ParentChain<T>(this T? start,
             Func<T, T> parentSelector,
-            Func<T, bool> stopCondition = null,
+            Func<T, bool>? stopCondition = null,
             bool skipStart = false)
             where T : class
         {
@@ -69,9 +70,9 @@ namespace System.Collections.Generic
             }
         }
 
-        public static IEnumerable<T> ParentChainReverse<T>(this T start,
+        public static IEnumerable<T> ParentChainReverse<T>(this T? start,
             Func<T, T> parentSelector,
-            Func<T, bool> stopCondition = null,
+            Func<T, bool>? stopCondition = null,
             bool skipStart = false)
             where T : class
         {
@@ -81,7 +82,7 @@ namespace System.Collections.Generic
             return chain;
         }
 
-        public static T FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
+        public static T? FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
             where T : class
         {
             if (start is null)

@@ -42,7 +42,7 @@ namespace System.Collections.Generic
         /// <param name="bytes">The source byte collection to check.</param>
         /// <param name="other">The second byte collection to check.</param>
         /// <returns><c>true</c> if the contents of the two byte collections are equal.</returns>
-        public static bool IsEqualTo(this IList<byte> bytes, IList<byte> other)
+        public static bool IsEqualTo(this IList<byte>? bytes, IList<byte>? other)
         {
             if (ReferenceEquals(bytes, other))
                 return true;
@@ -64,8 +64,10 @@ namespace System.Collections.Generic
         /// <param name="bytes">The source byte collection to check.</param>
         /// <param name="other">The second byte collection to check.</param>
         /// <returns><c>true</c> if the contents of the two byte collection are equal.</returns>
-        public static bool IsEqualTo(this IList<byte> bytes, params byte[] other) =>
-            IsEqualTo(bytes, (IList<byte>)other);
+        public static bool IsEqualTo(this IList<byte> bytes, params byte[] other)
+        {
+            return IsEqualTo(bytes, (IList<byte>)other);
+        }
 
         /// <summary>
         ///     Indicates whether the specified byte collection is <c>null</c>, does not contain any elements or consists
@@ -76,7 +78,7 @@ namespace System.Collections.Generic
         ///     <c>true</c> if the byte collection is <c>null</c>, does not contain any elements or consists exclusively
         ///     of zero value items.
         /// </returns>
-        public static bool IsNullOrZeroed(this ICollection<byte> bytes)
+        public static bool IsNullOrZeroed(this ICollection<byte>? bytes)
         {
             if (bytes == null || bytes.Count == 0)
                 return true;
@@ -107,7 +109,7 @@ namespace System.Collections.Generic
         /// <param name="source">The byte collection from which to create the string.</param>
         /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
         /// <returns>The combined string.</returns>
-        public static string ToString(this IList<byte> source, string delimiter)
+        public static string? ToString(this IList<byte>? source, string? delimiter)
         {
             if (source == null)
                 return null;
@@ -136,7 +138,7 @@ namespace System.Collections.Generic
         /// <param name="start">The index in the array to start searching.</param>
         /// <param name="sequence">The sequence to search for.</param>
         /// <returns>An array of bytes from the starting index to the matching sequence.</returns>
-        public static byte[] GetNumbersUptoSequence(this byte[] source, int start, params byte[] sequence)
+        public static byte[]? GetNumbersUptoSequence(this byte[] source, int start, params byte[] sequence)
         {
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
@@ -147,13 +149,13 @@ namespace System.Collections.Generic
             return result;
         }
 
-        public static int IndexOfSequence(this IList<byte> source, params byte[] sequence) =>
-            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<byte>)sequence);
+        public static int IndexOfSequence(this IList<byte>? source, params byte[] sequence) =>
+            IndexOfSequence(source, 0, source?.Count ?? 0, (IList<byte>)sequence);
 
-        public static int IndexOfSequence(this IList<byte> source, int start, int count, params byte[] sequence) =>
+        public static int IndexOfSequence(this IList<byte>? source, int start, int count, params byte[] sequence) =>
             IndexOfSequence(source, start, count, (IList<byte>)sequence);
 
-        public static int IndexOfSequence(this IList<byte> source, int start, int count, IList<byte> sequence)
+        public static int IndexOfSequence(this IList<byte>? source, int start, int count, IList<byte>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -180,13 +182,17 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this IList<byte> source, params byte[] sequence) =>
-            IndexOfSequences(source, 0, source != null ? source.Count : 0, sequence);
+        public static int[] IndexOfSequences(this IList<byte>? source, params byte[] sequence)
+        {
+            return IndexOfSequences(source, 0, source?.Count ?? 0, sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<byte> source, int start, int count, params byte[] sequence) =>
-            IndexOfSequences(source, start, count, (IList<byte>)sequence);
+        public static int[] IndexOfSequences(this IList<byte>? source, int start, int count, params byte[] sequence)
+        {
+            return IndexOfSequences(source, start, count, (IList<byte>)sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<byte> source, int start, int count, IList<byte> sequence)
+        public static int[] IndexOfSequences(this IList<byte>? source, int start, int count, IList<byte>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

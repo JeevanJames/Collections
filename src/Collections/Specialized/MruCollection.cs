@@ -26,6 +26,7 @@ using System;
 
 namespace Collections.Net.Specialized
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Specialized
 #endif
 {
@@ -45,12 +46,10 @@ namespace System.Collections.Specialized
         // considered.
         private readonly bool _creatingCollection;
 
-        public MruCollection(int capacity, MruCollectionOptions<T> options = null)
+        public MruCollection(int capacity, MruCollectionOptions<T>? options = null)
         {
             if (capacity <= 0)
                 throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity should be greater than zero");
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
 
             _capacity = capacity;
 
@@ -162,7 +161,7 @@ namespace System.Collections.Specialized
                 HasTrigger(MruTriggers.NewItemSet) || HasTrigger(MruTriggers.ExistingItemSet);
             if (_creatingCollection || !shouldUseMruLogic)
                 base.SetItem(index, item);
-            else if (_options.EqualityComparer.Equals(item, Peek(index)))
+            else if (_options.EqualityComparer != null && _options.EqualityComparer.Equals(item, Peek(index)))
             {
 
             }
@@ -179,9 +178,13 @@ namespace System.Collections.Specialized
         /// <returns>True if an item was matched and removed; otherwise false</returns>
         private bool RemoveExisting(T item)
         {
+            IEqualityComparer<T>? comparer = _options.EqualityComparer;
+            if (comparer is null)
+                throw new InvalidOperationException("Unexpected condition. Collection element equality comparer is null.");
+
             for (int i = 0; i < Count; i++)
             {
-                if (_options.EqualityComparer.Equals(item, Peek(i)))
+                if (comparer.Equals(item, Peek(i)))
                 {
                     RemoveAt(i);
                     return true;
@@ -248,12 +251,12 @@ namespace System.Collections.Specialized
         /// <summary>
         ///     Initial data that is populated into the collection. This data is not affected by MRU logic.
         /// </summary>
-        public IEnumerable<T> InitialData { get; set; }
+        public IEnumerable<T>? InitialData { get; set; }
 
         /// <summary>
         ///     <see cref="IEqualityComparer{T}" /> instance to use to compare two items for equality.
         /// </summary>
-        public IEqualityComparer<T> EqualityComparer { get; set; }
+        public IEqualityComparer<T>? EqualityComparer { get; set; }
 
         /// <summary>
         ///     Actions on the collection that cause the MRU logic to be executed.

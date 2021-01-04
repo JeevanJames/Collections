@@ -24,6 +24,7 @@ using System.Collections.Generic;
 
 namespace Collections.Net.Enumerable
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {

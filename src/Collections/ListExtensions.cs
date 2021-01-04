@@ -28,6 +28,7 @@ using Collections.Net.Collection;
 
 namespace Collections.Net.List
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
@@ -121,19 +122,15 @@ namespace System.Collections.Generic
             }
         }
 
-        public static void InsertRange<T>(this IList<T> list, int index, params T[] items) =>
-            InsertRange(list, index, (IEnumerable<T>) items);
+        public static void InsertRange<T>(this IList<T> list, int index, params T[] items)
+        {
+            InsertRange(list, index, (IEnumerable<T>)items);
+        }
 
-        public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items)
+        public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T>? items)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
-
-            if (index >= list.Count)
-            {
-                list.AddRange(items);
-                return;
-            }
 
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -141,9 +138,14 @@ namespace System.Collections.Generic
             if (items == null)
                 return;
 
-            int originalCount = list.Count;
-            foreach (T item in items)
-                list.Insert(index + (list.Count - originalCount), item);
+            if (index >= list.Count)
+                list.AddRange(items);
+            else
+            {
+                int originalCount = list.Count;
+                foreach (T item in items)
+                    list.Insert(index + (list.Count - originalCount), item);
+            }
         }
 
         public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items, Func<T, bool> predicate)
@@ -163,14 +165,12 @@ namespace System.Collections.Generic
 
         public static void InsertRange<TDest, TSource>(this IList<TDest> list, int index, IEnumerable<TSource> items,
             Func<TSource, bool> predicate, Func<TSource, TDest> converter,
-            Func<TDest, bool> afterConvertPredicate = null)
+            Func<TDest, bool>? afterConvertPredicate = null)
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
             if (converter == null)
                 throw new ArgumentNullException(nameof(converter));
-            if (afterConvertPredicate == null)
-                throw new ArgumentNullException(nameof(afterConvertPredicate));
 
             IEnumerable<TDest> convertedItems = items.Where(predicate).Select(converter);
             if (afterConvertPredicate != null)
@@ -325,12 +325,11 @@ namespace System.Collections.Generic
 
             for (int iteration = 0; iteration < iterations; iteration++)
             {
-                T temp;
                 for (int i = 0; i < list.Count; i++)
                 {
                     int index1 = rng.Next();
                     int index2 = rng.Next();
-                    temp = list[index1];
+                    T temp = list[index1];
                     list[index1] = list[index2];
                     list[index2] = temp;
                 }

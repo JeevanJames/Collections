@@ -42,7 +42,7 @@ namespace System.Collections.Generic
         /// <param name="shorts">The source short collection to check.</param>
         /// <param name="other">The second short collection to check.</param>
         /// <returns><c>true</c> if the contents of the two short collections are equal.</returns>
-        public static bool IsEqualTo(this IList<short> shorts, IList<short> other)
+        public static bool IsEqualTo(this IList<short>? shorts, IList<short>? other)
         {
             if (ReferenceEquals(shorts, other))
                 return true;
@@ -64,8 +64,10 @@ namespace System.Collections.Generic
         /// <param name="shorts">The source short collection to check.</param>
         /// <param name="other">The second short collection to check.</param>
         /// <returns><c>true</c> if the contents of the two short collection are equal.</returns>
-        public static bool IsEqualTo(this IList<short> shorts, params short[] other) =>
-            IsEqualTo(shorts, (IList<short>)other);
+        public static bool IsEqualTo(this IList<short> shorts, params short[] other)
+        {
+            return IsEqualTo(shorts, (IList<short>)other);
+        }
 
         /// <summary>
         ///     Indicates whether the specified short collection is <c>null</c>, does not contain any elements or consists
@@ -76,7 +78,7 @@ namespace System.Collections.Generic
         ///     <c>true</c> if the short collection is <c>null</c>, does not contain any elements or consists exclusively
         ///     of zero value items.
         /// </returns>
-        public static bool IsNullOrZeroed(this ICollection<short> shorts)
+        public static bool IsNullOrZeroed(this ICollection<short>? shorts)
         {
             if (shorts == null || shorts.Count == 0)
                 return true;
@@ -107,7 +109,7 @@ namespace System.Collections.Generic
         /// <param name="source">The short collection from which to create the string.</param>
         /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
         /// <returns>The combined string.</returns>
-        public static string ToString(this IList<short> source, string delimiter)
+        public static string? ToString(this IList<short>? source, string? delimiter)
         {
             if (source == null)
                 return null;
@@ -136,7 +138,7 @@ namespace System.Collections.Generic
         /// <param name="start">The index in the array to start searching.</param>
         /// <param name="sequence">The sequence to search for.</param>
         /// <returns>An array of shorts from the starting index to the matching sequence.</returns>
-        public static short[] GetNumbersUptoSequence(this short[] source, int start, params short[] sequence)
+        public static short[]? GetNumbersUptoSequence(this short[] source, int start, params short[] sequence)
         {
             int sequenceIndex = IndexOfSequence(source, start, source.Length - start + 1, sequence);
             if (sequenceIndex == -1)
@@ -147,13 +149,13 @@ namespace System.Collections.Generic
             return result;
         }
 
-        public static int IndexOfSequence(this IList<short> source, params short[] sequence) =>
-            IndexOfSequence(source, 0, source != null ? source.Count : 0, (IList<short>)sequence);
+        public static int IndexOfSequence(this IList<short>? source, params short[] sequence) =>
+            IndexOfSequence(source, 0, source?.Count ?? 0, (IList<short>)sequence);
 
-        public static int IndexOfSequence(this IList<short> source, int start, int count, params short[] sequence) =>
+        public static int IndexOfSequence(this IList<short>? source, int start, int count, params short[] sequence) =>
             IndexOfSequence(source, start, count, (IList<short>)sequence);
 
-        public static int IndexOfSequence(this IList<short> source, int start, int count, IList<short> sequence)
+        public static int IndexOfSequence(this IList<short>? source, int start, int count, IList<short>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -180,13 +182,17 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        public static int[] IndexOfSequences(this IList<short> source, params short[] sequence) =>
-            IndexOfSequences(source, 0, source != null ? source.Count : 0, sequence);
+        public static int[] IndexOfSequences(this IList<short>? source, params short[] sequence)
+        {
+            return IndexOfSequences(source, 0, source?.Count ?? 0, sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<short> source, int start, int count, params short[] sequence) =>
-            IndexOfSequences(source, start, count, (IList<short>)sequence);
+        public static int[] IndexOfSequences(this IList<short>? source, int start, int count, params short[] sequence)
+        {
+            return IndexOfSequences(source, start, count, (IList<short>)sequence);
+        }
 
-        public static int[] IndexOfSequences(this IList<short> source, int start, int count, IList<short> sequence)
+        public static int[] IndexOfSequences(this IList<short>? source, int start, int count, IList<short>? sequence)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

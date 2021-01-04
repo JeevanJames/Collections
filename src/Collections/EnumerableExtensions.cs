@@ -28,6 +28,7 @@ using Collections.Net.List;
 
 namespace Collections.Net.Enumerable
 #else
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
@@ -65,7 +66,7 @@ namespace System.Collections.Generic
                 }
             }
 
-            nonCompliantItem = default;
+            nonCompliantItem = default!;
             return true;
         }
 
@@ -112,7 +113,7 @@ namespace System.Collections.Generic
         }
 
         public static bool AllItemsContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection,
-            Comparison<T> comparison = null)
+            Comparison<T>? comparison = null)
         {
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
@@ -120,13 +121,13 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(collection));
 
             Func<T, bool> check = comparison == null
-                ? (Func<T, bool>)(item => collection.Any(c => item.Equals(c)))
-                : (item => collection.Any(c => comparison(item, c) == 0));
-            return sequence.All(item => collection.Any(c => comparison(item, c) == 0));
+                ? (Func<T, bool>)(item => collection.Any(c => Equals(c, item)))
+                : item => collection.Any(c => comparison(item, c) == 0);
+            return sequence.All(check);
         }
 
         public static bool AnyItemContainedIn<T>(this IEnumerable<T> sequence, IEnumerable<T> collection,
-            Comparison<T> comparison = null)
+            Comparison<T>? comparison = null)
         {
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
@@ -134,9 +135,9 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(collection));
 
             Func<T, bool> check = comparison == null
-                ? (Func<T, bool>)(item => collection.Any(c => item.Equals(c)))
-                : (item => collection.Any(c => comparison(item, c) == 0));
-            return sequence.Any(item => collection.Any(c => comparison(item, c) == 0));
+                ? (Func<T, bool>)(item => collection.Any(c => Equals(c, item)))
+                : item => collection.Any(c => comparison(item, c) == 0);
+            return sequence.Any(check);
         }
 
         public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> sequence, int chunkSize)
@@ -146,17 +147,17 @@ namespace System.Collections.Generic
             if (chunkSize < 1)
                 throw new ArgumentOutOfRangeException(nameof(chunkSize));
 
-            T[] chunk = null;
+            T[]? chunk = null;
             int currentIndex = 0;
 
             foreach (T element in sequence)
             {
                 if (currentIndex == 0)
                     chunk = new T[chunkSize];
-                chunk[currentIndex++] = element;
+                chunk![currentIndex++] = element;
                 if (currentIndex >= chunkSize)
                 {
-                    yield return chunk;
+                    yield return chunk!;
                     currentIndex = 0;
                 }
             }
@@ -178,10 +179,10 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentNullException">
         ///     Thrown of the <paramref name="action"/> is <c>null</c>.
         /// </exception>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T>? sequence, Action<T> action)
         {
             if (sequence == null)
-                return sequence;
+                return Enumerable.Empty<T>();
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
@@ -199,10 +200,10 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentNullException">
         ///     Thrown of the <paramref name="action"/> is <c>null</c>.
         /// </exception>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T>? sequence, Action<T, int> action)
         {
             if (sequence == null)
-                return sequence;
+                return Enumerable.Empty<T>();
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
@@ -235,7 +236,7 @@ namespace System.Collections.Generic
         /// <typeparam name="T">The type of the elements of the sequence</typeparam>
         /// <param name="sequence">The sequence.</param>
         /// <returns><c>true</c>, if the sequence if not <c>null</c> and has elements.</returns>
-        public static bool IsNotNullOrEmpty<T>(this IEnumerable<T> sequence)
+        public static bool IsNotNullOrEmpty<T>(this IEnumerable<T>? sequence)
         {
             return sequence != null && sequence.Any();
         }
@@ -248,7 +249,7 @@ namespace System.Collections.Generic
         /// <returns>
         ///     <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>.
         /// </returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> sequence)
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T>? sequence)
         {
             if (sequence == null)
                 return true;
@@ -475,7 +476,7 @@ namespace System.Collections.Generic
         }
 
         public static IEnumerable<T> WhereAny<T>(this IEnumerable<T> sequence, IEnumerable<T> other,
-            Func<T, T, bool> predicate = null)
+            Func<T, T, bool>? predicate = null)
         {
             if (predicate is null)
             {
@@ -505,7 +506,7 @@ namespace System.Collections.Generic
         }
 
         public static IEnumerable<T> WhereNotAny<T>(this IEnumerable<T> sequence, IEnumerable<T> other,
-            Func<T, T, bool> predicate = null)
+            Func<T, T, bool>? predicate = null)
         {
             if (predicate is null)
             {
@@ -537,13 +538,19 @@ namespace System.Collections.Generic
             return sequence.Where((element, i) => !predicate(element, i));
         }
 
-        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item) =>
-            sequence.Union(new[] { item });
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item)
+        {
+            return sequence.Union(new[] {item});
+        }
 
-        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item, IEqualityComparer<T> comparer) =>
-            sequence.Union(new[] { item }, comparer);
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, T item, IEqualityComparer<T> comparer)
+        {
+            return sequence.Union(new[] {item}, comparer);
+        }
 
-        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, params T[] items) =>
-            sequence.Union(items);
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> sequence, params T[] items)
+        {
+            return sequence.Union((IEnumerable<T>)items);
+        }
     }
 }

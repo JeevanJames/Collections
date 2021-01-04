@@ -5,6 +5,7 @@
     <TargetFrameworks>netstandard2.0;net461;net40</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AssemblyName>Collections.NET</AssemblyName>
+    <Nullable>enable</Nullable>
 
     <!-- NuGet properties -->
     <PackageId>Collections.NET</PackageId>
@@ -20,13 +21,14 @@
     <PackageTags>extension-methods extensions collections dictionary array enumerable ienumerable ilist icollection byte-array</PackageTags>
     <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
     <Product>Collections.NET</Product>
-  </PropertyGroup>
 
-  <PropertyGroup>
+    <!-- Error handling -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+
+    <!--Documentation -->
+    <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
