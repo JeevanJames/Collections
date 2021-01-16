@@ -82,6 +82,24 @@ namespace System.Collections.Generic
             return chain;
         }
 
+        /// <summary>
+        ///     Given a self-referencing object (<paramref name="start"/>), traverse up the parent chain
+        ///     until the first object satisfying the specified <paramref name="predicate"/> is found.
+        /// </summary>
+        /// <typeparam name="T">Type of the self-referencing object.</typeparam>
+        /// <param name="start">The object to start traversing from.</param>
+        /// <param name="parentSelector">
+        ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns it's parent
+        ///     instance.
+        /// </param>
+        /// <param name="predicate">
+        ///     Delegate that specifies the condition for the object to meet.
+        /// </param>
+        /// <returns>The first matching object, if found; otherwise <c>null</c>.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if <paramref name="start"/>, <paramref name="parentSelector"/> or
+        ///     <paramref name="predicate"/> is <c>null</c>.
+        /// </exception>
         public static T? FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
             where T : class
         {
@@ -103,6 +121,20 @@ namespace System.Collections.Generic
             return null;
         }
 
+        /// <summary>
+        ///     Given a self-referencing object (<paramref name="start"/>), traverses up the parent
+        ///     chain and returns the root object (whose parent is <c>null</c>).
+        /// </summary>
+        /// <typeparam name="T">Type of the self-referencing object.</typeparam>
+        /// <param name="start">The object to start traversing from.</param>
+        /// <param name="parentSelector">
+        ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns it's parent
+        ///     instance.
+        /// </param>
+        /// <returns>The root object.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown if <paramref name="start"/> or <paramref name="parentSelector"/> is <c>null</c>.
+        /// </exception>
         public static T FindRootParent<T>(this T start, Func<T, T> parentSelector)
             where T : class
         {
@@ -120,6 +152,27 @@ namespace System.Collections.Generic
             }
 
             return current;
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="IEnumerable{T}"/> from a single object.
+        /// </summary>
+        /// <typeparam name="T">The type of the single object.</typeparam>
+        /// <param name="instance">The single object.</param>
+        /// <returns>An <see cref="IEnumerable{T}"/> that contains the single object.</returns>
+        public static IEnumerable<T> ToEnumerable<T>(this T instance)
+        {
+            yield return instance;
+        }
+
+        public static IList<T> ToListCollection<T>(this T instance)
+        {
+            return new List<T> { instance };
+        }
+
+        public static T[] ToArrayCollection<T>(this T instance)
+        {
+            return new[] { instance };
         }
     }
 }

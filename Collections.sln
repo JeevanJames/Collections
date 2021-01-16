@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{27CA36B9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collection.Tests", "tests\Collection.Tests\Collection.Tests.csproj", "{16EAC683-540C-4B2D-8865-7E3EA5882642}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4FCB0270-F17C-4F56-A564-E3F3A8398A47}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".scripts", ".scripts", "{4FCB0270-F17C-4F56-A564-E3F3A8398A47}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\create-numeric-collections.ps1 = scripts\create-numeric-collections.ps1
 		scripts\publish.bat = scripts\publish.bat

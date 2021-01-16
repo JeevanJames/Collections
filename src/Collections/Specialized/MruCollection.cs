@@ -20,6 +20,7 @@ limitations under the License.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 #if EXPLICIT
 using System;
@@ -127,8 +128,9 @@ namespace System.Collections.Specialized
         /// </summary>
         protected override void InsertItem(int index, T item)
         {
-            bool shouldUseMruLogic = HasTrigger(MruTriggers.NewItemInserted) || HasTrigger(MruTriggers.ExistingItemInserted);
-            if (_creatingCollection || !shouldUseMruLogic)
+            bool hasNewItemInsertedTrigger = HasTrigger(MruTriggers.NewItemInserted);
+            bool hasExistingItemInsertedTrigger = HasTrigger(MruTriggers.ExistingItemInserted);
+            if (_creatingCollection || !(hasNewItemInsertedTrigger || hasExistingItemInsertedTrigger))
                 base.InsertItem(index, item);
             else
             {
@@ -138,8 +140,7 @@ namespace System.Collections.Specialized
                 // If the item exists and there is a trigger for existing item inserted, or if the
                 // item does not exist and there is a trigger for new item inserted, apply the MRU
                 // logic and move the item to the top of the collection
-                if ((removed && HasTrigger(MruTriggers.ExistingItemInserted)) ||
-                    (!removed && HasTrigger(MruTriggers.NewItemInserted)))
+                if ((removed && hasExistingItemInsertedTrigger) || (!removed && hasNewItemInsertedTrigger))
                 {
                     base.InsertItem(0, item);
                     if (!removed)
@@ -157,18 +158,17 @@ namespace System.Collections.Specialized
         /// </summary>
         protected override void SetItem(int index, T item)
         {
-            bool shouldUseMruLogic =
-                HasTrigger(MruTriggers.NewItemSet) || HasTrigger(MruTriggers.ExistingItemSet);
+            bool hasNewItemSetTrigger = HasTrigger(MruTriggers.NewItemSet);
+            bool hasExistingItemSetTrigger = HasTrigger(MruTriggers.ExistingItemSet);
+            bool shouldUseMruLogic = hasNewItemSetTrigger || hasExistingItemSetTrigger;
             if (_creatingCollection || !shouldUseMruLogic)
                 base.SetItem(index, item);
             else if (_options.EqualityComparer != null && _options.EqualityComparer.Equals(item, Peek(index)))
             {
-
+                //TODO:
             }
             else
-            {
                 InsertItem(index, item);
-            }
         }
 
         /// <summary>
@@ -205,6 +205,9 @@ namespace System.Collections.Specialized
             }
         }
 
+#if !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         private bool HasTrigger(MruTriggers trigger)
         {
             return (_options.Triggers & trigger) == trigger;
@@ -223,16 +226,16 @@ namespace System.Collections.Specialized
         {
             bool IEqualityComparer<TItem>.Equals(TItem x, TItem y)
             {
-                if (x == null && y == null)
+                if (x is null && y is null)
                     return true;
-                if (x == null || y == null)
+                if (x is null || y is null)
                     return false;
                 return x.Equals(y);
             }
 
             int IEqualityComparer<TItem>.GetHashCode(TItem obj)
             {
-                return obj == null ? 0 : obj.GetHashCode();
+                return obj is null ? 0 : obj.GetHashCode();
             }
         }
     }
