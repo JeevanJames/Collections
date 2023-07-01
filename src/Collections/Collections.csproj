@@ -1,45 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <!-- Build properties -->
-    <TargetFrameworks>netstandard2.0;net461;net40</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
-    <AssemblyName>Collections.NET</AssemblyName>
-    <Nullable>enable</Nullable>
+    <PropertyGroup Label="Build">
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Collections.NET</AssemblyName>
+        <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
 
-    <!-- NuGet properties -->
-    <PackageId>Collections.NET</PackageId>
-    <Version>1.6.2</Version>
-    <Authors>Jeevan James</Authors>
-    <Company>Jeevan James</Company>
-    <Description>Collection extensions and custom collections for .NET.</Description>
-    <Copyright>Copyright (c) 2018-2020 Jeevan James</Copyright>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/JeevanJames/Collections</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/JeevanJames/Collections.git</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>extension-methods extensions collections dictionary array enumerable ienumerable ilist icollection byte-array</PackageTags>
-    <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
-    <Product>Collections.NET</Product>
+    <PropertyGroup Label="Errors and Warnings">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
 
-    <!-- Error handling -->
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <NoWarn>1701;1702;1591</NoWarn>
+    <PropertyGroup Label="Package">
+        <PackageId>Collections.NET</PackageId>
+        <Version>1.6.2</Version>
+        <Authors>Jeevan James</Authors>
+        <Company>Jeevan James</Company>
+        <Description>Collection extensions and custom collections for .NET.</Description>
+        <Copyright>Copyright (c) 2018-2023 Jeevan James</Copyright>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/JeevanJames/Collections</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/JeevanJames/Collections.git</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>extension-methods extensions collections dictionary array enumerable ienumerable ilist icollection byte-array</PackageTags>
+        <PackageReleaseNotes>Release notes are at https://github.com/JeevanJames/Collections/releases</PackageReleaseNotes>
+        <Product>Collections.NET</Product>
+    </PropertyGroup>
 
-    <!--Documentation -->
-    <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461'">
-    <DefineConstants>NET461</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
-    <DefineConstants>NET40</DefineConstants>
-  </PropertyGroup>
 </Project>

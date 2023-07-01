@@ -151,8 +151,7 @@
                 elements match and others do not, then <c>false</c> is returned.
             </returns>
             <exception cref="T:System.ArgumentNullException">
-                Thrown of the <paramref name="sequence"/> or <paramref name="predicate"/> is
-                <c>null</c>.
+                Thrown of the <paramref name="sequence"/> or <paramref name="predicate"/> is <c>null</c>.
             </exception>
         </member>
         <member name="M:System.Collections.Generic.EnumerableExtensions.AllOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
@@ -168,9 +167,39 @@
                 elements match and others do not, then <c>false</c> is returned.
             </returns>
             <exception cref="T:System.ArgumentNullException">
-                Thrown of the <paramref name="sequence"/> or <paramref name="predicate"/> is
+                Thrown if the <paramref name="sequence"/> or <paramref name="predicate"/> is
                 <c>null</c>.
             </exception>
+        </member>
+        <member name="M:System.Collections.Generic.EnumerableExtensions.AnyItemMatchesAll``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean}[])">
+            <summary>
+                Determines whether any element of a <paramref name="sequence"/> satisfies all of the
+                specified conditions (<paramref name="predicates"/>)
+            </summary>
+            <typeparam name="T">The type of the elements of sequence.</typeparam>
+            <param name="sequence">The sequence.</param>
+            <param name="predicates">
+                One or more functions to test the conditions for each item in the sequence.
+            </param>
+            <returns>
+                <c>true</c> if any item in the sequence satisfies all of the specified predicates;
+                otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EnumerableExtensions.AnyItemMatchesAny``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean}[])">
+            <summary>
+                Determines whether any element of a <paramref name="sequence"/> satisfies any of the
+                specified conditions (<paramref name="predicates"/>)
+            </summary>
+            <typeparam name="T">The type of the elements of sequence.</typeparam>
+            <param name="sequence">The sequence.</param>
+            <param name="predicates">
+                One or more functions to test the conditions for each item in the sequence.
+            </param>
+            <returns>
+                <c>true</c> if any item in the sequence satisfies any of the specified predicates;
+                otherwise <c>false</c>.
+            </returns>
         </member>
         <member name="M:System.Collections.Generic.EnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
@@ -420,7 +449,21 @@
             <param name="predicate">The predicate delegate to check against.</param>
             <returns><c>true</c> if an element was found and removed; otherwise <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
-            <exception cref="T:Systehe specified <paramref name="chunkSize"/>.
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="predicate"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.ShuffleInplace``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+                Shuffles the elements of the <paramref name="list"/>.
+            </summary>
+            <typeparam name="T">The type of the elements of list.</typeparam>
+            <param name="list">The list.</param>
+            <param name="iterations">The number of times to repeat the shuffle operation.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="list"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the <paramref name="iterations"/> is less than one.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtensions.SlidingChunk``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+                Returns overlapping chunks of the specified <paramref name="chunkSize"/>.
             </summary>
             <typeparam name="T">The type of the elements of list.</typeparam>
             <param name="list">The list.</param>
@@ -595,20 +638,6 @@
             <param name="ints">The int collection to test.</param>
             <returns>
                 <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
-                of zero value items.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if the int collection is <c>null</c>.</exception>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.ToString(System.Collections.Generic.IList{System.Int32},System.String)">
-            <summary>
-                Creates a <see cref="T:System.String"/> from a int collection that concatenates each item in the collection,
-                separated by the specified delimiter.
-            </summary>
-            <param name="source">The int collection from which to create the string.</param>
-            <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
-            <returns>The combined string.</returns>
-        </member>
-        <member name="M:System.Collections.Generic.IntCollectionExtensions.GetNumbersUptoSequence(System.Int32[],System.Int32,System.Int32  <c>true</c> if the int collection is <c>null</c>, does not contain any elements or consists exclusively
                 of zero value items.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the int collection is <c>null</c>.</exception>
@@ -816,29 +845,6 @@
             <param name="instance">The single object.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the single object.</returns>
         </member>
-        <member name="T:System.Collections.Generic.PartitionSequence`1">
-            <summary>
-                Represents the results of a predicate check on all items of a collection.
-            </summary>
-            <typeparam name="T">The type of element in the collection.</typeparam>
-        </member>
-        <member name="M:System.Collections.Generic.PartitionSequence`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-                Initializes an instance of the <see cref="T:System.Collections.Generic.PartitionSequence`1"/> class.
-            </summary>
-            <param name="matches">The matching elements.</param>
-            <param name="mismatches">The elements that do not match.</param>
-        </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Matches">
-            <summary>
-                Collection of all items in the collection that satisfy the predicate.
-            </summary>
-        </member>
-        <member name="P:System.Collections.Generic.PartitionSequence`1.Mismatches">
-            <summary>
-                Collection of all items in the collection that do not satisfy the predicate.
-            </summary>
-        </member>
         <member name="T:System.Collections.Generic.Rng">
             <summary>
                 Random number generator.
@@ -869,7 +875,29 @@
                 is moved to the top of the collection. If the item already exists in the collection at any
                 position, it is also moved to the top.
             </summary>
-            <typeparam name="T">The type of elements in the collection.</typfirst position.
+            <typeparam name="T">The type of elements in the collection.</typeparam>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.Peek(System.Int32)">
+            <summary>
+                Gets the item at the specified index without triggering the MRU logic that causes the
+                item to be moved to the top of the collection.
+            </summary>
+            <param name="index">The index of the item to be retrieved</param>
+            <returns>The item at the specified index</returns>
+        </member>
+        <member name="P:System.Collections.Specialized.MruCollection`1.Item(System.Int32)">
+            <summary>
+                Overrides the indexer's getter to return the item at the specified index and then move
+                it to the top of the collection.
+            </summary>
+            <param name="index">The zero-based index of the item to get or set.</param>
+            <returns>The item at the specified index</returns>
+        </member>
+        <member name="M:System.Collections.Specialized.MruCollection`1.InsertItem(System.Int32,`0)">
+            <inheritdoc />
+            <summary>
+                Forces the new item to be inserted at the first position in the collection.
+                If the item already exists in the collection, it is moved to the first position.
             </summary>
         </member>
         <member name="M:System.Collections.Specialized.MruCollection`1.SetItem(System.Int32,`0)">
@@ -920,34 +948,6 @@
                 Actions on the collection that cause the MRU logic to be executed.
                 Examples include inserting or setting items, and accessing items through the indexer.
                 This property allows you to configure which actions trigger the MRU logic.
-            </summary>
-        </member>
-        <member name="T:System.Collections.Specialized.MruTriggers">
-            <summary>
-                Triggers that cause the MRU logic to be executed on an MRU collection.
-            </summary>
-        </member>
-        <member name="F:System.Collections.Specialized.MruTriggers.NewItemSet">
-            <summary>
-                An existing item in the collection is overwritten with a new item
-            </summary>
-        </member>
-        <member name="F:System.Collections.Specialized.MruTriggers.NewItemInserted">
-            <summary>
-                A new item is inserted into the collection
-            </summary>
-        </member>
-        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemSet">
-            <summary>
-                An existing item in the collection is overwritten with an item that already exists in the collection
-            </summary>
-        </member>
-        <member name="F:System.Collections.Specialized.MruTriggers.ExistingItemInserted">
-            <summary>
-                An item that already exists in the collection is inserted again
-            </summary>
-        </member>
-        <member name="F:System.Collections.Specialized.MruTriggerlogic.
             </summary>
         </member>
         <member name="T:System.Collections.Specialized.MruTriggers">

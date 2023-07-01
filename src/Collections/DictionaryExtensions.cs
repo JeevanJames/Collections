@@ -1,22 +1,5 @@
-﻿#region --- License & Copyright Notice ---
-/*
-Custom collections and collection extensions for .NET
-Copyright (c) 2018-2020 Jeevan James
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-#endregion
+﻿// Copyright (c) 2018-2023 Jeevan James
+// Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
 #if EXPLICIT
 using System;
@@ -80,7 +63,6 @@ namespace System.Collections.Generic
             return dictionary;
         }
 
-#if NETSTANDARD2_0
         public static IDictionary<TKey, TValue> AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
             params (TKey key, TValue value)[] kvps)
         {
@@ -94,7 +76,6 @@ namespace System.Collections.Generic
 
             return dictionary;
         }
-#endif
 
         /// <summary>
         ///     Gets the value for the specified key in a dictionary. If the key does not exist, the
@@ -111,14 +92,13 @@ namespace System.Collections.Generic
         /// </returns>
         /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            TValue defaultValue = default)
+            TValue? defaultValue = default)
         {
             if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
         }
 
-#if NETSTANDARD2_0 || NET461
         /// <summary>
         ///     Gets the value for the specified key in a dictionary. If the key does not exist, the
         ///     <paramref name="defaultValue"/> value is returned.
@@ -134,13 +114,12 @@ namespace System.Collections.Generic
         /// </returns>
         /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
         public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary,
-            TKey key, TValue defaultValue = default)
+            TKey key, TValue? defaultValue = default)
         {
             if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
         }
-#endif
 
         /// <summary>
         ///     Gets the value associated with the specified key. If the key does not exist, the
