@@ -11,7 +11,7 @@ using Shouldly;
 using Xunit;
 
 #if EXPLICIT
-using Collections.Net.Dictionary;
+using Collections.Net.Extensions.DictionaryExtensions;
 #endif
 
 namespace Collection.Tests.DictionaryExtensions

@@ -13,7 +13,7 @@ using Shouldly;
 using Xunit;
 
 #if EXPLICIT
-using Collections.Net.List;
+using Collections.Net.Extensions.ListExtensions;
 #endif
 
 namespace Collection.Tests.CollectionExtensions

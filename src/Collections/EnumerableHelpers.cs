@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
 using System.Security.Cryptography;
-// ReSharper disable CheckNamespace
 
+// ReSharper disable CheckNamespace
 #if EXPLICIT
-namespace Collections.Net.EnumerableEx;
+namespace Collections.Net;
 #else
 namespace System.Collections.Generic;
 #endif
@@ -61,9 +61,9 @@ public static class EnumerableHelpers
     ///     Creates an <see cref="IEnumerable{Byte}"/> with <paramref name="count"/> number of elements,
     ///     each initialized with a random value between <paramref name="min"/> and <paramref name="max"/>.
     /// </summary>
-    /// <param name="count">The number of items in the <see cref="IEnumerable{T}"/>.</param>
-    /// <param name="min"></param>
-    /// <param name="max"></param>
+    /// <param name="count">The number of items in the <see cref="IEnumerable{Byte}"/>.</param>
+    /// <param name="min">The minimum inclusive value of the random numbers to generate.</param>
+    /// <param name="max">The maximum inclusive value of the random numbers to generate.</param>
     /// <returns>
     ///     An <see cref="IEnumerable{Byte}"/> instance with <paramref name="count"/> elements, with
     ///     each value being a random value.
@@ -81,10 +81,21 @@ public static class EnumerableHelpers
         }
     }
 
+    /// <summary>
+    ///     Creates an <see cref="IEnumerable{Int32}"/> with <paramref name="count"/> number of elements,
+    ///     each initialized with a random value between <paramref name="min"/> and <paramref name="max"/>.
+    /// </summary>
+    /// <param name="count">The number of items in the <see cref="IEnumerable{Int32}"/>.</param>
+    /// <param name="min">The minimum inclusive value of the random numbers to generate.</param>
+    /// <param name="max">The maximum inclusive value of the random numbers to generate.</param>
+    /// <returns>
+    ///     An <see cref="IEnumerable{Int32}"/> instance with <paramref name="count"/> elements, with
+    ///     each value being a random value.
+    /// </returns>
     public static IEnumerable<int> CreateRandomInts(int count, int min = int.MinValue, int max = int.MaxValue)
     {
         byte[] buffer = new byte[sizeof(int)];
-        long zeroBasedInclusiveMax = (long)max - (long)min + 1;
+        long zeroBasedInclusiveMax = max - min + 1;
 
         for (int i = 0; i < count; i++)
         {

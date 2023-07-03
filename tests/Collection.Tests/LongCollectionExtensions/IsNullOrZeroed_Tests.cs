@@ -6,7 +6,7 @@ using Shouldly;
 using Xunit;
 
 #if EXPLICIT
-using Collections.Net.Numeric;
+using Collections.Net.Extensions.Numeric;
 #endif
 
 namespace Collection.Tests.LongCollectionExtensions

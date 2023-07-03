@@ -4,7 +4,7 @@
 using Collection.Tests.DataAttributes;
 
 #if EXPLICIT
-using Collections.Net.EnumerablesEx;
+using Collections.Net.Extensions.EnumerableExtensions;
 #endif
 
 using Shouldly;

@@ -3,7 +3,7 @@
 
 // ReSharper disable CheckNamespace
 #if EXPLICIT
-namespace Collections.Net.EnumerableEx;
+namespace Collections.Net.Extensions.EnumerableExtensions.NoCapture;
 #else
 namespace System.Collections.Generic;
 #endif

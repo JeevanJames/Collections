@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-
 using Collection.Tests.DataAttributes;
 
 using Shouldly;
@@ -11,7 +8,7 @@ using Shouldly;
 using Xunit;
 
 #if EXPLICIT
-using Collections.Net.Dictionary;
+using Collections.Net.Extensions.DictionaryExtensions;
 #endif
 
 namespace Collection.Tests.DictionaryExtensions

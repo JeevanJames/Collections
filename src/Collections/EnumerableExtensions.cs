@@ -1,13 +1,12 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
+// ReSharper disable CheckNamespace
 #if EXPLICIT
-using Collections.Net.List;
+using Collections.Net.Extensions.ListExtensions;
 
-// ReSharper disable once CheckNamespace
-namespace Collections.Net.EnumerablesEx;
+namespace Collections.Net.Extensions.EnumerableExtensions;
 #else
-// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic;
 #endif
 
@@ -205,7 +204,7 @@ public static class EnumerableExtensions
             }
         }
 
-        if (chunk != null && currentIndex > 0)
+        if (chunk is not null && currentIndex > 0)
         {
             var trailingChunk = new T[currentIndex];
             Array.Copy(chunk, 0, trailingChunk, 0, currentIndex);
@@ -281,7 +280,7 @@ public static class EnumerableExtensions
     /// <returns><c>true</c>, if the sequence if not <c>null</c> and has elements.</returns>
     public static bool IsNotNullOrEmpty<T>(this IEnumerable<T>? sequence)
     {
-        return sequence != null && sequence.Any();
+        return sequence is not null && sequence.Any();
     }
 
     /// <summary>
@@ -426,7 +425,7 @@ public static class EnumerableExtensions
             throw new ArgumentOutOfRangeException(nameof(iterations));
 
         T[] array = sequence.ToArray();
-        ListExtensions.ShuffleInplace(array, iterations);
+        array.ShuffleInplace(iterations);
         return array;
     }
 

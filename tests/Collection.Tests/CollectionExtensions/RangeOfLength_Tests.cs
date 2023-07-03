@@ -6,7 +6,7 @@ using Shouldly;
 using Xunit;
 
 #if EXPLICIT
-using Collections.Net.Collection;
+using Collections.Net.Extensions.CollectionExtensions;
 #endif
 
 namespace Collection.Tests.CollectionExtensions
