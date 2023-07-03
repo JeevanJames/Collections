@@ -61,9 +61,7 @@ public static class CharCollectionExtensions
     /// </returns>
     public static bool IsNullOrZeroed(this ICollection<char>? chars)
     {
-        if (chars is null || chars.Count == 0)
-            return true;
-        return chars.All(b => b == default);
+        return chars is null || chars.Count == 0 || chars.All(b => b == default);
     }
 
     /// <summary>
@@ -228,7 +226,7 @@ public static class CharCollectionExtensions
             int startIndex = locationIdx > 0 ? locations[locationIdx - 1] + sequence.Length : start;
             int endIndex = locations[locationIdx] - 1;
             if (endIndex < startIndex)
-                results.Add(new char[0]);
+                results.Add(Array.Empty<char>());
             else
             {
                 char[] splitItems = new char[endIndex - startIndex + 1];
@@ -238,7 +236,7 @@ public static class CharCollectionExtensions
         }
 
         if (locations[locations.Length - 1] + sequence.Length > start + count - 1)
-            results.Add(new char[0]);
+            results.Add(Array.Empty<char>());
         else
         {
             char[] splitItems = new char[start + count - locations[locations.Length - 1] - sequence.Length];

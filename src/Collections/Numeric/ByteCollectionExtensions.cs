@@ -228,7 +228,7 @@ public static class ByteCollectionExtensions
             int startIndex = locationIdx > 0 ? locations[locationIdx - 1] + sequence.Length : start;
             int endIndex = locations[locationIdx] - 1;
             if (endIndex < startIndex)
-                results.Add(new byte[0]);
+                results.Add(Array.Empty<byte>());
             else
             {
                 byte[] splitItems = new byte[endIndex - startIndex + 1];
@@ -238,7 +238,7 @@ public static class ByteCollectionExtensions
         }
 
         if (locations[locations.Length - 1] + sequence.Length > start + count - 1)
-            results.Add(new byte[0]);
+            results.Add(Array.Empty<byte>());
         else
         {
             byte[] splitItems = new byte[start + count - locations[locations.Length - 1] - sequence.Length];

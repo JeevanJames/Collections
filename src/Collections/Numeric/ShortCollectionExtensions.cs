@@ -228,7 +228,7 @@ public static class ShortCollectionExtensions
             int startIndex = locationIdx > 0 ? locations[locationIdx - 1] + sequence.Length : start;
             int endIndex = locations[locationIdx] - 1;
             if (endIndex < startIndex)
-                results.Add(new short[0]);
+                results.Add(Array.Empty<short>());
             else
             {
                 short[] splitItems = new short[endIndex - startIndex + 1];
@@ -238,7 +238,7 @@ public static class ShortCollectionExtensions
         }
 
         if (locations[locations.Length - 1] + sequence.Length > start + count - 1)
-            results.Add(new short[0]);
+            results.Add(Array.Empty<short>());
         else
         {
             short[] splitItems = new short[start + count - locations[locations.Length - 1] - sequence.Length];

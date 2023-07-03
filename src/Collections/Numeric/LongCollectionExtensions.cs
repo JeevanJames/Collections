@@ -228,7 +228,7 @@ public static class LongCollectionExtensions
             int startIndex = locationIdx > 0 ? locations[locationIdx - 1] + sequence.Length : start;
             int endIndex = locations[locationIdx] - 1;
             if (endIndex < startIndex)
-                results.Add(new long[0]);
+                results.Add(Array.Empty<long>());
             else
             {
                 long[] splitItems = new long[endIndex - startIndex + 1];
@@ -238,7 +238,7 @@ public static class LongCollectionExtensions
         }
 
         if (locations[locations.Length - 1] + sequence.Length > start + count - 1)
-            results.Add(new long[0]);
+            results.Add(Array.Empty<long>());
         else
         {
             long[] splitItems = new long[start + count - locations[locations.Length - 1] - sequence.Length];
