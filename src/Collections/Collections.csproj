@@ -2,9 +2,6 @@
 
     <PropertyGroup Label="Build">
         <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
         <AssemblyName>Collections.NET</AssemblyName>
         <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>

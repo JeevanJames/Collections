@@ -1,0 +1,18 @@
+<Project>
+
+    <PropertyGroup Label="Build">
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Debug;Release;Debug_Explicit;Release_Explicit</Configurations>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration) == 'Debug_Explicit'">
+        <DefineConstants>EXPLICIT;DEBUG</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration) == 'Release_Explicit'">
+        <DefineConstants>EXPLICIT;RELEASE</DefineConstants>
+    </PropertyGroup>
+
+</Project>

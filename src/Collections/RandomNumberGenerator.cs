@@ -17,7 +17,7 @@ namespace System.Collections.Generic
     /// </summary>
     internal sealed class Rng
     {
-        private readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
+        private readonly RNGCryptoServiceProvider _generator = new();
         private readonly byte[] _buffer = new byte[sizeof(int)];
 
         /// <summary>

@@ -1,44 +1,40 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+#if EXPLICIT
+using Collections.Net.EnumerablesEx;
+#endif
+
 using Shouldly;
 using Xunit;
 
-#if EXPLICIT
-using Collections.Net.Enumerable;
-#endif
+namespace Collection.Tests.CollectionExtensions;
 
-namespace Collection.Tests.CollectionExtensions
+public sealed class IsEmptyTests
 {
-    public sealed class IsEmpty_Tests
+    [Fact]
+    public void Throws_if_collection_is_null()
     {
-        [Fact]
-        public void Throws_if_collection_is_null()
-        {
-            IEnumerable<int> collection = null;
-            Should.Throw<ArgumentNullException>(() => collection.IsEmpty());
-        }
+        IEnumerable<int> collection = null!;
+        Should.Throw<ArgumentNullException>(() => collection.IsEmpty());
+    }
 
-        [Fact]
-        public void Returns_true_if_collection_is_empty()
-        {
-            IEnumerable<int> collection = new int[0];
-            collection.IsEmpty().ShouldBeTrue();
-        }
+    [Fact]
+    public void Returns_true_if_collection_is_empty()
+    {
+        IEnumerable<int> collection = Array.Empty<int>();
+        collection.IsEmpty().ShouldBeTrue();
+    }
 
-        [Theory, MemberData(nameof(NotEmptyCollections))]
-        public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
-        {
-            collection.IsEmpty().ShouldBeFalse();
-        }
+    [Theory, MemberData(nameof(NotEmptyCollections))]
+    public void Returns_false_if_collection_is_not_empty(IEnumerable<int> collection)
+    {
+        collection.IsEmpty().ShouldBeFalse();
+    }
 
-        public static IEnumerable<object[]> NotEmptyCollections()
-        {
-            yield return new object[] {Enumerable.Range(1, 5)};
-            yield return new object[] {new[] {1, 2, 3, 4, 5}};
-        }
+    public static IEnumerable<object[]> NotEmptyCollections()
+    {
+        yield return new object[] {Enumerable.Range(1, 5)};
+        yield return new object[] {new[] {1, 2, 3, 4, 5}};
     }
 }

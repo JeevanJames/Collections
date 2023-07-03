@@ -2,12 +2,10 @@
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
 #if EXPLICIT
-using System;
-using System.Collections.Generic;
-
 using Collections.Net.List;
 
-namespace Collections.Net.Enumerable;
+// ReSharper disable once CheckNamespace
+namespace Collections.Net.EnumerablesEx;
 #else
 // ReSharper disable once CheckNamespace
 namespace System.Collections.Generic;
@@ -185,7 +183,7 @@ public static class EnumerableExtensions
         return sequence.Any(check);
     }
 
-    public static IEnumerable<T[]> Chunk<T>(this IEnumerable<T> sequence, int chunkSize)
+    public static IEnumerable<T[]> ChunkEx<T>(this IEnumerable<T> sequence, int chunkSize)
     {
         if (sequence is null)
             throw new ArgumentNullException(nameof(sequence));

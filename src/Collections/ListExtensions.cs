@@ -1,17 +1,12 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
-using System.Linq;
-
+// ReSharper disable CheckNamespace
 #if EXPLICIT
-using System;
-using System.Collections.Generic;
-
 using Collections.Net.Collection;
 
 namespace Collections.Net.List
 #else
-// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {

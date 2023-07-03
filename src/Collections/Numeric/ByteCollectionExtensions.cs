@@ -4,13 +4,10 @@
 using System.Globalization;
 using System.Text;
 
+// ReSharper disable CheckNamespace
 #if EXPLICIT
-using System;
-using System.Collections.Generic;
-
 namespace Collections.Net.Numeric
 #else
-// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 #endif
 {
