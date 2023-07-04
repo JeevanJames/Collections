@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
-// Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
+// Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
 #if EXPLICIT
 using System.Collections;
@@ -24,11 +24,10 @@ public partial class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, IList
             valuesEntry = CreateList();
             if (valuesEntry is null)
             {
-                string errorMessage =
-                    $"The {GetType().Name}.CreateList method return a null IList<{typeof(TValue).FullName}."
-                    + Environment.NewLine
-                    + "Ensure that the method return a non-null value.";
-                throw new InvalidOperationException(errorMessage);
+                throw new InvalidOperationException($"""
+                    The {GetType().Name}.CreateList method return a null IList<{typeof(TValue).FullName}.
+                    Ensure that the method return a non-null value.
+                    """);
             }
 
             base.Add(key, valuesEntry);

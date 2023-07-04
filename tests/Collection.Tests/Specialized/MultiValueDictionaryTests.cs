@@ -29,5 +29,31 @@ public sealed class MultiValueDictionaryTests
             countries.ShouldNotBeNull();
             countries.Count.ShouldBe(2);
         }
+
+        [Fact]
+        public void TripleDictionaryTest()
+        {
+            var students = new Dictionary<string, string, int>
+            {
+                { "ID001", "Ryan", 14 },
+                { "ID002", "Emma", 7 }
+            };
+
+            students.ShouldNotBeNull();
+            students.Count.ShouldBe(2);
+        }
+
+        [Fact]
+        public void TripleDictionaryInitializerTest()
+        {
+            var students = new Dictionary<string, string, int>
+            {
+                ["ID001"] = ("Ryan", 14),
+                ["ID002"] = ("Emma", 7),
+            };
+
+            students.ShouldNotBeNull();
+            students.Count.ShouldBe(2);
+        }
     }
 }

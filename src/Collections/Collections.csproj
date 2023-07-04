@@ -3,8 +3,16 @@
     <PropertyGroup Label="Build">
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Collections.Net</RootNamespace>
-        <AssemblyName>$(RootNamespace)</AssemblyName>
+        <AssemblyName>Collections.NET</AssemblyName>
         <DocumentationFile>Properties\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration) == 'Release'">
+        <AssemblyName>Collections.NET</AssemblyName>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration) == 'Release_Explicit'">
+        <AssemblyName>Collections.NET.ExplicitNs</AssemblyName>
     </PropertyGroup>
 
     <PropertyGroup Label="Errors and Warnings">
@@ -14,8 +22,7 @@
     </PropertyGroup>
 
     <PropertyGroup Label="Package">
-        <PackageId>Collections.NET</PackageId>
-        <Version>1.6.2</Version>
+        <Version>1.8.0</Version>
         <Authors>Jeevan James</Authors>
         <Company>Jeevan James</Company>
         <Description>Collection extensions and custom collections for .NET.</Description>
