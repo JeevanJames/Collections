@@ -11,6 +11,7 @@ namespace System.Collections.Specialized;
 #endif
 
 public partial class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, IList<TValue>>, IMultiValueDictionary<TKey, TValue>
+    where TKey : notnull
 {
     public void Add(TKey key, params TValue[] values)
     {
@@ -19,7 +20,7 @@ public partial class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, IList
 
     public void Add(TKey key, IEnumerable<TValue> values)
     {
-        if (!TryGetValue(key, out IList<TValue> valuesEntry))
+        if (!TryGetValue(key, out IList<TValue>? valuesEntry))
         {
             valuesEntry = CreateList();
             if (valuesEntry is null)
@@ -57,7 +58,7 @@ public partial class MultiValueDictionary<TKey, TValue> : ILookup<TKey, TValue>
     }
 
     IEnumerable<TValue> ILookup<TKey, TValue>.this[TKey key]
-        => TryGetValue(key, out IList<TValue> values) ? values : Enumerable.Empty<TValue>();
+        => TryGetValue(key, out IList<TValue>? values) ? values : Enumerable.Empty<TValue>();
 }
 
 internal sealed class GroupingImpl<TKey, TValue> : IGrouping<TKey, TValue>

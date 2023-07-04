@@ -11,7 +11,7 @@ namespace Benchmarks;
 [MemoryDiagnoser]
 public class NoCaptureVsCaptureBenchmarks
 {
-    private IEnumerable<Data> _collection;
+    private IEnumerable<Data> _collection = null!;
 
     [GlobalSetup]
     public void Setup()

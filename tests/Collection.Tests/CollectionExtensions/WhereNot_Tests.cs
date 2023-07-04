@@ -24,8 +24,8 @@ public sealed class CollectionExtensionsWhereNotTests
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
     public void Throws_if_predicate_is_null(IEnumerable<int> collection)
     {
-        Should.Throw<ArgumentNullException>(() => collection.WhereNot((Func<int, bool>)null));
-        Should.Throw<ArgumentNullException>(() => collection.WhereNot((Func<int, int, bool>)null));
+        Should.Throw<ArgumentNullException>(() => collection.WhereNot((Func<int, bool>)null!));
+        Should.Throw<ArgumentNullException>(() => collection.WhereNot((Func<int, int, bool>)null!));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]

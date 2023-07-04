@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
 
+using System.Diagnostics.CodeAnalysis;
+
 #if EXPLICIT
 using System.Collections;
 
@@ -34,6 +36,7 @@ public abstract partial class DirectoryBase<TKey, TValue>
 }
 
 public abstract partial class DirectoryBase<TKey, TValue> : IDictionary<TKey, TValue>
+    where TKey : notnull
 {
     private readonly IDictionary<TKey, TValue> _dictionaryImpl = new Dictionary<TKey, TValue>();
 
@@ -91,7 +94,11 @@ public abstract partial class DirectoryBase<TKey, TValue> : IDictionary<TKey, TV
         return RemoveItem(key);
     }
 
+#if NET7_0_OR_GREATER
+    public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
+#else
     public bool TryGetValue(TKey key, out TValue value)
+#endif
     {
         return _dictionaryImpl.TryGetValue(key, out value);
     }

@@ -13,7 +13,7 @@ using Collections.Net.Extensions.Numeric;
 
 namespace Collection.Tests.ByteCollectionExtensions;
 
-public sealed class IndexOfSequences_Tests
+public sealed class IndexOfSequencesTests
 {
     [Theory, ByteArray(CollectionType.Null)]
     public void Throws_if_bytes_are_null(IList<byte> bytes)
@@ -36,7 +36,7 @@ public sealed class IndexOfSequences_Tests
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Throws_if_sequence_is_null(IList<byte> bytes)
     {
-        Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequences(0, 100, null));
+        Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequences(0, 100, sequence: null!));
     }
 
     [Theory]

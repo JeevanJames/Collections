@@ -26,15 +26,15 @@ public sealed class ToListTests
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
     public void Throws_if_predicate_is_null(IEnumerable<int> collection)
     {
-        Should.Throw<ArgumentNullException>(() => collection.ToList(predicate: null));
-        Should.Throw<ArgumentNullException>(() => collection.ToList(null, n => n.ToString()));
+        Should.Throw<ArgumentNullException>(() => collection.ToList(predicate: null!));
+        Should.Throw<ArgumentNullException>(() => collection.ToList(predicate: null!, n => n.ToString()));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
     public void Throws_if_converter_is_null(IEnumerable<int> collection)
     {
-        Should.Throw<ArgumentNullException>(() => collection.ToList(converter: (Func<int, string>) null));
-        Should.Throw<ArgumentNullException>(() => collection.ToList(n => n % 2 == 0, (Func<int, string>) null));
+        Should.Throw<ArgumentNullException>(() => collection.ToList(converter: (Func<int, string>)null!));
+        Should.Throw<ArgumentNullException>(() => collection.ToList(n => n % 2 == 0, (Func<int, string>)null!));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]

@@ -18,16 +18,16 @@ public sealed class ToArrayTests
     [Theory, DataAttributes.Collection(CollectionType.Null)]
     public void Throws_if_collection_is_null(IEnumerable<int> collection)
     {
-        Should.Throw<ArgumentNullException>(() => collection.ToArray<int, string>(n => n.ToString()));
-        Should.Throw<ArgumentNullException>(() => collection.ToArray<int>(n => n % 2 == 0));
+        Should.Throw<ArgumentNullException>(() => collection.ToArray(n => n.ToString()));
+        Should.Throw<ArgumentNullException>(() => collection.ToArray(n => n % 2 == 0));
         Should.Throw<ArgumentNullException>(() => collection.ToArray(n => n % 2 == 0, n => n * 2));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
     public void Throws_if_predicate_is_null(IEnumerable<int> collection)
     {
-        Should.Throw<ArgumentNullException>(() => collection.ToArray<int>(null));
-        Should.Throw<ArgumentNullException>(() => collection.ToArray(null, n => n.ToString()));
+        Should.Throw<ArgumentNullException>(() => collection.ToArray(predicate: null!));
+        Should.Throw<ArgumentNullException>(() => collection.ToArray(predicate: null!, n => n.ToString()));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]

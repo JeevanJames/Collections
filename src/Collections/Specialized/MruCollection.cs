@@ -159,8 +159,7 @@ public partial class MruCollection<T> : Collection<T>
     /// <returns>True if an item was matched and removed; otherwise false</returns>
     private bool RemoveExisting(T item)
     {
-        IEqualityComparer<T>? comparer = _options.EqualityComparer;
-        if (comparer is null)
+        IEqualityComparer<T>? comparer = _options.EqualityComparer ??
             throw new InvalidOperationException("Unexpected condition. Collection element equality comparer is null.");
 
         for (int i = 0; i < Count; i++)
@@ -204,7 +203,7 @@ public partial class MruCollection<T>
     /// <typeparam name="TItem"></typeparam>
     private sealed class EquatableEqualityComparer<TItem> : IEqualityComparer<TItem>
     {
-        bool IEqualityComparer<TItem>.Equals(TItem x, TItem y)
+        bool IEqualityComparer<TItem>.Equals(TItem? x, TItem? y)
         {
             if (x is null && y is null)
                 return true;
@@ -248,7 +247,7 @@ public sealed class MruCollectionOptions<T>
     /// </summary>
     public MruTriggers Triggers { get; set; }
 
-    public static readonly MruCollectionOptions<T> Default = new MruCollectionOptions<T>();
+    public static readonly MruCollectionOptions<T> Default = new();
 }
 
 /// <summary>

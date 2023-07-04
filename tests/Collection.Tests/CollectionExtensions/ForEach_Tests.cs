@@ -26,8 +26,8 @@ public sealed class ForEachTests
     {
         IEnumerable<int> collection = new[] {1, 2, 3, 4, 5, 6};
 
-        Should.Throw<ArgumentNullException>(() => collection.ForEach((Action<int>) null));
-        Should.Throw<ArgumentNullException>(() => collection.ForEach((Action<int, int>) null));
+        Should.Throw<ArgumentNullException>(() => collection.ForEach((Action<int>) null!));
+        Should.Throw<ArgumentNullException>(() => collection.ForEach((Action<int, int>) null!));
     }
 
     [Fact]

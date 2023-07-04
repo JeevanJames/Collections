@@ -55,7 +55,9 @@ public static class EnumerableHelpers
             yield return valueFactory(i);
     }
 
+#if NETSTANDARD2_0
     private static readonly RNGCryptoServiceProvider _rng = new();
+#endif
 
     /// <summary>
     ///     Creates an <see cref="IEnumerable{Byte}"/> with <paramref name="count"/> number of elements,
@@ -75,7 +77,11 @@ public static class EnumerableHelpers
 
         for (int i = 0; i < count; i++)
         {
+#if NETSTANDARD2_0
             _rng.GetBytes(buffer);
+#else
+            RandomNumberGenerator.Fill(buffer);
+#endif
             int randomValue = (buffer[0] % zeroBasedInclusiveMax) + min;
             yield return (byte)randomValue;
         }
@@ -99,7 +105,11 @@ public static class EnumerableHelpers
 
         for (int i = 0; i < count; i++)
         {
+#if NETSTANDARD2_0
             _rng.GetBytes(buffer);
+#else
+            RandomNumberGenerator.Fill(buffer);
+#endif
             long randomValue = (Math.Abs(BitConverter.ToInt32(buffer, 0)) % zeroBasedInclusiveMax) + min;
             yield return (int)randomValue;
         }

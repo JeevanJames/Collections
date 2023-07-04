@@ -93,7 +93,7 @@ public static class DictionaryExtensions
     {
         if (dictionary is null)
             throw new ArgumentNullException(nameof(dictionary));
-        return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
+        return dictionary.TryGetValue(key, out TValue? value) ? value : defaultValue!;
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ public static class DictionaryExtensions
     {
         if (dictionary is null)
             throw new ArgumentNullException(nameof(dictionary));
-        return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue!;
+        return dictionary.TryGetValue(key, out TValue? value) ? value : defaultValue!;
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public static class DictionaryExtensions
         if (dictionary is null)
             throw new ArgumentNullException(nameof(dictionary));
 
-        if (dictionary.TryGetValue(key, out TValue existingValue))
+        if (dictionary.TryGetValue(key, out TValue? existingValue))
             return existingValue;
 
         dictionary.Add(key, value);
@@ -165,7 +165,7 @@ public static class DictionaryExtensions
         if (valueGetter is null)
             throw new ArgumentNullException(nameof(valueGetter));
 
-        if (dictionary.TryGetValue(key, out TValue existingValue))
+        if (dictionary.TryGetValue(key, out TValue? existingValue))
             return existingValue;
 
         TValue value = valueGetter(key);
@@ -195,7 +195,7 @@ public static class DictionaryExtensions
         if (valueGetter is null)
             throw new ArgumentNullException(nameof(valueGetter));
 
-        if (dictionary.TryGetValue(key, out TValue existingValue))
+        if (dictionary.TryGetValue(key, out TValue? existingValue))
             return existingValue;
 
         TValue value = valueGetter(key, dictionary);

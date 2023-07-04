@@ -15,7 +15,9 @@ namespace System.Collections.Generic;
 /// </summary>
 internal sealed class Rng
 {
+#if NETSTANDARD2_0
     private readonly RNGCryptoServiceProvider _generator = new();
+#endif
     private readonly byte[] _buffer = new byte[sizeof(int)];
 
     /// <summary>
@@ -39,7 +41,11 @@ internal sealed class Rng
     /// <returns>The random number.</returns>
     internal int Next()
     {
+#if NETSTANDARD2_0
         _generator.GetBytes(_buffer);
+#else
+        RandomNumberGenerator.Fill(_buffer);
+#endif
         return Math.Abs(BitConverter.ToInt32(_buffer, 0) % _max);
     }
 }

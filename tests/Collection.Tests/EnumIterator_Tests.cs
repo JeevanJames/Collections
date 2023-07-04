@@ -9,56 +9,55 @@ using Xunit;
 using Collections.Net;
 #endif
 
-namespace Collection.Tests
+namespace Collection.Tests;
+
+public sealed class EnumIteratorTests
 {
-    public sealed class EnumIterator_Tests
+    [Fact]
+    public void Returns_collection_of_enum_values()
     {
-        [Fact]
-        public void Returns_collection_of_enum_values()
+        var values = EnumIterator.For<DayOfWeek>().ToList();
+
+        values.Count.ShouldBe(7);
+        values.ShouldBe(new []
         {
-            var values = EnumIterator.For<DayOfWeek>().ToList();
+            DayOfWeek.Sunday,
+            DayOfWeek.Monday,
+            DayOfWeek.Tuesday,
+            DayOfWeek.Wednesday,
+            DayOfWeek.Thursday,
+            DayOfWeek.Friday,
+            DayOfWeek.Saturday,
+        });
+    }
 
-            values.Count.ShouldBe(7);
-            values.ShouldBe(new []
-            {
-                DayOfWeek.Sunday,
-                DayOfWeek.Monday,
-                DayOfWeek.Tuesday,
-                DayOfWeek.Wednesday,
-                DayOfWeek.Thursday,
-                DayOfWeek.Friday,
-                DayOfWeek.Saturday,
-            });
-        }
+    [Fact]
+    public void Throws_if_enum_type_is_null()
+    {
+        Should.Throw<ArgumentNullException>(() => EnumIterator.For(enumType: null!));
+    }
 
-        [Fact]
-        public void Throws_if_enum_type_is_null()
+    [Fact]
+    public void Throws_if_specified_type_is_not_enum()
+    {
+        Should.Throw<ArgumentException>(() => EnumIterator.For(typeof(EnumIteratorTests)));
+    }
+
+    [Fact]
+    public void Returns_collection_of_enum_values_based_on_type()
+    {
+        var values = EnumIterator.For(typeof(DayOfWeek)).Cast<DayOfWeek>().ToList();
+
+        values.Count.ShouldBe(7);
+        values.ShouldBe(new[]
         {
-            Should.Throw<ArgumentNullException>(() => EnumIterator.For(null));
-        }
-
-        [Fact]
-        public void Throws_if_specified_type_is_not_enum()
-        {
-            Should.Throw<ArgumentException>(() => EnumIterator.For(typeof(EnumIterator_Tests)));
-        }
-
-        [Fact]
-        public void Returns_collection_of_enum_values_based_on_type()
-        {
-            var values = EnumIterator.For(typeof(DayOfWeek)).Cast<DayOfWeek>().ToList();
-
-            values.Count.ShouldBe(7);
-            values.ShouldBe(new[]
-            {
-                DayOfWeek.Sunday,
-                DayOfWeek.Monday,
-                DayOfWeek.Tuesday,
-                DayOfWeek.Wednesday,
-                DayOfWeek.Thursday,
-                DayOfWeek.Friday,
-                DayOfWeek.Saturday,
-            });
-        }
+            DayOfWeek.Sunday,
+            DayOfWeek.Monday,
+            DayOfWeek.Tuesday,
+            DayOfWeek.Wednesday,
+            DayOfWeek.Thursday,
+            DayOfWeek.Friday,
+            DayOfWeek.Saturday,
+        });
     }
 }
