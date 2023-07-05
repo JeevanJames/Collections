@@ -36,4 +36,8 @@
         <Product>Collections.NET</Product>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Folder Include="Properties\" />
+    </ItemGroup>
+
 </Project>
