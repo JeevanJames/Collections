@@ -159,7 +159,7 @@ public partial class MruCollection<T> : Collection<T>
     /// <returns>True if an item was matched and removed; otherwise false</returns>
     private bool RemoveExisting(T item)
     {
-        IEqualityComparer<T>? comparer = _options.EqualityComparer ??
+        IEqualityComparer<T> comparer = _options.EqualityComparer ??
             throw new InvalidOperationException("Unexpected condition. Collection element equality comparer is null.");
 
         for (int i = 0; i < Count; i++)
@@ -197,8 +197,7 @@ public partial class MruCollection<T>
 {
     /// <inheritdoc />
     /// <summary>
-    ///     <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> implementation that
-    ///     wraps an <see cref="T:System.IEquatable`1" />
+    ///     <see cref="IEqualityComparer{T}"/> implementation that wraps an <see cref="IEquatable{T}"/>.
     /// </summary>
     /// <typeparam name="TItem"></typeparam>
     private sealed class EquatableEqualityComparer<TItem> : IEqualityComparer<TItem>

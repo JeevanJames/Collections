@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
-// Licensed under the Apache License, Version 2.0.  See LICENSE file in the project root for full license information.
+// Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
 #if NET7_0_OR_GREATER
 
@@ -55,30 +55,28 @@ public static class NumberCollectionExtensions
     }
 
     /// <summary>
-    ///     Indicates whether the specified numeric collection is <c>null</c>, does not contain any elements or consists
-    ///     of only zero value items.
+    ///     Indicates whether the specified numeric collection is <c>null</c>, does not contain any
+    ///     elements or consists of only zero value items.
     /// </summary>
     /// <param name="source">The numeric collection to test.</param>
     /// <returns>
-    ///     <c>true</c> if the numeric collection is <c>null</c>, does not contain any elements or consists exclusively
-    ///     of zero value items.
+    ///     <c>true</c> if the numeric collection is <c>null</c>, does not contain any elements or
+    ///     consists exclusively of zero value items.
     /// </returns>
     public static bool IsNullOrZeroed<T>(this ICollection<T>? source)
         where T : INumber<T>
     {
-        if (source is null || source.Count == 0)
-            return true;
-        return source.All(b => b == default);
+        return source is null || source.Count == 0 || source.All(b => b == default);
     }
 
     /// <summary>
-    ///     Indicates whether the specified numeric collection does not contain any elements or consists of only zero
-    ///     value items.
+    ///     Indicates whether the specified numeric collection does not contain any elements or consists
+    ///     of only zero value items.
     /// </summary>
     /// <param name="source">The numeric collection to test.</param>
     /// <returns>
-    ///     <c>true</c> if the numeric collection is <c>null</c>, does not contain any elements or consists exclusively
-    ///     of zero value items.
+    ///     <c>true</c> if the numeric collection is <c>null</c>, does not contain any elements or
+    ///     consists exclusively of zero value items.
     /// </returns>
     /// <exception cref="ArgumentNullException">Thrown if the numeric collection is <c>null</c>.</exception>
     public static bool IsZeroed<T>(this ICollection<T> source)
@@ -90,8 +88,8 @@ public static class NumberCollectionExtensions
     }
 
     /// <summary>
-    ///     Creates a <see cref="string"/> from a numeric collection that concatenates each item in the collection,
-    ///     separated by the specified delimiter.
+    ///     Creates a <see cref="string"/> from a numeric collection that concatenates each item in
+    ///     the collection, separated by the specified delimiter.
     /// </summary>
     /// <param name="source">The numeric collection from which to create the string.</param>
     /// <param name="delimiter">The optional delimiter to separate each item in the collection.</param>
@@ -138,6 +136,16 @@ public static class NumberCollectionExtensions
         return result;
     }
 
+    /// <summary>
+    ///     Returns the index of the first occurrence of the specified sequence in the numeric collection.
+    /// </summary>
+    /// <typeparam name="T">The type of the numeric collection's elements.</typeparam>
+    /// <param name="source">The numeric collection.</param>
+    /// <param name="sequence">The sequence to find in the numeric collection.</param>
+    /// <returns>
+    ///     The index of the sequence within the numeric collection, or <c>-1</c> if the sequence could
+    ///     not be found.
+    /// </returns>
     public static int IndexOfSequence<T>(this IList<T>? source, params T[] sequence)
         where T : INumber<T>
     {
