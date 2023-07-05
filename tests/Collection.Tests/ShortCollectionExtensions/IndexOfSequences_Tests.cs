@@ -18,19 +18,19 @@ public sealed class IndexOfSequencesTests
     [Theory, ShortArray(CollectionType.Null)]
     public void Throws_if_shorts_are_null(IList<short> shorts)
     {
-        Should.Throw<ArgumentNullException>(() => shorts.IndexOfSequences(1));
+        Should.Throw<ArgumentNullException>(() => shorts.IndexOfSequences<short>(1));
     }
 
     [Theory, ShortArray(CollectionType.NonEmpty)]
     public void Throws_if_start_is_negative(IList<short> shorts)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => shorts.IndexOfSequences(-1, 10, 1));
+        Should.Throw<ArgumentOutOfRangeException>(() => shorts.IndexOfSequences<short>(-1, 10, 1));
     }
 
     [Theory, ShortArray(CollectionType.NonEmpty)]
     public void Throws_if_count_is_negative(IList<short> shorts)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => shorts.IndexOfSequences(0, -1, 1));
+        Should.Throw<ArgumentOutOfRangeException>(() => shorts.IndexOfSequences<short>(0, -1, 1));
     }
 
     [Theory, ShortArray(CollectionType.NonEmpty)]

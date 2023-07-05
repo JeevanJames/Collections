@@ -27,7 +27,7 @@ public static class ObjectExtensions
     /// </param>
     /// <returns>The sequence of instances traversed.</returns>
     public static IEnumerable<T> ParentChain<T>(this T? start,
-        Func<T, T> parentSelector,
+        Func<T, T?> parentSelector,
         Func<T, bool>? stopCondition = null,
         bool skipStart = false)
         where T : class
@@ -38,7 +38,7 @@ public static class ObjectExtensions
         if (start is null)
             yield break;
 
-        T current = skipStart ? parentSelector(start) : start;
+        T? current = skipStart ? parentSelector(start) : start;
         while (current is not null)
         {
             if (stopCondition is not null && stopCondition(current))
@@ -50,7 +50,7 @@ public static class ObjectExtensions
     }
 
     public static IEnumerable<T> ParentChainReverse<T>(this T? start,
-        Func<T, T> parentSelector,
+        Func<T, T?> parentSelector,
         Func<T, bool>? stopCondition = null,
         bool skipStart = false)
         where T : class
@@ -79,7 +79,7 @@ public static class ObjectExtensions
     ///     Thrown if <paramref name="start"/>, <paramref name="parentSelector"/> or
     ///     <paramref name="predicate"/> is <c>null</c>.
     /// </exception>
-    public static T? FindParent<T>(this T start, Func<T, T> parentSelector, Func<T, bool> predicate)
+    public static T? FindParent<T>(this T start, Func<T, T?> parentSelector, Func<T, bool> predicate)
         where T : class
     {
         if (start is null)
@@ -89,7 +89,7 @@ public static class ObjectExtensions
         if (predicate is null)
             throw new ArgumentNullException(nameof(predicate));
 
-        T current = parentSelector(start);
+        T? current = parentSelector(start);
         while (current is not null)
         {
             if (predicate(current))
@@ -114,7 +114,7 @@ public static class ObjectExtensions
     /// <exception cref="ArgumentNullException">
     ///     Thrown if <paramref name="start"/> or <paramref name="parentSelector"/> is <c>null</c>.
     /// </exception>
-    public static T FindRootParent<T>(this T start, Func<T, T> parentSelector)
+    public static T FindRootParent<T>(this T start, Func<T, T?> parentSelector)
         where T : class
     {
         if (start is null)
@@ -123,7 +123,7 @@ public static class ObjectExtensions
             throw new ArgumentNullException(nameof(parentSelector));
 
         T current = start;
-        T parent = parentSelector(current);
+        T? parent = parentSelector(current);
         while (parent is not null)
         {
             current = parent;
@@ -147,6 +147,11 @@ public static class ObjectExtensions
     public static IList<T> ToListCollection<T>(this T instance)
     {
         return new List<T> { instance };
+    }
+
+    public static IReadOnlyList<T> ToReadOnlyListCollection<T>(this T instance)
+    {
+        return new List<T> { instance }.AsReadOnly();
     }
 
     public static T[] ToArrayCollection<T>(this T instance)

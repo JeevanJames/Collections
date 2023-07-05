@@ -13,7 +13,7 @@ using Collections.Net.Extensions.Numeric;
 
 namespace Collection.Tests.ByteCollectionExtensions;
 
-public sealed class IsEqualTo_Tests
+public sealed class IsEqualToTests
 {
     [Theory]
     [InlineData(new byte[0])]
@@ -61,6 +61,6 @@ public sealed class IsEqualTo_Tests
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Returns_true_for_params_array(IList<byte> bytes)
     {
-        bytes.IsEqualTo(1, 2, 3, 4, 5, 6).ShouldBeTrue();
+        bytes.IsEqualTo<byte>(1, 2, 3, 4, 5, 6).ShouldBeTrue();
     }
 }

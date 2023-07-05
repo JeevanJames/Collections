@@ -24,13 +24,13 @@ public sealed class SplitBySequenceTests
     [Theory, ShortArray(CollectionType.NonEmpty)]
     public void Throws_if_start_is_negative(short[] shorts)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => shorts.SplitBySequence(-1, 100, 1, 2));
+        Should.Throw<ArgumentOutOfRangeException>(() => shorts.SplitBySequence<short>(-1, 100, 1, 2));
     }
 
     [Theory, ShortArray(CollectionType.NonEmpty)]
     public void Throws_if_count_is_negative(short[] shorts)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => shorts.SplitBySequence(0, -1, 1, 2));
+        Should.Throw<ArgumentOutOfRangeException>(() => shorts.SplitBySequence<short>(0, -1, 1, 2));
     }
 
     [Theory, ShortArray(CollectionType.NonEmpty)]

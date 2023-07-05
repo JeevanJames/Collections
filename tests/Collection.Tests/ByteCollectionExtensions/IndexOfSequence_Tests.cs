@@ -18,19 +18,19 @@ public sealed class IndexOfSequenceTests
     [Theory, ByteArray(CollectionType.Null)]
     public void Throws_if_bytes_are_null(IList<byte> bytes)
     {
-        Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequence(1));
+        Should.Throw<ArgumentNullException>(() => bytes.IndexOfSequence<byte>(1));
     }
 
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Throws_if_start_is_negative(IList<byte> bytes)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence(-1, 10, 1));
+        Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence<byte>(-1, 10, 1));
     }
 
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Throws_if_count_is_negative(IList<byte> bytes)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence(0, -1, 1));
+        Should.Throw<ArgumentOutOfRangeException>(() => bytes.IndexOfSequence<byte>(0, -1, 1));
     }
 
     [Theory, ByteArray(CollectionType.NonEmpty)]

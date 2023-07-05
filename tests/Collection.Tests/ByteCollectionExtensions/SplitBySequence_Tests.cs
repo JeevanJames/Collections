@@ -24,13 +24,13 @@ public sealed class SplitBySequenceTests
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Throws_if_start_is_negative(byte[] bytes)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => bytes.SplitBySequence(-1, 100, 1, 2));
+        Should.Throw<ArgumentOutOfRangeException>(() => bytes.SplitBySequence<byte>(-1, 100, 1, 2));
     }
 
     [Theory, ByteArray(CollectionType.NonEmpty)]
     public void Throws_if_count_is_negative(byte[] bytes)
     {
-        Should.Throw<ArgumentOutOfRangeException>(() => bytes.SplitBySequence(0, -1, 1, 2));
+        Should.Throw<ArgumentOutOfRangeException>(() => bytes.SplitBySequence<byte>(0, -1, 1, 2));
     }
 
     [Theory, ByteArray(CollectionType.NonEmpty)]
