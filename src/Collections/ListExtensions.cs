@@ -79,7 +79,7 @@ public static class ListExtensions
     ///     Returns all indices of elements in a <paramref name="list"/> that match the specified
     ///     <paramref name="predicate"/>.
     /// </summary>
-    /// <typeparam name="T">The type of the elements of list.</typeparam>
+    /// <typeparam name="T">The type of the elements of the list.</typeparam>
     /// <param name="list">The list.</param>
     /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
     /// <returns>
@@ -101,11 +101,33 @@ public static class ListExtensions
         }
     }
 
+    /// <summary>
+    ///     Insert one or more items at a specific index in a <paramref name="list"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of the list.</typeparam>
+    /// <param name="list">The list to insert items into.</param>
+    /// <param name="index">
+    ///     The zero-based index at which to insert the items. If this value is greater or equal to
+    ///     the number of items in the list, then the items are added at the end of the list.
+    /// </param>
+    /// <param name="items">The new items to insert into the list.</param>
     public static void InsertRange<T>(this IList<T> list, int index, params T[] items)
     {
         InsertRange(list, index, (IEnumerable<T>)items);
     }
 
+    /// <summary>
+    ///     Insert one or more items at a specific index in a <paramref name="list"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of the list.</typeparam>
+    /// <param name="list">The list to insert items into.</param>
+    /// <param name="index">
+    ///     The zero-based index at which to insert the items. If this value is greater or equal to
+    ///     the number of items in the list, then the items are added at the end of the list.
+    /// </param>
+    /// <param name="items">The new items to insert into the list.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="index"/> is less than 0.</exception>
     public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T>? items)
     {
         if (list is null)
@@ -127,6 +149,19 @@ public static class ListExtensions
         }
     }
 
+    /// <summary>
+    ///    Insert one or more items at a specific index in a <paramref name="list"/> if they match
+    ///    the specified <paramref name="predicate"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of the list.</typeparam>
+    /// <param name="list">The list to insert items into.</param>
+    /// <param name="index">
+    ///     The zero-based index at which to insert the items. If this value is greater or equal to
+    ///     the number of items in the list, then the items are added at the end of the list.
+    /// </param>
+    /// <param name="items">The new items to insert into the list.</param>
+    /// <param name="predicate">The predicate that matches items to be inserted.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <c>null</c>.</exception>
     public static void InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items, Func<T, bool> predicate)
     {
         if (predicate is null)
@@ -134,24 +169,24 @@ public static class ListExtensions
         InsertRange(list, index, items.Where(predicate));
     }
 
-    public static void InsertRange<TDest, TSource>(this IList<TDest> list, int index, IEnumerable<TSource> items,
-        Func<TSource, TDest> converter)
+    public static void InsertRange<TSource, TItem>(this IList<TSource> list, int index, IEnumerable<TItem> items,
+        Func<TItem, TSource> converter)
     {
         if (converter is null)
             throw new ArgumentNullException(nameof(converter));
         InsertRange(list, index, items.Select(converter));
     }
 
-    public static void InsertRange<TDest, TSource>(this IList<TDest> list, int index, IEnumerable<TSource> items,
-        Func<TSource, bool> predicate, Func<TSource, TDest> converter,
-        Func<TDest, bool>? afterConvertPredicate = null)
+    public static void InsertRange<TSource, TItem>(this IList<TSource> list, int index, IEnumerable<TItem> items,
+        Func<TItem, bool> beforeConvertPredicate, Func<TItem, TSource> converter,
+        Func<TSource, bool>? afterConvertPredicate = null)
     {
-        if (predicate is null)
-            throw new ArgumentNullException(nameof(predicate));
+        if (beforeConvertPredicate is null)
+            throw new ArgumentNullException(nameof(beforeConvertPredicate));
         if (converter is null)
             throw new ArgumentNullException(nameof(converter));
 
-        IEnumerable<TDest> convertedItems = items.Where(predicate).Select(converter);
+        IEnumerable<TSource> convertedItems = items.Where(beforeConvertPredicate).Select(converter);
         if (afterConvertPredicate is not null)
             convertedItems = convertedItems.Where(afterConvertPredicate);
         InsertRange(list, index, convertedItems);
@@ -312,9 +347,7 @@ public static class ListExtensions
             {
                 int index1 = rng.Next();
                 int index2 = rng.Next();
-                T temp = list[index1];
-                list[index1] = list[index2];
-                list[index2] = temp;
+                (list[index1], list[index2]) = (list[index2], list[index1]);
             }
         }
     }

@@ -3,6 +3,8 @@
 
 // ReSharper disable CheckNamespace
 
+using System.Collections.ObjectModel;
+
 #if EXPLICIT
 namespace Collections.Net.Extensions.ObjectExtensions;
 #else
@@ -12,21 +14,23 @@ namespace System.Collections.Generic;
 public static class ObjectExtensions
 {
     /// <summary>
-    ///     Given a self-referencing object, this method traverses up the parent chain until the
-    ///     oldest parent is reached or the specified <paramref name="stopCondition"/> is met.
+    ///     Given a self-referencing object, this method traverses up the parent chain until the root
+    ///     parent is reached or the specified <paramref name="stopCondition"/> is met.
     /// </summary>
     /// <typeparam name="T">Type of the self-referencing object.</typeparam>
     /// <param name="start">The object to start traversing from.</param>
     /// <param name="parentSelector">
-    ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns it's parent
-    ///     instance.
+    ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns its parent instance.
     /// </param>
     /// <param name="stopCondition">Optional predicate to stop the traversal.</param>
     /// <param name="skipStart">
     ///     If <c>true</c>, skips the <paramref name="start"/> instance during traversal.
     /// </param>
     /// <returns>The sequence of instances traversed.</returns>
-    public static IEnumerable<T> ParentChain<T>(this T? start,
+    /// <exception cref="ArgumentNullException">
+    ///     Thrown if <paramref name="parentSelector"/> is <c>null</c>.
+    /// </exception>
+    public static IEnumerable<T> EnumerateParentChain<T>(this T? start,
         Func<T, T?> parentSelector,
         Func<T, bool>? stopCondition = null,
         bool skipStart = false)
@@ -49,13 +53,27 @@ public static class ObjectExtensions
         }
     }
 
-    public static IEnumerable<T> ParentChainReverse<T>(this T? start,
+    /// <summary>
+    ///     Given a self-referencing object, this method traverses from the root object till the current
+    ///     object or until the specified <paramref name="stopCondition"/> is met.
+    /// </summary>
+    /// <typeparam name="T">Type of the self-referencing object.</typeparam>
+    /// <param name="start">The object to traverse up to.</param>
+    /// <param name="parentSelector">
+    ///     Delegate that accepts an instance of <typeparamref name="T"/> and returns its parent instance.
+    /// </param>
+    /// <param name="stopCondition">Optional predicate to stop the traversal.</param>
+    /// <param name="skipStart">
+    ///     If <c>true</c>, skips the <paramref name="start"/> instance during traversal.
+    /// </param>
+    /// <returns>The sequence of instances traversed.</returns>
+    public static IEnumerable<T> EnumerateParentChainReverse<T>(this T? start,
         Func<T, T?> parentSelector,
         Func<T, bool>? stopCondition = null,
         bool skipStart = false)
         where T : class
     {
-        IEnumerable<T> chain = ParentChain(start, parentSelector, skipStart: skipStart).Reverse();
+        IEnumerable<T> chain = EnumerateParentChain(start, parentSelector, skipStart: skipStart).Reverse();
         if (stopCondition is not null)
             chain = chain.SkipWhile(item => !stopCondition(item));
         return chain;
@@ -78,7 +96,7 @@ public static class ObjectExtensions
     /// <exception cref="ArgumentNullException">
     ///     Thrown if <paramref name="start"/>, <paramref name="parentSelector"/> or
     ///     <paramref name="predicate"/> is <c>null</c>.
-    /// </exception>
+    /// </exception> 
     public static T? FindParent<T>(this T start, Func<T, T?> parentSelector, Func<T, bool> predicate)
         where T : class
     {
@@ -101,8 +119,8 @@ public static class ObjectExtensions
     }
 
     /// <summary>
-    ///     Given a self-referencing object (<paramref name="start"/>), traverses up the parent
-    ///     chain and returns the root object (whose parent is <c>null</c>).
+    ///     Given a self-referencing object (<paramref name="start"/>), traverses up the parent chain
+    ///     and returns the root object (whose parent is <c>null</c>).
     /// </summary>
     /// <typeparam name="T">Type of the self-referencing object.</typeparam>
     /// <param name="start">The object to start traversing from.</param>
@@ -139,23 +157,43 @@ public static class ObjectExtensions
     /// <typeparam name="T">The type of the single object.</typeparam>
     /// <param name="instance">The single object.</param>
     /// <returns>An <see cref="IEnumerable{T}"/> that contains the single object.</returns>
-    public static IEnumerable<T> ToEnumerable<T>(this T instance)
+    public static IEnumerable<T> AsEnumerable<T>(this T instance)
     {
         yield return instance;
     }
 
-    public static IList<T> ToListCollection<T>(this T instance)
-    {
-        return new List<T> { instance };
-    }
+    /// <summary>
+    ///     Returns an <see cref="IList{T}"/> that contains the single <paramref name="instance"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the single object.</typeparam>
+    /// <param name="instance">The single object.</param>
+    /// <returns>A <see cref="IList{T}"/> that contains the single <paramref name="instance"/>.</returns>
+    public static IList<T> AsListCollection<T>(this T instance) => new List<T>(1) { instance };
 
-    public static IReadOnlyList<T> ToReadOnlyListCollection<T>(this T instance)
-    {
-        return new List<T> { instance }.AsReadOnly();
-    }
+    /// <summary>
+    ///     Returns a new <see cref="List{T}"/> that contains the single <paramref name="instance"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the single object.</typeparam>
+    /// <param name="instance">The single object.</param>
+    /// <returns>A new <see cref="List{T}"/> that contains the single <paramref name="instance"/>.</returns>
+    public static List<T> AsConcreteList<T>(this T instance) => new(1) { instance };
 
-    public static T[] ToArrayCollection<T>(this T instance)
-    {
-        return new[] { instance };
-    }
+    /// <summary>
+    ///     Returns a new <see cref="IReadOnlyList{T}"/> that contains the single <paramref name="instance"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the single object.</typeparam>
+    /// <param name="instance">The single object.</param>
+    /// <returns>
+    ///     A new <see cref="IReadOnlyList{T}"/> that contains the single <paramref name="instance"/>.
+    /// </returns>
+    public static IReadOnlyList<T> AsReadOnlyListCollection<T>(this T instance) =>
+        new ReadOnlyCollection<T>(new[] { instance });
+
+    /// <summary>
+    ///     Returns a new array that contains the single <paramref name="instance"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the single object.</typeparam>
+    /// <param name="instance">The single object.</param>
+    /// <returns>A new <see cref="List{T}"/> that contains the single <paramref name="instance"/>.</returns>
+    public static T[] AsArrayCollection<T>(this T instance) => new[] { instance };
 }

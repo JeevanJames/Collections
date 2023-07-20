@@ -2,6 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
 // ReSharper disable CheckNamespace
+
+using System.Diagnostics.CodeAnalysis;
+
 #if EXPLICIT
 using Collections.Net.Extensions.ListExtensions;
 
@@ -291,7 +294,11 @@ public static class EnumerableExtensions
     /// <returns>
     ///     <c>true</c> if the sequence is either null or empty; otherwise <c>false</c>.
     /// </returns>
+#if NETSTANDARD2_0
     public static bool IsNullOrEmpty<T>(this IEnumerable<T>? sequence)
+#else
+    public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? sequence)
+#endif
     {
         if (sequence is null)
             return true;

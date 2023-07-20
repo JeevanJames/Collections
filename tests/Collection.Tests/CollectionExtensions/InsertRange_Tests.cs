@@ -85,7 +85,7 @@ public sealed class InsertRangeTests
     {
         Should.Throw<ArgumentNullException>(() => list.InsertRange(2, new[] {7, 8, 9}, predicate: null!));
         Should.Throw<ArgumentNullException>(() =>
-            list.InsertRange(2, new[] {"7", "8", "9"}, predicate: null!, converter: int.Parse));
+            list.InsertRange(2, new[] {"7", "8", "9"}, beforeConvertPredicate: null!, converter: int.Parse));
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NonEmpty)]
@@ -93,7 +93,7 @@ public sealed class InsertRangeTests
     {
         Should.Throw<ArgumentNullException>(() => list.InsertRange(2, new[] { 7, 8, 9 }, converter: null!));
         Should.Throw<ArgumentNullException>(() =>
-            list.InsertRange(2, new[] { "7", "8", "9" }, predicate: n => n == "8", converter: null!));
+            list.InsertRange(2, new[] { "7", "8", "9" }, beforeConvertPredicate: n => n == "8", converter: null!));
     }
 }
 

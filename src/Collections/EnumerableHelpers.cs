@@ -1,6 +1,9 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
+#if NET7_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+#endif
 using System.Security.Cryptography;
 
 // ReSharper disable CheckNamespace
@@ -112,6 +115,181 @@ public static class EnumerableHelpers
 #endif
             long randomValue = (Math.Abs(BitConverter.ToInt32(buffer, 0)) % zeroBasedInclusiveMax) + min;
             yield return (int)randomValue;
+        }
+    }
+
+    public static IEnumerable<float> CreateRandomFloats(int count, float min = float.MinValue,
+        float max = float.MaxValue)
+    {
+        byte[] buffer = new byte[sizeof(int)];
+        double zeroBasedInclusiveMax = max - min + 1;
+
+        for (int i = 0; i < count; i++)
+        {
+#if NETSTANDARD2_0
+            _rng.GetBytes(buffer);
+#else
+            RandomNumberGenerator.Fill(buffer);
+#endif
+            double randomValue = (Math.Abs(BitConverter.ToSingle(buffer, 0)) % zeroBasedInclusiveMax) + min;
+            yield return (float)randomValue;
+        }
+    }
+
+    /// <summary>
+    ///     Tries to allocate an <see cref="IList{T}"/> of the same size as the <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the list to allocate.</typeparam>
+    /// <param name="source"></param>
+    /// <returns>
+    ///     An empty list with the initial size set to the size of the <paramref name="source"/> collection.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="source"/> is <c>null</c>.</exception>
+    public static IList<T> TryAllocateListOfSize<T>(IEnumerable<T> source)
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+
+        return source switch
+        {
+            ICollection<T> list => new List<T>(list.Count),
+            IReadOnlyCollection<T> readOnlyList => new List<T>(readOnlyList.Count),
+            _ => new List<T>()
+        };
+    }
+
+    public static IList<TItem> TryAllocateListOfSize<TSource, TItem>(IEnumerable<TSource> source)
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+
+        return source switch
+        {
+            ICollection<TSource> list => new List<TItem>(list.Count),
+            IReadOnlyCollection<TSource> readOnlyList => new List<TItem>(readOnlyList.Count),
+            _ => new List<TItem>()
+        };
+    }
+
+#if NETSTANDARD2_0
+    public static bool TryAllocateCollectionOfSize<T>(IEnumerable<T> source,
+        out IList<T>? collection,
+        Func<int, IList<T>>? collectionFactory = null)
+#else
+    public static bool TryAllocateCollectionOfSize<T>(IEnumerable<T> source,
+        [NotNullWhen(true)] out IList<T>? collection,
+        Func<int, IList<T>>? collectionFactory = null)
+#endif
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+
+        switch (source)
+        {
+            case ICollection<T> list:
+                collection = collectionFactory is not null ? collectionFactory(list.Count) : new List<T>(list.Count);
+                return true;
+            case IReadOnlyCollection<T> readOnlyList:
+                collection = collectionFactory is not null
+                    ? collectionFactory(readOnlyList.Count)
+                    : new List<T>(readOnlyList.Count);
+                return true;
+            default:
+                collection = null;
+                return false;
+        }
+    }
+
+#if NETSTANDARD2_0
+    public static bool TryAllocateCollectionOfSize<TSource, TItem>(IEnumerable<TSource> source,
+        out IList<TItem>? collection,
+        Func<int, IList<TItem>>? collectionFactory = null)
+#else
+    public static bool TryAllocateCollectionOfSize<TSource, TItem>(IEnumerable<TSource> source,
+        [NotNullWhen(true)] out IList<TItem>? collection,
+        Func<int, IList<TItem>>? collectionFactory = null)
+#endif
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+
+        switch (source)
+        {
+            case ICollection<TSource> list:
+                collection = collectionFactory is not null
+                    ? collectionFactory(list.Count)
+                    : new List<TItem>(list.Count);
+                return true;
+            case IReadOnlyCollection<TSource> readOnlyList:
+                collection = collectionFactory is not null
+                    ? collectionFactory(readOnlyList.Count)
+                    : new List<TItem>(readOnlyList.Count);
+                return true;
+            default:
+                collection = null;
+                return false;
+        }
+    }
+
+#if NETSTANDARD2_0
+    public static bool TryAllocateCollectionOfSize<T, TCollection>(IEnumerable<T> source,
+        Func<int, TCollection> collectionFactory,
+        out TCollection? collection)
+        where TCollection : IEnumerable<T>
+#else
+    public static bool TryAllocateCollectionOfSize<T, TCollection>(IEnumerable<T> source,
+        Func<int, TCollection> collectionFactory,
+        [NotNullWhen(true)] out TCollection? collection)
+        where TCollection : IEnumerable<T>
+#endif
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+        if (collectionFactory is null)
+            throw new ArgumentNullException(nameof(collectionFactory));
+
+        switch (source)
+        {
+            case ICollection<T> list:
+                collection = collectionFactory(list.Count);
+                return true;
+            case IReadOnlyCollection<T> readOnlyList:
+                collection = collectionFactory(readOnlyList.Count);
+                return true;
+            default:
+                collection = default;
+                return false;
+        }
+    }
+
+#if NETSTANDARD2_0
+    public static bool TryAllocateCollectionOfSize<TSource, TItem, TCollection>(IEnumerable<TSource> source,
+        Func<int, TCollection> collectionFactory,
+        out TCollection? collection)
+        where TCollection : IEnumerable<TItem>
+#else
+    public static bool TryAllocateCollectionOfSize<TSource, TItem, TCollection>(IEnumerable<TSource> source,
+        Func<int, TCollection> collectionFactory,
+        [NotNullWhen(true)] out TCollection? collection)
+        where TCollection : IEnumerable<TItem>
+#endif
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
+        if (collectionFactory is null)
+            throw new ArgumentNullException(nameof(collectionFactory));
+
+        switch (source)
+        {
+            case ICollection<TSource> list:
+                collection = collectionFactory(list.Count);
+                return true;
+            case IReadOnlyCollection<TSource> readOnlyList:
+                collection = collectionFactory(readOnlyList.Count);
+                return true;
+            default:
+                collection = default;
+                return false;
         }
     }
 }
