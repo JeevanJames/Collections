@@ -292,4 +292,62 @@ public static class EnumerableHelpers
                 return false;
         }
     }
+
+    public static IEnumerable<int> Range(int start, int end, int increment = 1)
+    {
+        if (increment == 0)
+            throw new ArgumentException("Cannot have an increment of 0.", nameof(increment));
+        if (end > start && increment < 0)
+            throw new ArgumentException("Increment cannot be negative when the range is increasing.", nameof(increment));
+        if (end < start && increment > 0)
+            throw new ArgumentException("Increment cannot be positive when the range is decreasing.", nameof(increment));
+
+        return start == end ? new[] { start } : new RangeEnumerator(start, end, increment);
+    }
+
+    private sealed class RangeEnumerator : IEnumerable<int>, IEnumerator<int>
+    {
+        private readonly int _start;
+        private readonly int _end;
+        private readonly int _increment;
+        private long _current;
+
+        internal RangeEnumerator(int start, int end, int increment)
+        {
+            _start = start;
+            _end = end;
+            _increment = increment;
+            _current = long.MaxValue;
+        }
+
+        public IEnumerator<int> GetEnumerator() => this;
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public bool MoveNext()
+        {
+            if (_current == long.MaxValue)
+            {
+                _current = _start;
+                return true;
+            }
+
+            _current += _increment;
+            return (_end <= _start || _current <= _end) && (_end >= _start || _current >= _end);
+        }
+
+        public void Reset()
+        {
+            _current = long.MaxValue;
+        }
+
+        public int Current => (int)_current;
+
+        object IEnumerator.Current => Current;
+
+        public void Dispose()
+        {
+            _current = long.MaxValue;
+        }
+    }
 }

@@ -53,4 +53,40 @@ public sealed class EnumerableHelpersTests
 
         _output.WriteLine(bytes.ToString(", "));
     }
+
+    [Theory]
+    [InlineData(3, 3, 1, new[] { 3 })]
+    [InlineData(3, 3, -1, new[] { 3 })]
+    [InlineData(3, 8, 1, new[] { 3, 4, 5, 6, 7, 8 })]
+    [InlineData(-3, 2, 1, new[] { -3, -2, -1, 0, 1, 2 })]
+    [InlineData(16, 10, -1, new[] { 16, 15, 14, 13, 12, 11, 10 })]
+    [InlineData(-3, -10, -1, new[] { -3, -4, -5, -6, -7, -8, -9, -10 })]
+    [InlineData(2, 10, 2, new[] { 2, 4, 6, 8, 10 })]
+    public void Generates_range(int start, int end, int increment, int[] expected)
+    {
+        int[] result = EnumerableHelpers.Range(start, end, increment).ToArray();
+        _output.WriteLine(string.Join(", ", result));
+
+        result.ShouldBeEquivalentTo(expected);
+    }
+
+    [Theory]
+    [InlineData(int.MaxValue - 5, int.MaxValue, 1, 6)]
+    [InlineData(int.MinValue + 5, int.MinValue, -1, 6)]
+    public void Generates_ranges_for_max_min_values(int start, int end, int increment, int expectedLength)
+    {
+        int[] result = EnumerableHelpers.Range(start, end, increment).ToArray();
+
+        result.Length.ShouldBe(expectedLength);
+        result[^1].ShouldBe(end);
+    }
+
+    [Theory]
+    [InlineData(3, 8, -1)]
+    [InlineData(8, 3, 1)]
+    [InlineData(3, 8, 0)]
+    public void Invalid_ranges(int start, int end, int increment)
+    {
+        Should.Throw<ArgumentException>(() => EnumerableHelpers.Range(start, end, increment).ToArray());
+    }
 }
