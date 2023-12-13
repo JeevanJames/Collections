@@ -12,6 +12,55 @@ namespace System.Collections.Generic;
 
 public static class ListExtensions
 {
+    public static IList<TOutput> ConvertAll<T, TOutput>(this IList<T> list, Func<T, TOutput> converter)
+    {
+        if (list is null)
+            throw new ArgumentNullException(nameof(list));
+        if (converter is null)
+            throw new ArgumentNullException(nameof(converter));
+
+        List<TOutput> output = new(list.Count);
+        foreach (T item in list)
+            output.Add(converter(item));
+        return output;
+    }
+
+    public static IList<TOutput> ConvertAll<T, TOutput>(this IList<T> list, Func<T, bool> predicate,
+        Func<T, TOutput> converter)
+    {
+        if (list is null)
+            throw new ArgumentNullException(nameof(list));
+        if (predicate is null)
+            throw new ArgumentNullException(nameof(predicate));
+        if (converter is null)
+            throw new ArgumentNullException(nameof(converter));
+
+        List<TOutput> output = new(list.Count);
+        foreach (T item in list)
+        {
+            if (predicate(item))
+                output.Add(converter(item));
+        }
+
+        return output;
+    }
+
+    public static bool Exists<T>(this IList<T> list, Func<T, bool> predicate)
+    {
+        if (list is null)
+            throw new ArgumentNullException(nameof(list));
+        if (predicate is null)
+            throw new ArgumentNullException(nameof(predicate));
+
+        foreach (T item in list)
+        {
+            if (predicate(item))
+                return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     ///     Populates each item in a <paramref name="list"/> with a specific <paramref name="value"/>.
     /// </summary>
@@ -19,14 +68,15 @@ public static class ListExtensions
     /// <param name="list">The collection to be populated.</param>
     /// <param name="value">The value with which to populate the collection.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
-    public static void Fill<T>(this IList<T> list, T value)
+    public static IList<T> Fill<T>(this IList<T> list, T value)
     {
         if (list is null)
             throw new ArgumentNullException(nameof(list));
         if (list.Count == 0)
-            return;
+            return list;
         for (int i = 0; i < list.Count; i++)
             list[i] = value;
+        return list;
     }
 
     /// <summary>
@@ -37,16 +87,17 @@ public static class ListExtensions
     /// <param name="list">The collection to be populated.</param>
     /// <param name="generator">The delegate to generate the values for each item.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="list"/> is <c>null</c>.</exception>
-    public static void Fill<T>(this IList<T> list, Func<int, T> generator)
+    public static IList<T> Fill<T>(this IList<T> list, Func<int, T> generator)
     {
         if (list is null)
             throw new ArgumentNullException(nameof(list));
         if (list.Count == 0)
-            return;
+            return list;
         if (generator is null)
             throw new ArgumentNullException(nameof(generator));
         for (int i = 0; i < list.Count; i++)
             list[i] = generator(i);
+        return list;
     }
 
     /// <summary>
