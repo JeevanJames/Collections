@@ -109,8 +109,8 @@ public static class EnumerableExtensions
     }
 
     /// <summary>
-    ///     Determines whether any element of a <paramref name="sequence"/> satisfies all of the
-    ///     specified conditions (<paramref name="predicates"/>)
+    ///     Determines whether any element of a <paramref name="sequence"/> satisfies all the specified
+    ///     conditions (<paramref name="predicates"/>)
     /// </summary>
     /// <typeparam name="T">The type of the elements of sequence.</typeparam>
     /// <param name="sequence">The sequence.</param>
@@ -118,8 +118,8 @@ public static class EnumerableExtensions
     ///     One or more functions to test the conditions for each item in the sequence.
     /// </param>
     /// <returns>
-    ///     <c>true</c> if any item in the sequence satisfies all of the specified predicates;
-    ///     otherwise <c>false</c>.
+    ///     <c>true</c> if any item in the sequence satisfies all the specified predicates; otherwise
+    ///     <c>false</c>.
     /// </returns>
     public static bool AnyItemMatchesAll<T>(this IEnumerable<T> sequence, params Func<T, bool>[] predicates)
     {
@@ -136,8 +136,8 @@ public static class EnumerableExtensions
     }
 
     /// <summary>
-    ///     Determines whether any element of a <paramref name="sequence"/> satisfies any of the
-    ///     specified conditions (<paramref name="predicates"/>)
+    ///     Determines whether any element of a <paramref name="sequence"/> satisfies any of the specified
+    ///     conditions (<paramref name="predicates"/>)
     /// </summary>
     /// <typeparam name="T">The type of the elements of sequence.</typeparam>
     /// <param name="sequence">The sequence.</param>
@@ -347,20 +347,18 @@ public static class EnumerableExtensions
     }
 
     /// <summary>
-    ///     Checks each element of the <paramref name="sequence"/> against the specified
-    ///     <paramref name="predicate"/> and returns the elements that match and those that do not
-    ///     match.
+    ///     Checks each element of the <paramref name="sequence"/> against the specified <paramref name="predicate"/>
+    ///     and returns the elements that match and those that do not match.
     /// </summary>
     /// <typeparam name="T">The type of the elements of sequence.</typeparam>
     /// <param name="sequence">The sequence.</param>
     /// <param name="predicate">The <paramref name="predicate"/> to check against.</param>
     /// <returns>
-    ///     Two collections sequences - one with the elements that match the
-    ///     <paramref name="predicate"/> and another with elements that do not match.
+    ///     Two collections sequences - one with the elements that match the <paramref name="predicate"/>
+    ///     and another with elements that do not match.
     /// </returns>
     /// <exception cref="ArgumentNullException">
-    ///     Thrown if the <paramref name="sequence"/> or <paramref name="predicate"/> is
-    ///     <c>null</c>.
+    ///     Thrown if the <paramref name="sequence"/> or <paramref name="predicate"/> is <c>null</c>.
     /// </exception>
     public static (IEnumerable<T> matches, IEnumerable<T> mismatches) Partition<T>(this IEnumerable<T> sequence,
         Func<T, bool> predicate)

@@ -1,7 +1,4 @@
-﻿// Copyright (c) 2018-2023 Jeevan James
-// Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 #if EXPLICIT
 using System.Collections;
@@ -12,30 +9,7 @@ namespace Collections.Net.ObjectModel;
 namespace System.Collections.ObjectModel;
 #endif
 
-public abstract partial class DirectoryBase<TKey, TValue>
-{
-    protected virtual void InsertItem(TKey key, TValue value)
-    {
-        _dictionaryImpl.Add(key, value);
-    }
-
-    protected virtual void SetItem(TKey key, TValue value)
-    {
-        _dictionaryImpl[key] = value;
-    }
-
-    protected virtual void ClearItems()
-    {
-        _dictionaryImpl.Clear();
-    }
-
-    protected virtual bool RemoveItem(TKey key)
-    {
-        return _dictionaryImpl.Remove(key);
-    }
-}
-
-public abstract partial class DirectoryBase<TKey, TValue> : IDictionary<TKey, TValue>
+public abstract partial class DictionaryBase<TKey, TValue> : IDictionary<TKey, TValue>
     where TKey : notnull
 {
     private readonly IDictionary<TKey, TValue> _dictionaryImpl = new Dictionary<TKey, TValue>();
@@ -112,4 +86,27 @@ public abstract partial class DirectoryBase<TKey, TValue> : IDictionary<TKey, TV
     public ICollection<TKey> Keys => _dictionaryImpl.Keys;
 
     public ICollection<TValue> Values => _dictionaryImpl.Values;
+}
+
+public abstract partial class DictionaryBase<TKey, TValue>
+{
+    protected virtual void InsertItem(TKey key, TValue value)
+    {
+        _dictionaryImpl.Add(key, value);
+    }
+
+    protected virtual void SetItem(TKey key, TValue value)
+    {
+        _dictionaryImpl[key] = value;
+    }
+
+    protected virtual void ClearItems()
+    {
+        _dictionaryImpl.Clear();
+    }
+
+    protected virtual bool RemoveItem(TKey key)
+    {
+        return _dictionaryImpl.Remove(key);
+    }
 }

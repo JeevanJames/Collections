@@ -1,6 +1,10 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
+#if EXPLICIT
+using System.Collections;
+#endif
+
 #if NET7_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 #endif
@@ -293,6 +297,16 @@ public static class EnumerableHelpers
         }
     }
 
+    /// <summary>
+    ///     Generates a sequence of integers within a specified range.
+    /// </summary>
+    /// <param name="start">The value of the first number in the sequence.</param>
+    /// <param name="end">
+    ///     The maximum possible value to generate in the sequence. This number may or may not be generated
+    ///     depending on the <paramref name="increment"/> value.
+    /// </param>
+    /// <param name="increment">The amount to increment between numbers in the sequence. Defaults to 1.</param>
+    /// <returns>An <see cref="IEnumerable{Int32}"/> that contains the range of integers.</returns>
     public static IEnumerable<int> Range(int start, int end, int increment = 1)
     {
         if (increment == 0)
