@@ -18,7 +18,7 @@ public sealed class IsEqualToTests
     [InlineData(new short[] {1, 2}, null)]
     [InlineData(null, new short[0])]
     [InlineData(null, new short[] {1, 2})]
-    public void Returns_false_if_any_collection_is_null(IList<short> shorts1, IList<short> shorts2)
+    public void Returns_false_if_any_collection_is_null(IList<short>? shorts1, IList<short>? shorts2)
     {
         shorts1.IsEqualTo(shorts2).ShouldBeFalse();
     }

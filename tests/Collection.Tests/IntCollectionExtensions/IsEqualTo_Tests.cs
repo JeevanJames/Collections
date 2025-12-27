@@ -18,7 +18,7 @@ public sealed class IsEqualTo_Tests
     [InlineData(new int[] {1, 2}, null)]
     [InlineData(null, new int[0])]
     [InlineData(null, new int[] {1, 2})]
-    public void Returns_false_if_any_collection_is_null(IList<int> ints1, IList<int> ints2)
+    public void Returns_false_if_any_collection_is_null(IList<int>? ints1, IList<int>? ints2)
     {
         ints1.IsEqualTo(ints2).ShouldBeFalse();
     }

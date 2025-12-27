@@ -18,7 +18,7 @@ public sealed class IsEqualTo_Tests
     [InlineData(new long[] {1, 2}, null)]
     [InlineData(null, new long[0])]
     [InlineData(null, new long[] {1, 2})]
-    public void Returns_false_if_any_collection_is_null(IList<long> longs1, IList<long> longs2)
+    public void Returns_false_if_any_collection_is_null(IList<long>? longs1, IList<long>? longs2)
     {
         longs1.IsEqualTo(longs2).ShouldBeFalse();
     }

@@ -9,7 +9,7 @@ public sealed class IsNullOrZeroed_Tests
     [InlineData(null)]
     [InlineData(new byte[0])]
     [InlineData(new byte[] {0, 0, 0, 0})]
-    public void Returns_true_if_collection_is_null_or_empty_or_zeroed(IList<byte> bytes)
+    public void Returns_true_if_collection_is_null_or_empty_or_zeroed(IList<byte>? bytes)
     {
         bytes.IsNullOrZeroed().ShouldBeTrue();
     }

@@ -9,7 +9,7 @@ public sealed class IsNullOrZeroed_Tests
     [InlineData(null)]
     [InlineData(new int[0])]
     [InlineData(new int[] {0, 0, 0, 0})]
-    public void Returns_true_if_collection_is_null_or_empty_or_zeroed(IList<int> ints)
+    public void Returns_true_if_collection_is_null_or_empty_or_zeroed(IList<int>? ints)
     {
         ints.IsNullOrZeroed().ShouldBeTrue();
     }

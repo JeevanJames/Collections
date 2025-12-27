@@ -8,7 +8,7 @@ public sealed class IsNullOrEmptyTests
     [Theory]
     [InlineData((IEnumerable<int>?)null)]
     [InlineData(new int[0])]
-    public void Returns_true_if_collection_is_null_or_empty(IEnumerable<int> collection)
+    public void Returns_true_if_collection_is_null_or_empty(IEnumerable<int>? collection)
     {
         collection.IsNullOrEmpty().ShouldBeTrue();
     }

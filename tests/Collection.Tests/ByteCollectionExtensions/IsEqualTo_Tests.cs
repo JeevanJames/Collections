@@ -18,7 +18,7 @@ public sealed class IsEqualToTests
     [InlineData(new byte[] {1, 2}, null)]
     [InlineData(null, new byte[0])]
     [InlineData(null, new byte[] {1, 2})]
-    public void Returns_false_if_any_collection_is_null(IList<byte> bytes1, IList<byte> bytes2)
+    public void Returns_false_if_any_collection_is_null(IList<byte>? bytes1, IList<byte>? bytes2)
     {
         bytes1.IsEqualTo(bytes2).ShouldBeFalse();
     }
