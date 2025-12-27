@@ -3,77 +3,57 @@
 
 namespace Collection.Tests.DataAttributes;
 
-public sealed class ByteArrayAttribute : BaseCollectionAttribute
+public sealed class ByteArrayAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public ByteArrayAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,
         CollectionType.Empty => Array.Empty<byte>(),
-        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => new byte[] { 1, 2, 3, 4, 5, 6 },
+        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => [1, 2, 3, 4, 5, 6],
         _ => throw new InvalidOperationException()
     };
 }
 
-public sealed class IntArrayAttribute : BaseCollectionAttribute
+public sealed class IntArrayAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public IntArrayAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,
         CollectionType.Empty => Array.Empty<int>(),
-        CollectionType.NonEmpty or CollectionType.NumbersOneToSix=> new[] { 1, 2, 3, 4, 5, 6 },
+        CollectionType.NonEmpty or CollectionType.NumbersOneToSix=> [1, 2, 3, 4, 5, 6],
         _ => throw new InvalidOperationException()
     };
 }
 
-public sealed class LongArrayAttribute : BaseCollectionAttribute
+public sealed class LongArrayAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public LongArrayAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,
         CollectionType.Empty => Array.Empty<long>(),
-        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => new[] { 1L, 2, 3, 4, 5, 6 },
+        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => [1L, 2, 3, 4, 5, 6],
         _ => throw new InvalidOperationException(),
     };
 }
 
-public sealed class CharArrayAttribute : BaseCollectionAttribute
+public sealed class CharArrayAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public CharArrayAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,
         CollectionType.Empty => Array.Empty<char>(),
-        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => new[] { '1', '2', '3', '4', '5', '6' },
+        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => ['1', '2', '3', '4', '5', '6'],
         _ => throw new InvalidOperationException()
     };
 }
 
-public sealed class ShortArrayAttribute : BaseCollectionAttribute
+public sealed class ShortArrayAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public ShortArrayAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,
         CollectionType.Empty => Array.Empty<short>(),
-        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => new short[] { 1, 2, 3, 4, 5, 6 },
+        CollectionType.NonEmpty or CollectionType.NumbersOneToSix => [1, 2, 3, 4, 5, 6],
         _ => throw new InvalidOperationException()
     };
 }

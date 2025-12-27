@@ -1,16 +1,6 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-#if EXPLICIT
-using Collections.Net.Extensions.EnumerableExtensions;
-#endif
-
-using Shouldly;
-
-using Xunit;
-
 namespace Collection.Tests.CollectionExtensions;
 
 public sealed class ToArrayTests
@@ -43,7 +33,7 @@ public sealed class ToArrayTests
         string[] converted = collection.ToArray(n => n.ToString());
 
         converted.Length.ShouldBe(6);
-        converted.ShouldBe(new[] {"1", "2", "3", "4", "5", "6"});
+        converted.ShouldBe(["1", "2", "3", "4", "5", "6"]);
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
@@ -52,7 +42,7 @@ public sealed class ToArrayTests
         int[] result = collection.ToArray(n => n % 2 == 0);
 
         result.Length.ShouldBe(3);
-        result.ShouldBe(new[] { 2, 4, 6 });
+        result.ShouldBe([2, 4, 6]);
     }
 
     [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
@@ -61,6 +51,6 @@ public sealed class ToArrayTests
         string[] result = collection.ToArray(n => n % 2 == 0, n => n.ToString());
 
         result.Length.ShouldBe(3);
-        result.ShouldBe(new[] { "2", "4", "6" });
+        result.ShouldBe(["2", "4", "6"]);
     }
 }

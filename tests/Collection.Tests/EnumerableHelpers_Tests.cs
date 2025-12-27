@@ -1,14 +1,6 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-#if EXPLICIT
-using Collections.Net;
-using Collections.Net.Extensions.Numeric;
-#endif
-
-using Shouldly;
-
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Collection.Tests;

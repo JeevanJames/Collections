@@ -1,14 +1,6 @@
 // Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.Numeric;
-#endif
-
 namespace Collection.Tests.ShortCollectionExtensions;
 
 public sealed class IsNullOrZeroedTests
@@ -25,7 +17,7 @@ public sealed class IsNullOrZeroedTests
     [Fact]
     public void Returns_false_if_any_element_is_non_zero()
     {
-        short[] shorts = {0, 1, 0, 0};
+        short[] shorts = [0, 1, 0, 0];
         shorts.IsNullOrZeroed().ShouldBeFalse();
     }
 }

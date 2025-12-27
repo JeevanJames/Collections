@@ -1,16 +1,6 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.Numeric;
-#endif
-
 namespace Collection.Tests.ByteCollectionExtensions;
 
 public sealed class SplitBySequenceTests
@@ -56,9 +46,9 @@ public sealed class SplitBySequenceTests
             new byte[] {4, 1},
             new byte[][]
             {
-                new byte[] {1, 2, 3},
-                new byte[] {2, 3},
-                new byte[] {2, 3, 4},
+                [1, 2, 3],
+                [2, 3],
+                [2, 3, 4],
             }
         };
 
@@ -68,9 +58,9 @@ public sealed class SplitBySequenceTests
             new byte[] {4},
             new byte[][]
             {
-                new byte[] {1, 2, 3},
-                new byte[] {1, 2, 3},
-                new byte[] {1, 2, 3},
+                [1, 2, 3],
+                [1, 2, 3],
+                [1, 2, 3],
                 Array.Empty<byte>(), 
             }
         };
@@ -82,9 +72,9 @@ public sealed class SplitBySequenceTests
             new byte[][]
             {
                 Array.Empty<byte>(), 
-                new byte[] {2, 3, 4},
-                new byte[] {2, 3, 4},
-                new byte[] {2, 3, 4},
+                [2, 3, 4],
+                [2, 3, 4],
+                [2, 3, 4],
             }
         };
     }
@@ -98,14 +88,14 @@ public sealed class SplitBySequenceTests
 
         result.Length.ShouldBe(1);
         result[0].ShouldBeSameAs(bytes);
-        result.ShouldBe(new byte[][] { bytes });
+        result.ShouldBe([bytes]);
     }
 
     [Fact]
     public void Does_not_error_if_count_is_too_large()
     {
-        byte[] bytes = {1, 2, 3, 4, 1, 2, 3, 4};
-        byte[] sequence = {3};
+        byte[] bytes = [1, 2, 3, 4, 1, 2, 3, 4];
+        byte[] sequence = [3];
 
         Should.NotThrow(() => bytes.SplitBySequence(0, 100, sequence));
     }

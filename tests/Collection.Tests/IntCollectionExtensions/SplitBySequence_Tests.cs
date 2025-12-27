@@ -1,16 +1,6 @@
 // Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.Numeric;
-#endif
-
 namespace Collection.Tests.IntCollectionExtensions;
 
 public sealed class SplitBySequenceTests
@@ -56,9 +46,9 @@ public sealed class SplitBySequenceTests
             new int[] {4, 1},
             new int[][]
             {
-                new [] {1, 2, 3},
-                new [] {2, 3},
-                new [] {2, 3, 4},
+                [1, 2, 3],
+                [2, 3],
+                [2, 3, 4],
             }
         };
 
@@ -68,9 +58,9 @@ public sealed class SplitBySequenceTests
             new int[] {4},
             new int[][]
             {
-                new [] {1, 2, 3},
-                new [] {1, 2, 3},
-                new [] {1, 2, 3},
+                [1, 2, 3],
+                [1, 2, 3],
+                [1, 2, 3],
                 Array.Empty<int>(), 
             }
         };
@@ -82,9 +72,9 @@ public sealed class SplitBySequenceTests
             new int[][]
             {
                 Array.Empty<int>(), 
-                new [] {2, 3, 4},
-                new [] {2, 3, 4},
-                new [] {2, 3, 4},
+                [2, 3, 4],
+                [2, 3, 4],
+                [2, 3, 4],
             }
         };
     }
@@ -98,14 +88,14 @@ public sealed class SplitBySequenceTests
 
         result.Length.ShouldBe(1);
         result[0].ShouldBeSameAs(ints);
-        result.ShouldBe(new int[][] {ints});
+        result.ShouldBe([ints]);
     }
 
     [Fact]
     public void Does_not_error_if_count_is_too_large()
     {
-        int[] ints = {1, 2, 3, 4, 1, 2, 3, 4};
-        int[] sequence = {3};
+        int[] ints = [1, 2, 3, 4, 1, 2, 3, 4];
+        int[] sequence = [3];
 
         Should.NotThrow(() => ints.SplitBySequence(0, 100, sequence));
     }

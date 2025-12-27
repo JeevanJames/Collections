@@ -1,10 +1,11 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-// ReSharper disable CheckNamespace
-
+#if NET8_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
+#endif
 
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 #if EXPLICIT
 using Collections.Net.Extensions.ListExtensions;
 

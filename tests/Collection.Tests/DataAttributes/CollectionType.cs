@@ -1,13 +1,12 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-namespace Collection.Tests.DataAttributes
+namespace Collection.Tests.DataAttributes;
+
+public enum CollectionType
 {
-    public enum CollectionType
-    {
-        Null,
-        Empty,
-        NonEmpty,
-        NumbersOneToSix,
-    }
+    Null,
+    Empty,
+    NonEmpty,
+    NumbersOneToSix,
 }

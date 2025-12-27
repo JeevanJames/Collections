@@ -1,16 +1,6 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-#if EXPLICIT
-using Collections.Net.Extensions.EnumerableExtensions;
-#endif
-
-using Shouldly;
-
-using Xunit;
-
 namespace Collection.Tests.CollectionExtensions;
 
 public sealed class ToListTests

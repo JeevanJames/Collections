@@ -1,16 +1,6 @@
 // Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.Numeric;
-#endif
-
 namespace Collection.Tests.LongCollectionExtensions;
 
 public sealed class SplitBySequenceTests
@@ -56,9 +46,9 @@ public sealed class SplitBySequenceTests
             new long[] {4, 1},
             new long[][]
             {
-                new long[] {1, 2, 3},
-                new long[] {2, 3},
-                new long[] {2, 3, 4},
+                [1, 2, 3],
+                [2, 3],
+                [2, 3, 4],
             }
         };
 
@@ -68,10 +58,10 @@ public sealed class SplitBySequenceTests
             new long[] {4},
             new long[][]
             {
-                new long[] {1, 2, 3},
-                new long[] {1, 2, 3},
-                new long[] {1, 2, 3},
-                new long[0], 
+                [1, 2, 3],
+                [1, 2, 3],
+                [1, 2, 3],
+                [], 
             }
         };
 
@@ -81,10 +71,10 @@ public sealed class SplitBySequenceTests
             new long[] {1},
             new long[][]
             {
-                new long[0], 
-                new long[] {2, 3, 4},
-                new long[] {2, 3, 4},
-                new long[] {2, 3, 4},
+                [], 
+                [2, 3, 4],
+                [2, 3, 4],
+                [2, 3, 4],
             }
         };
     }
@@ -98,14 +88,14 @@ public sealed class SplitBySequenceTests
 
         result.Length.ShouldBe(1);
         result[0].ShouldBeSameAs(longs);
-        result.ShouldBe(new long[][] {longs});
+        result.ShouldBe([longs]);
     }
 
     [Fact]
     public void Does_not_error_if_count_is_too_large()
     {
-        long[] longs = {1, 2, 3, 4, 1, 2, 3, 4};
-        long[] sequence = {3};
+        long[] longs = [1, 2, 3, 4, 1, 2, 3, 4];
+        long[] sequence = [3];
 
         Should.NotThrow(() => longs.SplitBySequence(0, 100, sequence));
     }

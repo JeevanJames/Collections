@@ -3,12 +3,8 @@
 
 namespace Collection.Tests.DataAttributes;
 
-public sealed class DictionaryAttribute : BaseCollectionAttribute
+public sealed class DictionaryAttribute(CollectionType collectionType) : BaseCollectionAttribute(collectionType)
 {
-    public DictionaryAttribute(CollectionType collectionType) : base(collectionType)
-    {
-    }
-
     protected override object CreateCollection() => CollectionType switch
     {
         CollectionType.Null => null!,

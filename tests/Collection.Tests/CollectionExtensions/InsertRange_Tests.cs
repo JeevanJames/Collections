@@ -3,16 +3,6 @@
 
 using System.Collections.ObjectModel;
 
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.ListExtensions;
-#endif
-
 namespace Collection.Tests.CollectionExtensions;
 
 public sealed class InsertRangeTests
@@ -21,7 +11,7 @@ public sealed class InsertRangeTests
     public void Throws_if_list_is_null(IList<int> list)
     {
         Should.Throw<ArgumentNullException>(() => list.InsertRange(1, 7, 8, 9));
-        Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {7, 8, 9}));
+        Should.Throw<ArgumentNullException>(() => list.InsertRange(1, [7, 8, 9]));
         Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {7, 8, 9}, n => n % 2 == 0));
         Should.Throw<ArgumentNullException>(() => list.InsertRange(1, new[] {"7", "8", "9"}, int.Parse));
         Should.Throw<ArgumentNullException>(() =>
@@ -33,10 +23,10 @@ public sealed class InsertRangeTests
     [Theory, DataAttributes.Collection(CollectionType.NumbersOneToSix)]
     public void Adds_range_if_index_is_greater_or_equal_to_list_count(IList<int> list)
     {
-        list.InsertRange(100, new [] {7, 8, 9});
+        list.InsertRange(100, [7, 8, 9]);
         list.ShouldBe(new [] {1, 2, 3, 4, 5, 6, 7, 8, 9});
 
-        list.InsertRange(list.Count, new [] {10, 11, 12});
+        list.InsertRange(list.Count, [10, 11, 12]);
         list.ShouldBe(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
 
         // Empty list

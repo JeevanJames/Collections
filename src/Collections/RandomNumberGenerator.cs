@@ -3,10 +3,10 @@
 
 using System.Security.Cryptography;
 
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 #if EXPLICIT
 namespace Collections.Net;
 #else
-// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic;
 #endif
 

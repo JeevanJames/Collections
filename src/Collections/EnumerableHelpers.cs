@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 #endif
 using System.Security.Cryptography;
 
-// ReSharper disable CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 #if EXPLICIT
 namespace Collections.Net;
 #else

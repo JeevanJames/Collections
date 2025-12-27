@@ -1,16 +1,6 @@
 // Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
-#if EXPLICIT
-using Collections.Net.Extensions.Numeric;
-#endif
-
 namespace Collection.Tests.ShortCollectionExtensions;
 
 public sealed class SplitBySequenceTests
@@ -56,9 +46,9 @@ public sealed class SplitBySequenceTests
             new short[] {4, 1},
             new short[][]
             {
-                new short[] {1, 2, 3},
-                new short[] {2, 3},
-                new short[] {2, 3, 4},
+                [1, 2, 3],
+                [2, 3],
+                [2, 3, 4],
             }
         };
 
@@ -68,9 +58,9 @@ public sealed class SplitBySequenceTests
             new short[] { 4 },
             new short[][]
             {
-                new short[] {1, 2, 3},
-                new short[] {1, 2, 3},
-                new short[] {1, 2, 3},
+                [1, 2, 3],
+                [1, 2, 3],
+                [1, 2, 3],
                 Array.Empty<short>(),
             }
         };
@@ -82,9 +72,9 @@ public sealed class SplitBySequenceTests
             new short[][]
             {
                 Array.Empty<short>(),
-                new short[] {2, 3, 4},
-                new short[] {2, 3, 4},
-                new short[] {2, 3, 4},
+                [2, 3, 4],
+                [2, 3, 4],
+                [2, 3, 4],
             }
         };
     }
@@ -98,14 +88,14 @@ public sealed class SplitBySequenceTests
 
         result.Length.ShouldBe(1);
         result[0].ShouldBeSameAs(shorts);
-        result.ShouldBe(new short[][] { shorts });
+        result.ShouldBe([shorts]);
     }
 
     [Fact]
     public void Does_not_error_if_count_is_too_large()
     {
-        short[] shorts = { 1, 2, 3, 4, 1, 2, 3, 4 };
-        short[] sequence = { 3 };
+        short[] shorts = [1, 2, 3, 4, 1, 2, 3, 4];
+        short[] sequence = [3];
 
         Should.NotThrow(() => shorts.SplitBySequence(0, 100, sequence));
     }

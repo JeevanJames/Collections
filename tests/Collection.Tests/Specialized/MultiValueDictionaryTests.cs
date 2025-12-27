@@ -7,9 +7,6 @@ using Collections.Net.Specialized;
 using System.Collections.Specialized;
 #endif
 
-using Shouldly;
-
-using Xunit;
 
 namespace Collection.Tests.Specialized;
 

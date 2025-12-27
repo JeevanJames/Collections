@@ -1,15 +1,6 @@
 ﻿// Copyright (c) 2018-2026 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-#if EXPLICIT
-using Collections.Net.Extensions.EnumerableExtensions;
-#endif
-using Collection.Tests.DataAttributes;
-
-using Shouldly;
-
-using Xunit;
-
 namespace Collection.Tests.CollectionExtensions;
 
 public sealed class ChunkTests
@@ -44,14 +35,14 @@ public sealed class ChunkTests
             1,
             new int[][]
             {
-                new[] {1},
-                new[] {2},
-                new[] {3},
-                new[] {4},
-                new[] {5},
-                new[] {6},
-                new[] {7},
-                new[] {8},
+                [1],
+                [2],
+                [3],
+                [4],
+                [5],
+                [6],
+                [7],
+                [8],
             }
         };
 
@@ -61,10 +52,10 @@ public sealed class ChunkTests
             2,
             new int[][]
             {
-                new[] {1, 2},
-                new[] {3, 4},
-                new[] {5, 6},
-                new[] {7, 8},
+                [1, 2],
+                [3, 4],
+                [5, 6],
+                [7, 8],
             }
         };
 
@@ -74,9 +65,9 @@ public sealed class ChunkTests
             3,
             new int[][]
             {
-                new[] {1, 2, 3},
-                new[] {4, 5, 6},
-                new[] {7, 8},
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8],
             }
         };
 
@@ -86,8 +77,8 @@ public sealed class ChunkTests
             7,
             new int[][]
             {
-                new[] {1, 2, 3, 4, 5, 6, 7},
-                new[] {8},
+                [1, 2, 3, 4, 5, 6, 7],
+                [8],
             }
         };
 
@@ -97,7 +88,7 @@ public sealed class ChunkTests
             8,
             new int[][]
             {
-                new[] {1, 2, 3, 4, 5, 6, 7, 8},
+                [1, 2, 3, 4, 5, 6, 7, 8],
             }
         };
 
@@ -107,7 +98,7 @@ public sealed class ChunkTests
             10,
             new int[][]
             {
-                new[] {1, 2, 3, 4, 5, 6, 7, 8},
+                [1, 2, 3, 4, 5, 6, 7, 8],
             }
         };
     }
