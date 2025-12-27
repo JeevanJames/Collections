@@ -127,7 +127,7 @@ public static class DictionaryExtensions
     /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
     /// <param name="dictionary">The dictionary.</param>
     /// <param name="key">The key to locate in the dictionary.</param>
-    /// <param name="value">The value to add if the key does does exist.</param>
+    /// <param name="value">The value to add if the key does exist.</param>
     /// <returns>The value associated with the specified key.</returns>
     /// <exception cref="ArgumentNullException">Thrown if the dictionary is <c>null</c>.</exception>
     public static TValue GetValueOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
