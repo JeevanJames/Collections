@@ -5,7 +5,7 @@
 using System.Collections;
 #endif
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 #endif
 using System.Security.Cryptography;

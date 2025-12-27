@@ -1,15 +1,10 @@
 ﻿// Copyright (c) 2018-2023 Jeevan James
 // Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
 
-// ReSharper disable CheckNamespace
-
 using System.Collections.ObjectModel;
 
-#if EXPLICIT
-namespace Collections.Net.Extensions.ObjectExtensions;
-#else
-namespace System.Collections.Generic;
-#endif
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Collections.Net.Extensions.Objects;
 
 public static class ObjectExtensions
 {

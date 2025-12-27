@@ -68,7 +68,7 @@ public abstract partial class DictionaryBase<TKey, TValue> : IDictionary<TKey, T
         return RemoveItem(key);
     }
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
 #else
     public bool TryGetValue(TKey key, out TValue value)
